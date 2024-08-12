@@ -71,6 +71,11 @@ wss.on('connection', function (ws) {
 
 		if (data.handshake) {
 			if (data.type == "cyberspace") {
+				if (mainGameConn) {
+					console.log("WARNING - cyberspace handshake attempted, but main connection already exists")
+					return
+				}
+				
 				mainGameConn = ws
 			}
 
@@ -101,6 +106,10 @@ wss.on('connection', function (ws) {
 
 	ws.on('close', function () {
 		console.log("❌ " + ws.id + " disconnected");
+
+		if (ws == mainGameConn) {
+			mainGameConn = null
+		}
 	});
 });
 
