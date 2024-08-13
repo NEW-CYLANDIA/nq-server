@@ -79,6 +79,14 @@ wss.on('connection', function (ws) {
 				mainGameConn = ws
 			}
 
+			if (data.type == "bridge") {
+				if (mainGameConn) {
+					mainGameConn.send(JSON.stringify({
+						"id": data.id
+					}))
+				}
+			}
+
 			ws.id = wss.getUniqueID(data.engine, data.id);
 			console.log("✅ " + ws.id + " connected");
 			ws.send(JSON.stringify({
