@@ -9,7 +9,9 @@ exports.clientData = {}
 
 parser.parse().then(data => {
     data.forEach((item) => {
-        item.impact_keys = item.impact_keys.split(",")
+        if (item.impact_keys) {
+            item.impact_keys = item.impact_keys.split(",")
+        }
 
         exports.bridgeData[item.id] = item
     })
