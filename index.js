@@ -4,6 +4,8 @@ const express = require('express');
 const path = require('path');
 const { createServer } = require('http');
 
+const nqHelper = require('./helper')
+
 const WebSocket = require('ws');
 
 const app = express();
@@ -12,21 +14,27 @@ app.use(express.static(path.join(__dirname, '/public')));
 const server = createServer(app);
 const wss = new WebSocket.Server({ server });
 
-let mainGameConn = null
+let conns = {
+	'cyberspace': null
+}
+let logMsgs = []
 let debug = false
 
-wss.getUniqueID = function (type, subtype) {
-	function s4() {
-		return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-	}
-	return type + '-' + subtype + '-' + s4() + s4() + '-' + s4();
-};
+wss.getConnectedClients = () => {
+	let uids = []
 
-wss.isClientConnected = function (id) {
+	wss.clients.forEach(function each(client) {
+		uids.push(client.uid)
+	})
+
+	return uids
+}
+
+wss.isClientConnected = (uid) => {
 	var connected = false
 
 	wss.clients.forEach(function each(client) {
-		if (client.id == id) {
+		if (client.uid == uid) {
 			connected = true
 		}
 	})
@@ -34,20 +42,27 @@ wss.isClientConnected = function (id) {
 	return connected
 }
 
-wss.getClientList = function () {
-	let ids = []
+wss.logMessage = (level, msg, uid) => {
+	const LOGLEVEL = [
+		"ℹ️ INFO",
+		"⚠️ WARNING",
+		"❌ ERROR"
+	]
 
-	wss.clients.forEach(function each(client) {
-		ids.push(client.id)
-	})
+	let timestamp = new Date()
 
-	return JSON.stringify(ids)
+	console.log(`${timestamp} - ${LOGLEVEL[level]} - ${msg}`)
+
+	logMsgs.push([
+		timestamp,
+		LOGLEVEL[level],
+		msg,
+		uid
+	])
 }
 
 wss.on('connection', function (ws) {
-	console.log("new connection established - awaiting handshake")
-
-	ws.on('message', function(data) {
+	ws.on('message', function (data) {
 		try {
 			data = JSON.parse(data)
 		}
@@ -57,72 +72,89 @@ wss.on('connection', function (ws) {
 		}
 
 		if (debug && data.cmd) {
+			let returnData = {
+				"cmd": data.cmd,
+				"payload": ""
+			}
+
 			switch (data.cmd) {
 				case "listclients":
-					ws.send(wss.getClientList())
+					returnData.payload = nqHelper.getClientDataFormatted(
+						wss.getConnectedClients()
+					)
 					break;
 				default:
-					console.log(data.cmd)
-					ws.send("debug enabled")
+					ws.send("invalid cmd")
 			}
+
+			ws.send(JSON.stringify(returnData))
 
 			return
 		}
 
 		if (data.handshake) {
-			if (data.type == "cyberspace") {
-				if (mainGameConn) {
-					console.log("WARNING - cyberspace handshake attempted, but main connection already exists")
-					return
-				}
-				
-				mainGameConn = ws
+			if (Object.keys(conns).includes(data.type)) {
+				conns[data.type] = ws
 			}
 
+			if (data.uid) {
+				ws.uid = data.uid
+			}
+			else {
+				ws.uid = nqHelper.getUniqueId();
+			}
+			ws.sessionId = nqHelper.getSessionId();
+
+			wss.logMessage(0, 'client connected', ws.uid)
+			// console.log("✅ " + ws.uid + " connected");
+			ws.send(JSON.stringify({
+				"uid": ws.uid
+			}))
+
 			if (data.type == "bridge") {
-				if (mainGameConn) {
-					mainGameConn.send(JSON.stringify({
-						"id": data.id
+				if (conns.cyberspace) {
+					conns.cyberspace.send(JSON.stringify({
+						"uid": ws.uid
 					}))
 				}
 			}
 
-			ws.id = wss.getUniqueID(data.engine, data.id);
-			console.log("✅ " + ws.id + " connected");
-			ws.send(JSON.stringify({
-				"uid": ws.id
-			}))
-
 			return
 		}
 
-		if (!mainGameConn) {
-			console.log("WARNING - message recieved, but no main connection available for routing")
+		if (!conns.cyberspace) {
+			wss.logMessage(1, 'message recieved, but no main connection available for routing', ws.uid)
 			return
 		}
 
-		if (!wss.isClientConnected(ws.id)) {
-			console.log("WARNING - message recieved from unknown client")
+		if (!wss.isClientConnected(ws.uid)) {
+			wss.logMessage(1, 'message recieved from unknown client', null)
 			return
 		}
 
 		if (data.impact) {
-			mainGameConn.send(JSON.stringify(data))
-			console.log("impact requested: " + data.impact)
+			if (ws.sessionId != nqHelper.getSessionId()) {
+				wss.logMessage(1, 'impact sent from expired session, closing bridge', ws.uid)
+				ws.close()
+				return
+			}
+
+			conns.cyberspace.send(JSON.stringify(data))
+			wss.logMessage(0, `impact requested: ${data.impact}`, ws.uid)
 		}
-	})  
+	})
 
 	ws.on('close', function () {
-		console.log("❌ " + ws.id + " disconnected");
+		wss.logMessage(0, 'client disconnected', ws.uid)
 
-		if (ws == mainGameConn) {
-			mainGameConn = null
+		if (ws == conns.cyberspace) {
+			conns.cyberspace = null
 		}
 	});
 });
 
 server.listen(8080, function () {
-  console.log('Listening on http://0.0.0.0:8080');
+	console.log('Listening on http://0.0.0.0:8080');
 
 	debug = wss.address().address == "::"
 });
