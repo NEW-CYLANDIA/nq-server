@@ -1,5 +1,10 @@
 'use strict';
 
+require('dotenv').config()
+
+const { Node: Logtail } = require("@logtail/js");
+const logtail = new Logtail(process.env.LOGTAIL_TOKEN);
+
 const express = require('express');
 const path = require('path');
 const { createServer } = require('http');
@@ -11,8 +16,22 @@ const WebSocket = require('ws');
 const app = express();
 app.use(express.static(path.join(__dirname, '/public')));
 
-const server = createServer(app);
-const wss = new WebSocket.Server({ server });
+const expressServer = createServer(app);
+const server = new WebSocket.Server({ server: expressServer });
+
+// const logger = require('pino')();
+
+// logger.info('Hello from Pino logger');
+
+logtail.error("Something bad happend.");
+logtail.info("Log message with structured data.", {
+	item: "Orange Soda",
+	price: 100.00
+});
+
+// Ensure that all logs are sent to Logtail
+logtail.flush()
+
 
 let conns = {
 	'cyberspace': null
@@ -20,20 +39,20 @@ let conns = {
 let logMsgs = []
 let debug = false
 
-wss.getConnectedClients = () => {
+server.getConnectedClients = () => {
 	let uids = []
 
-	wss.clients.forEach(function each(client) {
+	server.clients.forEach(function each(client) {
 		uids.push(client.uid)
 	})
 
 	return uids
 }
 
-wss.isClientConnected = (uid) => {
+server.isClientConnected = (uid) => {
 	var connected = false
 
-	wss.clients.forEach(function each(client) {
+	server.clients.forEach(function each(client) {
 		if (client.uid == uid) {
 			connected = true
 		}
@@ -42,7 +61,7 @@ wss.isClientConnected = (uid) => {
 	return connected
 }
 
-wss.logMessage = (level, msg, uid) => {
+server.logMessage = (level, msg, uid) => {
 	const LOGLEVEL = [
 		"ℹ️ INFO",
 		"⚠️ WARNING",
@@ -61,8 +80,8 @@ wss.logMessage = (level, msg, uid) => {
 	])
 }
 
-wss.on('connection', function (ws) {
-	ws.on('message', function (data) {
+server.on('connection', function (client) {
+	client.on('message', function (data) {
 		try {
 			data = JSON.parse(data)
 		}
@@ -80,41 +99,40 @@ wss.on('connection', function (ws) {
 			switch (data.cmd) {
 				case "listclients":
 					returnData.payload = nqHelper.getClientDataFormatted(
-						wss.getConnectedClients()
+						server.getConnectedClients()
 					)
 					break;
 				default:
-					ws.send("invalid cmd")
+					client.send("invalid cmd")
 			}
 
-			ws.send(JSON.stringify(returnData))
+			client.send(JSON.stringify(returnData))
 
 			return
 		}
 
 		if (data.handshake) {
 			if (Object.keys(conns).includes(data.type)) {
-				conns[data.type] = ws
+				conns[data.type] = client
 			}
 
 			if (data.uid) {
-				ws.uid = data.uid
+				client.uid = data.uid
 			}
 			else {
-				ws.uid = nqHelper.getUniqueId();
+				client.uid = nqHelper.getUniqueId();
 			}
-			ws.sessionId = nqHelper.getSessionId();
+			client.sessionId = nqHelper.getSessionId();
 
-			wss.logMessage(0, 'client connected', ws.uid)
-			// console.log("✅ " + ws.uid + " connected");
-			ws.send(JSON.stringify({
-				"uid": ws.uid
+			server.logMessage(0, 'client connected', client.uid)
+			client.send(JSON.stringify({
+				"uid": client.uid
 			}))
 
 			if (data.type == "bridge") {
 				if (conns.cyberspace) {
 					conns.cyberspace.send(JSON.stringify({
-						"uid": ws.uid
+						"uid": client.uid
 					}))
 				}
 			}
@@ -123,38 +141,38 @@ wss.on('connection', function (ws) {
 		}
 
 		if (!conns.cyberspace) {
-			wss.logMessage(1, 'message recieved, but no main connection available for routing', ws.uid)
+			server.logMessage(1, 'message recieved, but no main connection available for routing', client.uid)
 			return
 		}
 
-		if (!wss.isClientConnected(ws.uid)) {
-			wss.logMessage(1, 'message recieved from unknown client', null)
+		if (!server.isClientConnected(client.uid)) {
+			server.logMessage(1, 'message recieved from unknown client', null)
 			return
 		}
 
 		if (data.impact) {
-			if (ws.sessionId != nqHelper.getSessionId()) {
-				wss.logMessage(1, 'impact sent from expired session, closing bridge', ws.uid)
-				ws.close()
+			if (client.sessionId != nqHelper.getSessionId()) {
+				server.logMessage(1, 'impact sent from expired session, closing bridge', client.uid)
+				client.close()
 				return
 			}
 
 			conns.cyberspace.send(JSON.stringify(data))
-			wss.logMessage(0, `impact requested: ${data.impact}`, ws.uid)
+			server.logMessage(0, `impact requested: ${data.impact}`, client.uid)
 		}
 	})
 
-	ws.on('close', function () {
-		wss.logMessage(0, 'client disconnected', ws.uid)
+	client.on('close', function () {
+		server.logMessage(0, 'client disconnected', client.uid)
 
-		if (ws == conns.cyberspace) {
+		if (client == conns.cyberspace) {
 			conns.cyberspace = null
 		}
 	});
 });
 
-server.listen(8080, function () {
+expressServer.listen(8080, function () {
 	console.log('Listening on http://0.0.0.0:8080');
 
-	debug = wss.address().address == "::"
+	debug = server.address().address == "::"
 });
