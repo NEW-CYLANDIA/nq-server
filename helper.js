@@ -5,8 +5,8 @@ const spreadsheetId = process.env.GSHEET_ID
 const parser = new PublicGoogleSheetsParser(spreadsheetId)
 
 exports.bridgeData = {}
-exports.clientData = {}
 
+// TODO - dump/insert bridge data to db on server start?
 parser.parse().then(data => {
     data.forEach((item) => {
         if (item.impact_keys) {
@@ -30,16 +30,31 @@ exports.getUniqueId = () => {
     return s4() + s4() + '-' + s4();
 }
 
-exports.getClientDataFormatted = (connectedUids) => {
-    let data = []
-    
-    for (const [key, value] of Object.entries(exports.clientData)) {
-        data.push([
-            key,
-            "blah",
-            connectedUids.includes(key)
-        ])
-    }
+// TODO update to use db
+// exports.getUserData = (device_uid) => {
+//     let data = []
 
-    return JSON.stringify(data)
-}
+//     for (const [key, value] of Object.entries(exports.clientData)) {
+//         data.push([
+//             key,
+//             "blah",
+//             connectedUids.includes(key)
+//         ])
+//     }
+
+//     return JSON.stringify(data)
+// }
+
+// exports.getAllUserData = (connectedUids) => {
+//     let data = []
+
+//     for (const [key, value] of Object.entries(exports.clientData)) {
+//         data.push([
+//             key,
+//             "blah",
+//             connectedUids.includes(key)
+//         ])
+//     }
+
+//     return JSON.stringify(data)
+// }

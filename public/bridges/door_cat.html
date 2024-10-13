@@ -121,7 +121,7 @@ DLG 0
       - Oh, did you want me to open a door for you?
         Why didn't you say so?{pg}
         All you had to do was ask!{pg}
-        [The key disappears.](ws "open")
+        [The key disappears.](impact "open")
       - You're welcome.
     }
   - else ?
@@ -12227,14 +12227,14 @@ function addDialogTag(tag, fn) {
 	injectDialogTag(tag, 'kitsy.dialogFunctions["' + tag + '"]');
 }
 
-addDialogTag('ws', function (environment, parameters, onReturn) {
-    // console.log("sending impact")
-
-    window.WS.send(JSON.stringify({
-        "type": "bridge",
-        "impact": parameters[0]
-    }));
+addDialogTag('impact', function (environment, parameters, onReturn) {
+    requestImpact(parameters[0])
     onReturn(null);
+});
+
+addDialogTag('currency', function (environment, parameters, onReturn) {
+	requestCurrency(parameters[0])
+	onReturn(null);
 });
 
 })(window);

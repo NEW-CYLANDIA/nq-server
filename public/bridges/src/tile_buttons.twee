@@ -1,0 +1,42 @@
+:: StoryTitle
+NQ Test
+
+
+:: StoryData
+{
+  "ifid": "73D50CEB-3A9E-4D1D-844E-893868ACB244",
+  "format": "SugarCube",
+  "format-version": "2.37.3",
+  "start": "START",
+  "zoom": 1
+}
+
+
+:: Press the BLUE button {"position":"800,550","size":"100,100"}
+<<script>>requestImpact("blue")<</script>>
+
+You pressed the BLUE button. Nothing happens in the room, but you feel //very// accomplished nonetheless.
+
+[[Press the RED button]]
+
+[[Press the BLUE button again|Press the BLUE button]]
+
+
+:: Press the RED button {"position":"825,200","size":"100,100"}
+<<script>>requestImpact("red")<</script>>
+
+You pressed the RED button. Nothing happens in the room, but you feel //very// accomplished nonetheless.
+
+[[Press the RED button again|Press the RED button]]
+
+[[Press the BLUE button]]
+
+
+:: START {"position":"650,375","size":"100,100"}
+You find yourself in an empty room, save two large buttons: one RED and one BLUE.
+
+The RED one appears to be in //desperate// need of pressing. The BLUE one is playing hard to get.
+
+[[Press the RED button]]
+
+[[Press the BLUE button]]
