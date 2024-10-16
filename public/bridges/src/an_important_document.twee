@@ -1,0 +1,63 @@
+:: StoryTitle
+An Important Document
+
+
+:: StoryData
+{
+  "ifid": "EED35387-AC20-4CA8-8A4E-3B475C35E018",
+  "format": "Harlowe",
+  "format-version": "3.3.9",
+  "start": "Important Business",
+  "zoom": 1
+}
+
+
+:: Approach the folder {"position":"500,300","size":"100,100"}
+You approach the folder, and bend to pick it up....wait a minute.  
+
+The black cat leaps up, and bolts forward! It turns right, onto the sidewalk ahead.
+
+[[Run after it!]]
+
+
+:: Important Business {"position":"500,175","size":"100,100"}
+You find yourself walking down a wide, tree-lined street.  It's a pleasant autumn day; leaves crunch beneath your feet.  You see something ahead of you...a black file folder, just sitting on the ground.  It's important, though you're not sure why.  Perhaps a friend was looking for it?  
+
+[[Approach the folder]]
+[[Take a look around]]
+
+
+:: Keep chasing it {"position":"375,550","size":"100,100"}
+You run into the secluded park as night falls.  The shadows grow tall, and you're suddenly aware of the horrible, gnawing silence that surrounds you.  You're alone here; you can barely see the black file folder in the setting sun's dim light.  It's laying on the sand of the park, near the jungle gym.
+
+[[Pick it up]]
+
+
+:: Pick it up {"position":"375,675","size":"100,100"}
+You walk onto the sand to pick up the file folder.  As you grab it, a shadow moves behind the jungle gy-
+<script>sendImpact("cat")</script>
+
+
+:: Run after it! {"position":"500,425","size":"100,100"}
+You chase after the cat!  You're not sure what you want from it, maybe just to pet it?  Nevertheless, you follow it down the sidewalk, and it turns right again into the side path towards the secluded park.
+
+[[Keep chasing it]]
+[[Wait...isn't this place familiar?]]
+
+
+:: Take a look around {"position":"625,300","size":"100,100"}
+It's winter now, and there's a bite in the air. Snow blankets the ground, which makes the black file folder stick out plainly in front of you.  It's probably a little soggy...might be best to get it off the ground.
+
+[[Pick up the folder|Approach the folder]]
+
+
+:: Turn around {"position":"500,675","size":"100,100"}
+You go to turn around in a hurry, not noticing the person behind y- 
+
+<script>sendImpact("cat")</script>
+
+
+:: Wait...isn't this place familiar? {"position":"500,550","size":"100,100"}
+You look around.  You know this place.  You walked these streets every day as a kid. The suburbs stretch out in front of you endlessly, and as you walk you realize you've become hopelessly lost.  The black file folder is in your hand, but you're not really sure how you'll deliver it to its owner.  
+
+[[Turn around]]
