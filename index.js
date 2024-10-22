@@ -2,6 +2,8 @@
 
 require('dotenv').config()
 
+const os = require("os")
+
 const pg = require('pg');
 const { Client } = pg
 
@@ -53,7 +55,7 @@ server.isClientConnected = (uid) => {
 }
 
 server.on('connection', function (client) {
-	function build_log_obj(msg, data) {
+	function buildLogObj(msg, data) {
 		let obj = {
 			uid: client.uid,
 			msg: msg,
@@ -67,7 +69,7 @@ server.on('connection', function (client) {
 		return obj
 	}
 
-	async function pg_query(query, params = []) {
+	async function pgQuery(query, params = []) {
 		const pg_client = new Client()
 		await pg_client.connect()
 
@@ -83,13 +85,13 @@ server.on('connection', function (client) {
 	}
 
 	client.log_info = (msg, data = null) => {
-		logtail.info(build_log_obj(msg, data))
+		logtail.info(buildLogObj(msg, data))
 	}
 	client.log_warn = (msg, data = null) => {
-		logtail.warn(build_log_obj(msg, data))
+		logtail.warn(buildLogObj(msg, data))
 	}
 	client.log_error = (msg, data = null) => {
-		logtail.error(build_log_obj(msg, data))
+		logtail.error(buildLogObj(msg, data))
 	}
 
 	client.on('message', function (data) {
@@ -105,6 +107,8 @@ server.on('connection', function (client) {
 			client.log_warn('message recieved from unknown client', data)
 			return
 		}
+
+		let currentSessionId = nqHelper.getSessionId()
 
 		switch (data.type) {
 			case "debug":
@@ -136,36 +140,39 @@ server.on('connection', function (client) {
 				}
 				else {
 					client.uid = nqHelper.getUniqueId();
-					pg_query('INSERT INTO users (device_uid) VALUES ($1)', [client.uid])
+
+					if (conns.cyberspace != client) {
+						pgQuery('INSERT INTO users (device_uid) VALUES ($1)', [client.uid])
+					}
 				}
 
 				if (data.session_id) {
-					if (data.session_id != nqHelper.getSessionId()) {
+					if (data.session_id != currentSessionId) {
 						client.log_warn('client handshake attempted with expired session, closing connection', data)
 						client.close()
 						return
 					}
 				}
 
-				client.sessionId = nqHelper.getSessionId();
+				client.sessionId = currentSessionId;
 
-				let connect_data = {
+				let connectData = {
 					"uid": client.uid,
 					"session_id": client.sessionId
 				}
 
-				client.send(JSON.stringify(connect_data))
+				client.send(JSON.stringify(connectData))
 
-				if (conns.cyberspace) {
-					conns.cyberspace.send(JSON.stringify(connect_data))
+				if (conns.cyberspace && conns.cyberspace != client) {
+					conns.cyberspace.send(JSON.stringify(connectData))
 				}
 
-				client.log_info('client connected', connect_data)
+				client.log_info('client connected', connectData)
 
 				break
 			case "impact":
 				if (client.sessionId != nqHelper.getSessionId()) {
-					client.log_warn('impact sent from expired session, closing bridge', data)
+					client.log_warn('impact sent from expired session, closing connection', data)
 					client.close()
 					return
 				}
@@ -183,7 +190,7 @@ server.on('connection', function (client) {
 					return
 				}
 
-				pg_query('UPDATE users SET currency = currency + $1 WHERE device_uid = $2', [data.value, client.uid])
+				pgQuery('UPDATE users SET currency = currency + $1 WHERE device_uid = $2', [data.value, client.uid])
 
 				break
 		}
@@ -205,7 +212,8 @@ server.on('connection', function (client) {
 });
 
 expressServer.listen(8080, function () {
-	console.log('Listening on http://0.0.0.0:8080');
+	console.log('Listening on ' + os.hostname());
+	console.log(server.address())
 
 	debug = server.address().address == "::"
 });
