@@ -127,8 +127,8 @@ server.on('connection', function (client) {
 
 				break
 			case "handshake":
-				if (Object.keys(conns).includes(data.type)) {
-					conns[data.type] = client
+				if (Object.keys(conns).includes(data.id)) {
+					conns[data.id] = client
 				}
 
 				if (data.uid) {
@@ -138,6 +138,15 @@ server.on('connection', function (client) {
 					client.uid = nqHelper.getUniqueId();
 					pg_query('INSERT INTO users (device_uid) VALUES ($1)', [client.uid])
 				}
+
+				if (data.session_id) {
+					if (data.session_id != nqHelper.getSessionId()) {
+						client.log_warn('client handshake attempted with expired session, closing connection', data)
+						client.close()
+						return
+					}
+				}
+
 				client.sessionId = nqHelper.getSessionId();
 
 				let connect_data = {
