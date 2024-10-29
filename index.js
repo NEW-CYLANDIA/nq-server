@@ -4,8 +4,9 @@ require('dotenv').config()
 
 const os = require("os")
 
-const pg = require('pg');
-const { Client } = pg
+// const pg = require('pg');
+// const { Client } = pg
+const db = require('./db');
 
 const { Node: Logtail } = require("@logtail/js");
 const logtail = new Logtail(process.env.LOGTAIL_TOKEN);
@@ -23,6 +24,71 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 const expressServer = createServer(app);
 const server = new WebSocket.Server({ server: expressServer });
+
+const { uniqueNamesGenerator, adjectives, colors, animals } = require('unique-names-generator');
+
+let randomName = uniqueNamesGenerator({ dictionaries: [adjectives, colors, animals] }); // big_red_donkey
+
+const words = randomName.split("_");
+
+for (let i = 0; i < words.length; i++) {
+	words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+}
+
+randomName = words.join(" ")
+
+console.log(randomName)
+
+app.get('/found_dreams', async (req, res) => {
+	try {
+		const result = await db.query(`
+			select
+				d.id,
+				d.title,
+				d.url as dream_url,
+				c.name as creator_name,
+				c.website_url
+			FROM
+				dreams d
+			LEFT JOIN
+				creators c ON d.creator_id = c.id
+			where 
+				d.id in (
+					SELECT
+						e.dream_id 
+					FROM
+						events e 
+					where
+						e.device_uid = $1
+						and e.type = 'handshake'
+				)
+		`, [req.query.nquid]);
+		res.json(result.rows);
+	} catch (err) {
+		console.error(err);
+		res.status(500).send('Internal Server Error');
+	}
+});
+
+// app.get('/progress', async (req, res) => {
+// 	try {
+// 		console.log(req.query.nquid)
+
+// 		const result = await db.query(`
+// 			SELECT
+// 				e.dream_id 
+// 			FROM
+// 				events e 
+// 			where
+// 				e.device_uid = $1
+// 				and e.type = 'handshake'
+// 		`, [req.query.nquid]);
+// 		res.json(result.rows);
+// 	} catch (err) {
+// 		console.error(err);
+// 		res.status(500).send('Internal Server Error');
+// 	}
+// });
 
 logtail.debug({ msg: "SERVER UP" })
 logtail.flush()
@@ -69,20 +135,20 @@ server.on('connection', function (client) {
 		return obj
 	}
 
-	async function pgQuery(query, params = []) {
-		const pg_client = new Client()
-		await pg_client.connect()
+	// async function pgQuery(query, params = []) {
+	// 	const pg_client = new Client()
+	// 	await pg_client.connect()
 
-		const res = await pg_client.query(query, params)
+	// 	const res = await pg_client.query(query, params)
 
-		client.log_info('db query sent', {
-			query: query,
-			params: params,
-			result: res
-		})
+	// 	client.log_info('db query sent', {
+	// 		query: query,
+	// 		params: params,
+	// 		result: res
+	// 	})
 
-		await pg_client.end()
-	}
+	// 	await pg_client.end()
+	// }
 
 	client.log_info = (msg, data = null) => {
 		logtail.info(buildLogObj(msg, data))
@@ -142,7 +208,7 @@ server.on('connection', function (client) {
 					client.uid = nqHelper.getUniqueId();
 
 					if (conns.cyberspace != client) {
-						pgQuery('INSERT INTO users (device_uid) VALUES ($1)', [client.uid])
+						db.query('INSERT INTO users (device_uid) VALUES ($1)', [client.uid])
 					}
 				}
 
@@ -190,7 +256,7 @@ server.on('connection', function (client) {
 					return
 				}
 
-				pgQuery('UPDATE users SET currency = currency + $1 WHERE device_uid = $2', [data.value, client.uid])
+				db.query('UPDATE users SET currency = currency + $1 WHERE device_uid = $2', [data.value, client.uid])
 
 				break
 		}

@@ -19,6 +19,7 @@
     "pino": "^9.4.0",
     "public-google-sheets-parser": "^1.5.4",
     "rocket-store": "^0.10.19",
+    "unique-names-generator": "^4.7.1",
     "ws": "^8.5.0"
   }
 }

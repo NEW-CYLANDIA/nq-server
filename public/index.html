@@ -1,0 +1,32 @@
+<script type="module">
+    const table = new gridjs.Grid({
+        columns: ['Title', 'Creator'],
+        server: {
+            url: `/found_dreams?nquid=${localStorage.getItem("nquid")}`,
+            then: data => data.map(dream =>
+                [
+                    gridjs.html(`<a href='${dream.dream_url}'>${dream.title}</a>`),
+                    gridjs.html(`<a href='${dream.website_url}'>${dream.creator_name}</a>`)
+                ]
+            )
+        }
+    })
+
+    table.render(document.getElementById("wrapper"));
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="wrapper"></div>
+
+    <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+    <script src="src/index.js"></script>
+</body>
+
+</html>
