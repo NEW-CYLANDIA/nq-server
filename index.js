@@ -70,6 +70,18 @@ app.get('/found_dreams', async (req, res) => {
 	}
 });
 
+app.get('/new_player', async (req, res) => {
+	try {
+		const new_uid = nqHelper.getUniqueId();
+
+		const result = await db.query('INSERT INTO users (device_uid) VALUES ($1)', [new_uid])
+		res.json({uid: new_uid});
+	} catch (err) {
+		console.error(err);
+		res.status(500).send('Internal Server Error');
+	}
+});
+
 // app.get('/progress', async (req, res) => {
 // 	try {
 // 		console.log(req.query.nquid)

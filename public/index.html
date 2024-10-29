@@ -1,8 +1,15 @@
 <script type="module">
+    let nquid = localStorage.getItem("nquid")
+
+    if (!nquid) {
+        nquid = JSON.parse(httpGet("/new_player")).uid
+        localStorage.setItem("nquid", nquid)
+    }
+
     const table = new gridjs.Grid({
         columns: ['Title', 'Creator'],
         server: {
-            url: `/found_dreams?nquid=${localStorage.getItem("nquid")}`,
+            url: `/found_dreams?nquid=${nquid}`,
             then: data => data.map(dream =>
                 [
                     gridjs.html(`<a href='${dream.dream_url}'>${dream.title}</a>`),
@@ -13,6 +20,13 @@
     })
 
     table.render(document.getElementById("wrapper"));
+
+    function httpGet(theUrl) {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", theUrl, false); // false for synchronous request
+        xmlHttp.send(null);
+        return xmlHttp.responseText;
+    }
 </script>
 
 <!DOCTYPE html>
