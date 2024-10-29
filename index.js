@@ -289,7 +289,7 @@ server.on('connection', function (client) {
 	});
 });
 
-expressServer.listen(8080, function () {
+expressServer.listen(80, function () {
 	console.log('Listening on ' + os.hostname());
 	console.log(server.address())
 
