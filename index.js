@@ -289,7 +289,7 @@ server.on('connection', function (client) {
 	});
 });
 
-expressServer.listen(80, function () {
+expressServer.listen(process.env.PORT || 3000, function () {
 	console.log('Listening on ' + os.hostname());
 	console.log(server.address())
 
