@@ -137,7 +137,7 @@ server.on('connection', function (client) {
 		let obj = {
 			uid: client.uid,
 			msg: msg,
-			session_id: client.sessionId
+			session_hash: client.sessionHash
 		}
 
 		if (data) {
@@ -186,7 +186,7 @@ server.on('connection', function (client) {
 			return
 		}
 
-		let currentSessionId = nqHelper.getSessionId()
+		let currentSessionHash = nqHelper.getSessionHash()
 
 		switch (data.type) {
 			case "debug":
@@ -224,19 +224,19 @@ server.on('connection', function (client) {
 					}
 				}
 
-				if (data.session_id) {
-					if (data.session_id != currentSessionId) {
+				if (data.session_hash) {
+					if (data.session_hash != currentSessionHash) {
 						client.log_warn('client handshake attempted with expired session, closing connection', data)
 						client.close()
 						return
 					}
 				}
 
-				client.sessionId = currentSessionId;
+				client.sessionHash = currentSessionHash;
 
 				let connectData = {
 					"uid": client.uid,
-					"session_id": client.sessionId
+					"session_hash": client.sessionHash
 				}
 
 				client.send(JSON.stringify(connectData))
@@ -249,7 +249,7 @@ server.on('connection', function (client) {
 
 				break
 			case "impact":
-				if (client.sessionId != nqHelper.getSessionId()) {
+				if (client.sessionHash != nqHelper.getSessionHash()) {
 					client.log_warn('impact sent from expired session, closing connection', data)
 					client.close()
 					return
@@ -289,7 +289,7 @@ server.on('connection', function (client) {
 	});
 });
 
-expressServer.listen(process.env.PORT || 3000, function () {
+expressServer.listen(process.env.PORT || 8080, function () {
 	console.log('Listening on ' + os.hostname());
 	console.log(server.address())
 

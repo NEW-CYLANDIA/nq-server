@@ -1,7 +1,7 @@
 const protocol = window.location.protocol.includes('https') ? 'wss' : 'ws'
 window.WS = new WebSocket(`${protocol}://${window.location.host}`);
 
-let session_id
+let sessionHash
 
 window.WS.onopen = function (event) {
     // console.log("opened connection")
@@ -27,15 +27,15 @@ window.WS.onmessage = function (event) {
     if (data.uid) {
         localStorage.setItem("nquid", data.uid)
     }
-    if (data.session_id) {
-        session_id = data.session_id
+    if (data.session_hash) {
+        sessionHash = data.session_hash
     }
 }
 
 function requestImpact(impactKey) {
     window.WS.send(JSON.stringify({
         "type": "impact",
-        "session_id": session_id,
+        "session_hash": sessionHash,
         "key": impactKey
     }))
 }
@@ -45,7 +45,7 @@ function requestCurrency(value) {
         "type": "currency",
         "value": value,
         // "id": bridgeId,
-        "session_id": session_id,
+        "session_hash": sessionHash,
         "uid": localStorage.getItem("nquid"),
         // "displayName": displayName
     }));

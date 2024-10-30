@@ -4,6 +4,9 @@ const PublicGoogleSheetsParser = require('public-google-sheets-parser')
 const spreadsheetId = process.env.GSHEET_ID
 const parser = new PublicGoogleSheetsParser(spreadsheetId)
 
+// Importing 'crypto' module
+const crypto = require('crypto'), hash = crypto.getHashes();
+
 exports.bridgeData = {}
 
 // TODO - dump/insert bridge data to db on server start?
@@ -28,6 +31,19 @@ exports.getUniqueId = () => {
         return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
     }
     return s4() + s4() + '-' + s4();
+}
+
+exports.getSessionHash = () => {
+    // Create hash of SHA1 type
+    x = exports.getSessionId()
+
+    // 'digest' is the output 
+    // of hash function containing
+    // only hexadecimal digits
+    hashPwd = crypto.createHash('sha1')
+        .update(x).digest('hex');
+
+    return hashPwd
 }
 
 // TODO update to use db
