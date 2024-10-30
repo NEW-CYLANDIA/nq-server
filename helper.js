@@ -7,6 +7,11 @@ const parser = new PublicGoogleSheetsParser(spreadsheetId)
 // Importing 'crypto' module
 const crypto = require('crypto'), hash = crypto.getHashes();
 
+const { uniqueNamesGenerator, colors, animals, names, NumberDictionary } = require('unique-names-generator');
+const sleepAdjectives = require('./adjectives.json')
+
+const db = require('./db');
+
 exports.bridgeData = {}
 
 // TODO - dump/insert bridge data to db on server start?
@@ -44,6 +49,39 @@ exports.getSessionHash = () => {
         .update(x).digest('hex');
 
     return hashPwd
+}
+
+exports.generateDisplayName = () => {
+    const numberDictionary = NumberDictionary.generate({ min: 69, max: 420 });
+    const dictOptions = [
+        [sleepAdjectives, animals, numberDictionary],
+        [colors, animals, numberDictionary],
+        [sleepAdjectives, names, numberDictionary]
+    ]
+
+    let randomName = uniqueNamesGenerator({
+        dictionaries: dictOptions[Math.floor(Math.random() * dictOptions.length)],
+        style: Math.random() > 0.5 ? "capital" : "lowerCase",
+        separator: ""
+    })
+
+    return randomName
+}
+
+exports.dbCreatePlayer = async () => {
+    const uid = exports.getUniqueId();
+    const displayName = exports.generateDisplayName()
+
+    await db.query('INSERT INTO users (device_uid, display_name) VALUES ($1, $2)', [uid, displayName])
+
+    return uid
+}
+
+exports.dbLogEvent = async (uid, session_hash, data) => {
+    await db.query(
+        'INSERT INTO events (device_uid, session_hash, type, impact_key, currency_value, dream_url_part) VALUES ($1, $2, $3, $4, $5, $6)',
+        [uid, session_hash, data.type, data.key || null, data.value || null, data.dream_url_part || null]
+    )
 }
 
 // TODO update to use db

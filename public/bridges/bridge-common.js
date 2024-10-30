@@ -1,21 +1,16 @@
 const protocol = window.location.protocol.includes('https') ? 'wss' : 'ws'
 window.WS = new WebSocket(`${protocol}://${window.location.host}`);
 
+let path = window.location.pathname;
+const urlPart = path.split("/").pop().replace(".html", "");
+
 let sessionHash
 
 window.WS.onopen = function (event) {
-    // console.log("opened connection")
-
-    // let displayName = prompt("what's your name!")
-
-    var path = window.location.pathname;
-    var bridgeId = path.split("/").pop().replace(".html", "");
-
     window.WS.send(JSON.stringify({
         "type": "handshake",
-        "id": bridgeId,
+        "dream_url_part": urlPart,
         "uid": localStorage.getItem("nquid"),
-        // "displayName": displayName
     }));
 };
 
@@ -44,7 +39,7 @@ function requestCurrency(value) {
     window.WS.send(JSON.stringify({
         "type": "currency",
         "value": value,
-        // "id": bridgeId,
+        "dream_url_part": urlPart,
         "session_hash": sessionHash,
         "uid": localStorage.getItem("nquid"),
         // "displayName": displayName

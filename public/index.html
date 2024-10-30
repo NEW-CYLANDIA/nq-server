@@ -6,8 +6,9 @@
         localStorage.setItem("nquid", nquid)
     }
 
+    // TODO - flag to designate found this session or not
     const table = new gridjs.Grid({
-        columns: ['Title', 'Creator'],
+        columns: ['Dream Title', 'Original Dreamer'],
         server: {
             url: `/found_dreams?nquid=${nquid}`,
             then: data => data.map(dream =>
@@ -19,7 +20,17 @@
         }
     })
 
+    const currency = JSON.parse(httpGet(`/get_currency?nquid=${nquid}`)).currency
+
+    document.getElementById("currencyDisplay").hidden = !currency
+    document.getElementById("currencyCount").innerText = currency
+
     table.render(document.getElementById("wrapper"));
+    document.getElementById("displayName").innerText = JSON.parse(httpGet(`/get_display_name?nquid=${nquid}`)).display_name
+
+    document.getElementById("regenName").onclick = () => {
+        document.getElementById("displayName").innerText = JSON.parse(httpGet(`/set_display_name?nquid=${nquid}`)).display_name
+    }
 
     function httpGet(theUrl) {
         var xmlHttp = new XMLHttpRequest();
@@ -33,15 +44,20 @@
 <html lang="en">
 
 <head>
+    <title>my dream diary <3</title>
     <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
 </head>
 
 <body>
-    hello this is a test
+    <h1>dear diary,</h1>
+    <p>i had some really wild dreams last night! i don't remember them all too clearly, but here are some notes:</p>
     <div id="wrapper"></div>
+    <p>i hope i get to revisit some of them tonight...or maybe share them with someone special? ~O_O~</p>
+    <p id="currencyDisplay">oh! also, i found some DREAM DOLLARS! currently, i have <span style="font-size: large; font-weight: bold;" id="currencyCount">0</span> DD on hand...i wonder what i can spend it on :O</p>
+    <h2>- <span id="displayName"></span></h2>
+    <button id="regenName">Generate New Display Name</button>
 
     <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
-    {# <script src="src/index.js"></script> #}
 </body>
 
 </html>

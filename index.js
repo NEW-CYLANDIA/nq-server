@@ -25,27 +25,12 @@ app.use(express.static(path.join(__dirname, '/public')));
 const expressServer = createServer(app);
 const server = new WebSocket.Server({ server: expressServer });
 
-const { uniqueNamesGenerator, adjectives, colors, animals } = require('unique-names-generator');
-
-let randomName = uniqueNamesGenerator({ dictionaries: [adjectives, colors, animals] }); // big_red_donkey
-
-const words = randomName.split("_");
-
-for (let i = 0; i < words.length; i++) {
-	words[i] = words[i][0].toUpperCase() + words[i].substr(1);
-}
-
-randomName = words.join(" ")
-
-console.log(randomName)
-
 app.get('/found_dreams', async (req, res) => {
 	try {
 		const result = await db.query(`
 			select
-				d.id,
+				d.url_part,
 				d.title,
-				d.url as dream_url,
 				c.name as creator_name,
 				c.website_url
 			FROM
@@ -53,9 +38,9 @@ app.get('/found_dreams', async (req, res) => {
 			LEFT JOIN
 				creators c ON d.creator_id = c.id
 			where 
-				d.id in (
+				d.url_part in (
 					SELECT
-						e.dream_id 
+						e.dream_url_part 
 					FROM
 						events e 
 					where
@@ -72,10 +57,40 @@ app.get('/found_dreams', async (req, res) => {
 
 app.get('/new_player', async (req, res) => {
 	try {
-		const new_uid = nqHelper.getUniqueId();
+		const uid = await nqHelper.dbCreatePlayer()
+		res.json({uid: uid});
+	} catch (err) {
+		console.error(err);
+		res.status(500).send('Internal Server Error');
+	}
+});
 
-		const result = await db.query('INSERT INTO users (device_uid) VALUES ($1)', [new_uid])
-		res.json({uid: new_uid});
+app.get('/get_display_name', async (req, res) => {
+	try {
+		const result = await db.query(`select display_name from users where device_uid = $1`, [req.query.nquid]);
+		res.json({ display_name: result.rows[0].display_name });
+	} catch (err) {
+		console.error(err);
+		res.status(500).send('Internal Server Error');
+	}
+});
+
+app.get('/get_currency', async (req, res) => {
+	try {
+		const result = await db.query(`select currency from users where device_uid = $1`, [req.query.nquid]);
+		res.json({ currency: result.rows[0].currency });
+	} catch (err) {
+		console.error(err);
+		res.status(500).send('Internal Server Error');
+	}
+});
+
+app.get('/set_display_name', async (req, res) => {
+	try {
+		const newDisplayName = nqHelper.generateDisplayName()
+
+		const result = await db.query(`update users set display_name = $1 where device_uid = $2`, [newDisplayName, req.query.nquid]);
+		res.json({ display_name: newDisplayName });
 	} catch (err) {
 		console.error(err);
 		res.status(500).send('Internal Server Error');
@@ -105,7 +120,7 @@ app.get('/new_player', async (req, res) => {
 logtail.debug({ msg: "SERVER UP" })
 logtail.flush()
 
-let conns = {
+let uniqueConns = {
 	'cyberspace': null
 }
 let debug = false
@@ -147,21 +162,6 @@ server.on('connection', function (client) {
 		return obj
 	}
 
-	// async function pgQuery(query, params = []) {
-	// 	const pg_client = new Client()
-	// 	await pg_client.connect()
-
-	// 	const res = await pg_client.query(query, params)
-
-	// 	client.log_info('db query sent', {
-	// 		query: query,
-	// 		params: params,
-	// 		result: res
-	// 	})
-
-	// 	await pg_client.end()
-	// }
-
 	client.log_info = (msg, data = null) => {
 		logtail.info(buildLogObj(msg, data))
 	}
@@ -189,39 +189,19 @@ server.on('connection', function (client) {
 		let currentSessionHash = nqHelper.getSessionHash()
 
 		switch (data.type) {
-			case "debug":
-				let returnData = {
-					"cmd": data.cmd,
-					"payload": ""
+			case "registerUnique":
+				if (Object.keys(uniqueConns).includes(data.id)) {
+					uniqueConns[data.id] = client
+
+					client.send(JSON.stringify({"session_hash": currentSessionHash}))
 				}
-
-				switch (data.cmd) {
-					case "listclients":
-						returnData.payload = nqHelper.getUserData(
-							server.getConnectedClients()
-						)
-						break;
-					default:
-						client.send("invalid cmd")
-				}
-
-				client.send(JSON.stringify(returnData))
-
-				break
+				break;
 			case "handshake":
-				if (Object.keys(conns).includes(data.id)) {
-					conns[data.id] = client
-				}
-
 				if (data.uid) {
 					client.uid = data.uid
 				}
 				else {
-					client.uid = nqHelper.getUniqueId();
-
-					if (conns.cyberspace != client) {
-						db.query('INSERT INTO users (device_uid) VALUES ($1)', [client.uid])
-					}
+					client.uid = nqHelper.dbCreatePlayer()
 				}
 
 				if (data.session_hash) {
@@ -241,8 +221,8 @@ server.on('connection', function (client) {
 
 				client.send(JSON.stringify(connectData))
 
-				if (conns.cyberspace && conns.cyberspace != client) {
-					conns.cyberspace.send(JSON.stringify(connectData))
+				if (uniqueConns.cyberspace) {
+					uniqueConns.cyberspace.send(JSON.stringify(connectData))
 				}
 
 				client.log_info('client connected', connectData)
@@ -255,8 +235,8 @@ server.on('connection', function (client) {
 					return
 				}
 
-				if (conns.cyberspace) {
-					conns.cyberspace.send(JSON.stringify(data))
+				if (uniqueConns.cyberspace) {
+					uniqueConns.cyberspace.send(JSON.stringify(data))
 				}
 
 				client.log_info(`impact requested: ${data.key}`, data)
@@ -273,6 +253,8 @@ server.on('connection', function (client) {
 				break
 		}
 
+		nqHelper.dbLogEvent(client.uid, client.sessionHash, data)
+
 		// Ensure that all logs are sent to Logtail
 		logtail.flush()
 	})
@@ -280,8 +262,8 @@ server.on('connection', function (client) {
 	client.on('close', function () {
 		client.log_info('client disconnected')
 
-		if (client == conns.cyberspace) {
-			conns.cyberspace = null
+		if (client == uniqueConns.cyberspace) {
+			uniqueConns.cyberspace = null
 		}
 
 		// Ensure that all logs are sent to Logtail
