@@ -65,6 +65,10 @@ exports.generateDisplayName = () => {
         separator: ""
     })
 
+    if (Math.random() < 0.1) {
+        randomName = randomName.replace(/[a-z]/gi, c => c[`to${randomName ? 'Upp' : 'Low'}erCase`](randomName = !randomName))
+    }
+
     return randomName
 }
 
