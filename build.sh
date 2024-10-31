@@ -1,5 +1,7 @@
 #!/bin/sh
 
+npm install
+
 ROOT_PATH=$PWD
 BRIDGE_PATH=$PWD"/public/bridges"
 
