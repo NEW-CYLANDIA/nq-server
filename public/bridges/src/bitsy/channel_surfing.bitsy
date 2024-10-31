@@ -1,0 +1,827 @@
+"""
+{clr 2}channel surfing{/clr}
+by izzy kestrel
+"""
+
+# BITSY VERSION 8.12
+
+! VER_MAJ 8
+! VER_MIN 12
+! ROOM_FORMAT 1
+! DLG_COMPAT 0
+! TXT_MODE 0
+
+PAL 0
+69,82,237
+241,220,67
+105,193,59
+NAME bbt
+
+PAL 1
+170,113,255
+193,255,54
+75,214,91
+NAME gex
+
+PAL 2
+112,177,236
+10,3,78
+194,244,178
+NAME friends
+
+PAL 3
+255,255,255
+0,0,0
+244,208,154
+NAME office
+
+ROOM 0
+0,0,0,0,0,0,0,d,0,d,0,0,0,0,0,0
+0,d,d,d,d,d,d,d,0,d,d,d,d,d,d,0
+0,d,0,0,0,0,0,0,0,0,0,0,0,0,d,0
+0,d,0,0,0,0,0,0,0,c,0,0,0,0,d,0
+0,d,0,0,c,0,0,0,0,0,0,0,0,0,d,0
+0,d,0,0,0,0,0,0,0,0,0,c,0,0,d,0
+0,d,0,0,0,0,c,0,0,0,0,0,0,0,d,0
+0,d,0,0,0,0,0,0,0,0,0,0,0,0,d,0
+0,d,0,0,0,0,0,0,0,0,0,0,c,0,d,0
+0,d,0,0,0,c,0,0,0,0,0,0,0,0,d,0
+0,d,0,0,0,0,0,0,0,0,0,0,0,0,d,0
+0,d,0,0,0,0,0,c,0,0,0,0,0,0,d,0
+0,d,0,c,0,0,0,0,0,0,0,c,0,0,d,0
+0,d,0,0,0,0,0,0,0,0,0,0,0,0,d,0
+0,d,d,d,d,d,d,d,d,d,d,d,d,d,d,0
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+NAME start
+ITM 3 8,9
+ITM 3 8,0
+EXT 8,0 1 8,15
+PAL 1
+
+ROOM 1
+0,a,0,0,0,0,0,a,0,a,0,0,0,0,a,0
+0,0,a,0,0,a,0,a,0,0,a,a,0,a,0,0
+a,0,0,0,0,0,a,0,0,a,0,0,0,0,0,a
+0,a,0,a,0,a,0,0,0,0,a,0,0,0,a,a
+a,0,a,0,0,0,a,0,0,a,0,a,0,a,0,a
+0,a,0,a,0,a,0,0,a,0,0,0,a,0,0,a
+a,0,0,0,a,0,a,0,0,a,0,a,0,0,0,a
+a,0,0,0,0,a,0,0,0,0,a,0,0,0,0,a
+a,0,0,0,0,0,a,0,0,a,0,0,0,0,0,a
+a,0,0,0,0,0,a,0,a,a,0,0,0,0,0,a
+a,0,0,0,0,0,a,0,0,a,0,0,0,0,0,a
+a,0,0,0,0,0,0,0,0,0,0,0,0,0,0,a
+a,0,0,0,0,0,0,0,0,0,0,0,0,0,0,a
+a,0,0,0,0,0,a,0,0,a,0,0,0,0,0,a
+a,0,0,0,0,0,a,a,0,a,0,0,0,0,0,a
+a,a,a,a,a,a,a,a,0,a,a,a,a,a,a,a
+NAME bbt
+ITM 3 8,15
+ITM 3 8,0
+EXT 8,15 0 8,0
+EXT 8,0 2 8,15
+PAL 0
+
+ROOM 2
+g,f,f,f,f,f,h,e,0,g,f,f,f,f,f,h
+b,0,0,0,0,0,b,0,0,b,0,0,0,0,0,b
+b,0,0,0,0,0,b,0,e,b,0,0,0,0,0,b
+b,0,0,0,0,0,b,0,0,0,0,0,0,0,0,b
+b,0,0,0,0,0,b,0,0,0,0,0,0,0,0,b
+b,0,0,0,0,0,b,0,0,b,0,0,0,0,0,b
+b,0,0,0,0,0,b,0,0,b,0,0,0,0,0,b
+b,0,0,0,0,0,b,0,0,b,0,0,0,0,0,b
+b,0,0,0,0,0,b,0,0,b,0,0,0,0,0,b
+b,0,0,0,0,0,b,0,0,b,0,0,0,0,0,b
+b,0,0,0,0,0,0,0,0,b,0,0,0,0,0,b
+b,0,0,0,0,0,0,0,0,b,0,0,0,0,0,b
+b,0,0,0,0,0,b,0,0,b,0,0,0,0,0,b
+b,0,0,0,0,0,b,0,a,b,0,0,0,0,0,b
+b,0,0,0,0,0,b,0,0,b,0,0,0,0,0,b
+j,f,f,f,f,f,i,a,0,j,f,f,f,f,f,i
+NAME friends
+ITM 3 8,15
+ITM 3 8,0
+EXT 8,15 1 8,0
+EXT 8,0 3 8,15
+PAL 2
+
+ROOM 3
+e,e,e,e,e,e,e,e,e,e,e,e,e,e,e,e
+e,0,0,0,0,e,0,0,0,0,0,0,0,0,0,e
+e,0,e,e,0,e,e,0,0,0,0,e,e,e,0,e
+e,0,e,e,0,e,e,0,0,0,0,0,0,0,0,e
+e,0,e,e,0,e,e,0,0,0,0,0,0,0,0,e
+e,0,e,e,0,e,0,0,0,0,e,e,e,0,0,e
+e,0,0,0,0,0,0,0,0,0,0,0,0,0,0,e
+e,0,0,0,0,0,0,0,0,0,0,0,0,0,0,e
+e,e,e,e,e,e,0,0,0,0,e,e,e,e,e,e
+e,0,0,0,0,0,0,0,0,0,e,0,0,0,0,e
+e,0,0,0,0,0,0,0,0,0,e,0,0,0,0,e
+e,0,e,0,0,e,0,0,0,0,e,0,0,0,0,e
+e,0,e,0,0,e,0,0,0,0,0,0,0,0,0,e
+e,0,e,0,0,e,0,0,0,e,e,e,e,e,e,e
+e,0,0,0,0,e,e,0,0,e,e,e,e,e,e,e
+e,e,e,e,e,e,e,e,0,e,e,e,e,e,e,e
+NAME office
+ITM 2 1,1
+ITM 3 8,15
+EXT 8,15 2 8,0
+PAL 3
+
+TIL a
+00000000
+00010010
+01000100
+00011000
+00011010
+01000000
+00100010
+00000000
+NAME bbt
+WAL true
+
+TIL b
+00111100
+00111100
+00111100
+00111100
+00111100
+00111100
+00111100
+00111100
+NAME wall_ud
+WAL true
+
+TIL c
+00000000
+01111110
+10000001
+10101001
+10010101
+10101001
+10000001
+01111110
+>
+00000000
+01111110
+10000001
+10010101
+10101001
+10010101
+10000001
+01111110
+NAME tv
+WAL true
+
+TIL d
+00000000
+01111110
+10000001
+11110001
+10101011
+10100101
+10000001
+01111110
+NAME tv_wall
+WAL true
+
+TIL e
+11111111
+11111111
+10100001
+11111111
+10010001
+11111111
+10000101
+11111111
+NAME paper
+WAL true
+
+TIL f
+00000000
+00000000
+11111111
+11111111
+11111111
+11111111
+00000000
+00000000
+NAME wall_lr
+WAL true
+
+TIL g
+00000000
+00000000
+00111111
+00111111
+00111111
+00111111
+00111100
+00111100
+NAME corner0
+
+TIL h
+00000000
+00000000
+11111100
+11111100
+11111100
+11111100
+00111100
+00111100
+NAME corner1
+
+TIL i
+00111100
+00111100
+11111100
+11111100
+11111100
+11111100
+00000000
+00000000
+NAME corner2
+
+TIL j
+00111100
+00111100
+00111111
+00111111
+00111111
+00111111
+00000000
+00000000
+NAME corner3
+
+SPR A
+00000000
+00011000
+00011000
+00111100
+01111110
+10111101
+00100100
+00100100
+POS 0 10,10
+
+SPR a
+00000000
+01110000
+11111010
+01111001
+00011010
+00111100
+00011100
+00010100
+NAME gex
+DLG 0
+POS 0 8,6
+
+SPR b
+00011000
+00011000
+00011000
+00111100
+01111110
+10111101
+00100100
+00100100
+NAME bbt_sheldon
+DLG 3
+POS 1 13,7
+
+SPR c
+00000000
+00011000
+00011000
+00111100
+01111110
+10111101
+00100100
+00100100
+NAME bbt_leonard
+DLG 4
+POS 1 12,7
+
+SPR d
+00000000
+00011000
+00011000
+00111100
+01111110
+10111101
+00100100
+00100100
+NAME bbt_raj
+DLG 5
+POS 1 13,11
+
+SPR e
+00000000
+00011000
+00011000
+00111100
+01111110
+10111101
+00100100
+00100100
+NAME bbt_howard
+DLG 6
+POS 1 13,12
+
+SPR f
+00000000
+00011000
+00011000
+00100100
+01011010
+00011000
+00100100
+00100100
+NAME bbt_penny
+DLG 7
+POS 1 2,11
+
+SPR g
+00011000
+00011000
+00011000
+00111100
+01111110
+10111101
+00100100
+00100100
+NAME friends_ross
+DLG h
+POS 2 14,8
+
+SPR h
+00011000
+00011000
+00111100
+00111100
+01111110
+10111101
+00100100
+00100100
+NAME friends_chand
+DLG g
+POS 2 11,6
+
+SPR i
+00000000
+00011000
+00011000
+00100100
+01011010
+00011000
+00100100
+00100100
+NAME friends_rach
+DLG i
+POS 2 2,8
+
+SPR j
+00000000
+00011000
+00011000
+00100100
+01011010
+00011000
+00100100
+00100100
+NAME friends_phob
+DLG j
+POS 2 4,2
+
+SPR k
+00000000
+00011000
+00011000
+00100100
+01011010
+00011000
+00100100
+00100100
+NAME friends_mon
+DLG k
+POS 2 5,12
+
+SPR l
+00011000
+00011000
+00111100
+00111100
+01111110
+10111101
+00100100
+00100100
+NAME friends_joey
+DLG l
+POS 2 13,2
+
+SPR m
+00000000
+00011000
+00011000
+00111100
+01111110
+10111101
+00100100
+00100100
+NAME off_jim
+DLG d
+POS 3 9,5
+
+SPR n
+00000000
+00011000
+00011000
+00100100
+01011010
+00011000
+00111100
+00100100
+NAME off_pam
+DLG e
+POS 3 11,10
+
+SPR o
+00011000
+00011000
+00011000
+00111100
+01111110
+10111101
+00100100
+00100100
+NAME off_dwight
+DLG c
+POS 3 11,4
+
+SPR p
+00000000
+00011000
+00011000
+00111100
+01111110
+10111101
+00100100
+00100100
+NAME off_mich
+DLG f
+POS 3 1,12
+
+SPR q
+00000000
+00011000
+00011000
+00100100
+01111110
+10111101
+00100100
+00100100
+NAME off_phy
+DLG 9
+POS 3 13,3
+
+SPR r
+00000000
+00011000
+00011000
+00111100
+01111110
+10111101
+00100100
+00100100
+NAME off_stan
+DLG 8
+POS 3 13,1
+
+SPR s
+00000000
+00011000
+00011000
+00111100
+01111110
+10111101
+00100100
+00100100
+NAME off_toby
+DLG a
+POS 3 6,1
+
+SPR t
+11111111
+10000001
+10101001
+10010101
+10101001
+10000001
+11111111
+01111110
+>
+11111111
+10000001
+10010101
+10101001
+10010101
+10000001
+11111111
+01111110
+NAME friends_tv
+DLG m
+POS 2 12,13
+
+ITM 2
+00000000
+00000000
+00011100
+00100010
+01010001
+01001001
+01001001
+11111111
+>
+00000000
+00000000
+00111000
+01000100
+10100010
+10010010
+10010010
+11111111
+NAME jello
+DLG b
+
+ITM 3
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+NAME genderer
+DLG n
+
+DLG 0
+"""
+{
+  - {item "1"} ?
+    Hey, hey! It's the remote!{pg}Great job, kid.{pg}Now let's blow this popsicle-{pg}Hold on, there are no batteries in this thing!{pg}Looks like you still have some work to do, pal...{pg}Maybe ask the nerds?
+  - else ?
+    Left at Cheers, right at Doogie Howser...{pg}Ah man, this map hasn't been updated in decades!{pg}Oh, hey. You lost in TV land, too?{pg}Well, this ain't my first rodeo...{pg}Tell you what...if you can track down a {wvy}{rbw}TV REMOTE{/wvy}{/rbw},{pg}I can get us outta here.{pg}Capisce?
+}
+"""
+NAME gex dialog
+
+DLG 3
+"""
+{
+  - remote == true ?
+    Oh my, that's quite the {rbw}TV REMOTE{/rbw} you have there.{pg}What is that, a Magnavox? Hitachi? Lovely vintage.{pg}But wait, no batteries??{pg}I'm afraid I'm fresh out, unfortunately.{pg}You could ask the loathsome woman next door.{pg}She probably keeps them in her freezer like some kind of Ice Age neanderthal.{pg}Bazinga.
+  - else ?
+    Please do not talk to me.{pg}I am busy doing math problems in my head for fun.{pg}...{pg}Bazinga.
+}
+"""
+NAME bbt_sheldon dialog
+
+DLG 4
+Hi, I'm Leonard.{pg}That's my roommate Sheldon over there.{pg}We are very smart.
+NAME bbt_leonard dialog
+
+DLG 5
+"""
+{
+  - male == false ?
+    ...
+  - else ?
+    Hello, I'm Raj. I'm relatively normal{pg}except for the fact that I'm Indian and probably potrayed offensively.{pg}[Author's Note: i have not watched enough Big Bang Theory to know anything about Raj{pg}other than his race. Perhaps I am part of the problem.
+}
+"""
+NAME bbt_raj dialog
+
+DLG 6
+"""
+{
+  - male == false ?
+    {wvy}WHY HELLO NURSE!{/wvy}{pg}I'm an astronomical physiologist...know what that means?{pg}I study heavenly bodies...much like yours. ;)
+  - else ?
+    Hi, my name is Howard.{pg}I'm Jewish and live with my overbearing mother.
+}
+"""
+NAME bbt_howard dialog
+
+DLG 7
+"""
+{
+  - male == false ?
+    Oh, hello.{pg}I'm actress Kaley Cucco,{pg}who plays Penny on the show Big Bang Theory.{pg}I've been publicly lambasted for not being a feminist,{pg}so my manager has recommended I support some women to generate good press.{pg}Is there anything I can help you with?
+  - else ?
+    heyyy ;){pg}im penny im the dumb blonde that lives next door :O{pg}do u want my number? i love having relations with men...{pg}i mean, aside from the {shk}NERDS{/shk} across the hall
+}{
+  - remote == true ?
+    Batteries? Sure, let me grab some out of the freezer.{pg}You got {wvy}{rbw}COLD BATTERIES{/wvy}{/rbw}!{pg}You load them into the {wvy}{rbw}TV REMOTE{/wvy}{/rbw}.
+  - else ?
+    ...
+}
+"""
+NAME bbt_penny dialog
+
+DLG 8
+I take offense to this choice of color palette.
+NAME off_stan dialog
+
+DLG 9
+I'm old and homely.
+NAME off_phy dialog
+
+DLG a
+"""
+{sequence
+  - Hi. I'm Toby. I work in HR.{pg}Is this your first day?{pg}Talk to me if you have any problems.
+  - {cycle
+      - Oh...misgendering? That's very serious.{pg}Please sign here and I'll file your gender change request.{pg}You are now {wvy}FEMALE{/wvy}!{male = false}{ava "f"}
+      - Oh...misgendering? That's very serious.{pg}Please sign here and I'll file your gender change request.{pg}You are now {shk}MALE{/shk}!{male = true}{ava "A"}
+    }
+}
+"""
+NAME off_toby dialog
+
+DLG b
+You picked up a {wvy}{rbw}TV REMOTE SUSPENDED IN JELL-O{/wvy}{/rbw}
+NAME jello dialog
+
+DLG c
+Has anyone seen a TV remote?{pg}It was on my desk when I went to the bathroom...
+NAME off_dwight dialog
+
+DLG d
+[Jim stares knowingly into the camera]
+NAME off_jim dialog
+
+DLG e
+"""
+{
+  - male == false ?
+    Hello, welcome to Dunder Mifflin Paper Company.{pg}Please don't talk to Jim.{pg}He's mine, you harlot.
+  - else ?
+    Hello, welcome to Dunder Mifflin Paper Company.{pg}Please don't talk to Michael.{pg}He's weird.
+}
+"""
+NAME off_pam dialog
+
+DLG f
+"""
+{
+  - male == false ?
+    Why hello, pretty lady.{pg}What's a certified smokeshow like you doing in an office like mine?{pg}Care to sit on my face?
+  - else ?
+    Howdy, pardner!{pg}Welcome to the wild west of paper products.{pg}We're not like {wvy}other{/wvy} boring offices...{pg}[Michael spouting unimportant nonsense]
+}
+"""
+NAME off_mich dialog
+
+DLG g
+Hi, I’m Chandler. I make jokes when I’m uncomfortable.
+NAME friends_chand dialog
+
+DLG h
+Hi, I'm Ross and I'm an architect.{pg}Or archeologist? Something like that...
+NAME friends_ross dialog
+
+DLG i
+Hi, I'm Rachel.{pg}I used to be rich, but now I work as a lowly waitress.{pg}Thank god we got such a good deal on this apartment!
+NAME friends_rach dialog
+
+DLG j
+Hi, I'm Phoebe. I'm a bit of a free spirit.{pg}~^_^~
+NAME friends_phob dialog
+
+DLG k
+Hi, I'm Monica. I'm Ross's sister!
+NAME friends_mon dialog
+
+DLG l
+"""
+{
+  - {item "2"} ?
+    Yep...{wvy}there's always room for Jell-O...{/wvy}{pg}[Joey eats the Jell-O. It's very erotic.]{pg}You got a {wvy}{rbw}TV REMOTE{/wvy}{/rbw}{item "2" 0}
+  - else ?
+    Hi, I'm Joey. I'm dim-witted, but good-natured!
+}
+"""
+NAME friends_joey dialog
+
+DLG m
+This episode is called "The One Where Joey Eats Some Jell-O"
+NAME friends_tv dialog
+
+DLG n
+"""
+{
+  - male == false ?
+    {ava "f"}
+  - else ?
+    {ava "A"}
+}
+"""
+NAME genderer dialog
+
+VAR male
+true
+
+VAR remote
+false
+
+TUNE 1
+3d,0,0,0,3d5,0,0,0,3l,0,0,0,3s,0,0,0
+16d2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+>
+4l,0,0,0,s,0,3l,0,0,0,2s,0,2m,0,2r,0
+16m2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+>
+3d,0,0,0,3d5,0,0,0,3l,0,0,0,3s,0,0,0
+16l2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+>
+3l,0,0,0,s,0,4m,0,0,0,4r,0,0,0,0,0
+16s2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+NAME finale fanfare
+KEY C,D,E,F,G,A,B d,r,m,s,l
+TMP XFST
+SQR P2 P8
+ARP INT8
+
+TUNE 2
+0,0,2G,0,A,0,B,0,2C5,0,B,A,G,0,2G,0
+G3,0,D,0,G3,0,D,0,2A3,0,E,0,C,0,E,0
+>
+2F#,0,G,0,A,0,F#,0,2E,0,F#,E,4D,0,0,0
+2D,0,E,0,F#,0,D,0,2C,0,2G3,0,2F#3,0,D2,0
+>
+0,0,2G,0,A,0,B,0,2C5,0,B,A,G,0,G,0
+2G2,0,D,D5,G3,G,D,0,2C2,0,E,E5,C3,C,E5,0
+>
+2D,0,C5,B,A,0,A,0,4A,0,0,0,F#,0,0,0
+A2,0,E3,0,C3,0,E3,0,D3,0,A3,0,D,0,0,0
+>
+2E5,0,2G,0,2G5,0,2G,0,2F#5,0,2E5,0,2D5,0,2C5,0
+2C3,0,2E,0,2E5,0,2C,0,2A3,0,2C,0,2F#,0,2E,0
+>
+3B,0,0,0,2E5,0,D5,0,4A,0,0,0,G,0,0,0
+2G3,0,B3,0,2D,0,D3,0,2C3,0,G3,0,D#,0,0,0
+>
+0,0,2G,0,A,0,2B,0,C5,0,B,C5,A,0,G,0
+A2,0,A3,0,C,0,2D,0,D#,0,D,E,C,0,C3,0
+>
+8B,0,0,0,0,0,0,0,A,0,2F#,0,E,0,D,0
+D3,0,A3,0,F#,0,D,0,C,0,2D3,0,C3,0,F#3,0
+NAME tuneful town
+TMP FST
+SQR P4 P2
+
+TUNE 3
+3F5,0,0,A#,0,2C#5,0,A#,3F5,0,0,F#5,0,0,2F5,0
+A#3,C#,F,0,0,F,C#,F,A#3,C#,F,A#,0,A#,C#,F
+>
+3F5,0,0,A,0,2C#5,0,A,3F5,0,0,2A#5,0,A#,D#5,0
+A3,C#,F,A3,0,F,C#,F,A,C#,F,0,D#,0,C#5,0
+>
+4F5,0,0,0,G#,2C#5,0,G#,3F5,0,0,D#5,0,F5,2C#5,0
+G#3,C#,F,3F#,0,0,2F,0,G#3,C#,F,F#,B,A,F,D#
+>
+4D#5,0,0,0,0,0,2A#,0,4A#,0,0,0,0,0,A#,C5
+G3,D#,F,G,0,D#,F,G,G3,D#,G,F,0,F,D#,C#3
+>
+4C#5,0,0,0,0,0,2C#5,0,3C#5,0,0,D#5,0,0,2C#5,0
+F#2,C#,F#3,A#3,0,F#3,C#3,F#3,F#2,A,F#3,C#,0,F#3,A3,F#3
+>
+3C#5,0,0,F,3C5,0,0,C,3C5,0,0,D#,3A#,0,0,0
+F2,D#3,A3,0,0,F3,C#,0,F#2,A#3,D#3,0,0,F#3,C#,C
+>
+3A#,0,0,0,C5,0,C#5,0,A#,0,C#,D#,G#,G#3,0,C#3
+C3,A#3,C,E,A,0,A#,0,0,B2,B3,0,2F,0,0,0
+>
+A#,0,A#3,0,C#,0,F,0,A#,0,0,0,0,0,0,0
+A#2,0,C#3,0,F3,0,A#3,0,D,0,0,0,0,F#3,0,F3
+NAME rhythmic ruins
+TMP MED
+SQR P4 P4
+
+BLIP 1
+E5,B5,B5
+NAME meow
+ENV 40 99 4 185 138
+BEAT 61 115
+SQR P2
+
+BLIP 2
+D5,E5,D5
+NAME pick up key
+ENV 99 65 6 96 152
+BEAT 95 0
+SQR P4
+
