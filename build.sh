@@ -24,11 +24,10 @@ for file in $BRIDGE_PATH/src/bitsy/*.bitsy; do
 done
 
 echo "building twine games..."
-cd $ROOT_PATH"/tweego"
 for file in $BRIDGE_PATH/src/twine/*.twee; do 
     if [ -f "$file" ]; then
         FILENAME=$(basename ${file})
         FILENAME_NOEX=${FILENAME%.*}
-        ./tweego -o $BRIDGE_PATH/$FILENAME_NOEX.html $file
+        tweego -o $BRIDGE_PATH/$FILENAME_NOEX.html $file
     fi 
 done
