@@ -53,9 +53,7 @@ ROOM 0
 0,d,d,d,d,d,d,d,d,d,d,d,d,d,d,0
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 NAME start
-ITM 3 8,9
 ITM 3 8,0
-EXT 8,0 1 8,15
 PAL 1
 
 ROOM 1
@@ -76,10 +74,8 @@ a,0,0,0,0,0,a,0,0,a,0,0,0,0,0,a
 a,0,0,0,0,0,a,a,0,a,0,0,0,0,0,a
 a,a,a,a,a,a,a,a,0,a,a,a,a,a,a,a
 NAME bbt
-ITM 3 8,15
-ITM 3 8,0
-EXT 8,15 0 8,0
-EXT 8,0 2 8,15
+ITM 4 8,0
+ITM 8 8,15
 PAL 0
 
 ROOM 2
@@ -100,10 +96,8 @@ b,0,0,0,0,0,b,0,a,b,0,0,0,0,0,b
 b,0,0,0,0,0,b,0,0,b,0,0,0,0,0,b
 j,f,f,f,f,f,i,a,0,j,f,f,f,f,f,i
 NAME friends
-ITM 3 8,15
-ITM 3 8,0
-EXT 8,15 1 8,0
-EXT 8,0 3 8,15
+ITM 5 8,0
+ITM 7 8,15
 PAL 2
 
 ROOM 3
@@ -124,9 +118,8 @@ e,0,e,0,0,e,0,0,0,e,e,e,e,e,e,e
 e,0,0,0,0,e,e,0,0,e,e,e,e,e,e,e
 e,e,e,e,e,e,e,e,0,e,e,e,e,e,e,e
 NAME office
+ITM 6 8,15
 ITM 2 1,1
-ITM 3 8,15
-EXT 8,15 2 8,0
 PAL 3
 
 TIL a
@@ -564,16 +557,81 @@ ITM 3
 00000000
 00000000
 00000000
-NAME genderer
+NAME genderer_gex
 DLG n
+
+ITM 4
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+NAME genderer_bbt
+DLG o
+
+ITM 5
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+NAME genderer_friends
+DLG p
+
+ITM 6
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+NAME genderer_office_exit
+DLG q
+
+ITM 7
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+NAME genderer_friends_exit
+DLG r
+
+ITM 8
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+NAME genderer_bbt_exit
+DLG s
 
 DLG 0
 """
 {
-  - {item "1"} ?
-    Hey, hey! It's the remote!{pg}Great job, kid.{pg}Now let's blow this popsicle-{pg}Hold on, there are no batteries in this thing!{pg}Looks like you still have some work to do, pal...{pg}Maybe ask the nerds?
+  - remote == true ?
+    Hey, hey! It's the {rbw}TV REMOTE{/rbw}!{pg}Great job, kid.{
+      - batteries == false ?
+        {pg}Now let's blow this popsicle-{pg}Hold on, there are no {rbw}BATTERIES{/rbw} in this thing!{pg}Looks like you still have some work to do, pal...{pg}Maybe ask the nerds?
+      - else ?
+        {pg}Let's high-{wvy}tail{/wvy} it outta here!{end}
+    }
   - else ?
-    Left at Cheers, right at Doogie Howser...{pg}Ah man, this map hasn't been updated in decades!{pg}Oh, hey. You lost in TV land, too?{pg}Well, this ain't my first rodeo...{pg}Tell you what...if you can track down a {wvy}{rbw}TV REMOTE{/wvy}{/rbw},{pg}I can get us outta here.{pg}Capisce?
+    Left at Cheers, right at Doogie Howser...{pg}Ah man, this map hasn't been updated in decades!{pg}Oh, hey. You lost in TV land, too?{pg}Well, this ain't my first rodeo...{pg}Tell you what...if you can track down a {rbw}TV REMOTE{/rbw},{pg}I can get us outta here.{pg}Capisce?
 }
 """
 NAME gex dialog
@@ -582,7 +640,10 @@ DLG 3
 """
 {
   - remote == true ?
-    Oh my, that's quite the {rbw}TV REMOTE{/rbw} you have there.{pg}What is that, a Magnavox? Hitachi? Lovely vintage.{pg}But wait, no batteries??{pg}I'm afraid I'm fresh out, unfortunately.{pg}You could ask the loathsome woman next door.{pg}She probably keeps them in her freezer like some kind of Ice Age neanderthal.{pg}Bazinga.
+    Oh my, that's quite the {rbw}TV REMOTE{/rbw} you have there.{pg}What is that, a Magnavox? Hitachi? Lovely vintage.{
+      - batteries == false ?
+          {pg}But wait, no {rbw}BATTERIES{/rbw}??{pg}I'm afraid I used our last set for my Game Boy, unfortunately.{pg}You could ask the loathsome woman next door.{pg}She probably keeps them in her freezer...{pg}...like some kind of Ice Age neanderthal.{pg}Bazinga.
+    }
   - else ?
     Please do not talk to me.{pg}I am busy doing math problems in my head for fun.{pg}...{pg}Bazinga.
 }
@@ -590,16 +651,31 @@ DLG 3
 NAME bbt_sheldon dialog
 
 DLG 4
-Hi, I'm Leonard.{pg}That's my roommate Sheldon over there.{pg}We are very smart.
+"""
+{
+  - male == false ?
+    {wvy}huh...huh...hi....{pg}i'm....leonard....{pg}nice to meet...pretty lady...~O_O~{/wvy}
+  - else ?
+    Hi, I'm Leonard.{pg}That's my roommate Sheldon over there.{pg}We are very smart.
+}
+"""
 NAME bbt_leonard dialog
 
 DLG 5
 """
 {
-  - male == false ?
-    ...
+  - male == true ?
+    {
+    - remote == true ?
+      {sequence
+        - Sup, my man?{pg}{rbw}BATTERIES{/rbw}? You got it, bro. Anything for a fellow dude. ;){pg}You got {wvy}{rbw}BATTERIES{/wvy}{/rbw}! You pop them into the {wvy}{rbw}TV REMOTE{/wvy}{/rbw}.{batteries = true}
+        - Sup, bro? How those {rbw}BATTERIES{/rbw} treatin' ya?
+      }
+    - else ?
+      Hello, I'm Raj.{pg}I'm Indian, but I dislike Indian food and culture.{pg}Isn't that a hilarious quirk?
+  }
   - else ?
-    Hello, I'm Raj. I'm relatively normal{pg}except for the fact that I'm Indian and probably potrayed offensively.{pg}[Author's Note: i have not watched enough Big Bang Theory to know anything about Raj{pg}other than his race. Perhaps I am part of the problem.
+    ...
 }
 """
 NAME bbt_raj dialog
@@ -608,7 +684,7 @@ DLG 6
 """
 {
   - male == false ?
-    {wvy}WHY HELLO NURSE!{/wvy}{pg}I'm an astronomical physiologist...know what that means?{pg}I study heavenly bodies...much like yours. ;)
+    {wvy}WHY, HELLO NURSE!{/wvy}{pg}I'm an astronomical physiologist...know what that means?{pg}I study heavenly bodies...much like yours. ;){pg}Care to sit on my face?
   - else ?
     Hi, my name is Howard.{pg}I'm Jewish and live with my overbearing mother.
 }
@@ -619,20 +695,20 @@ DLG 7
 """
 {
   - male == false ?
-    Oh, hello.{pg}I'm actress Kaley Cucco,{pg}who plays Penny on the show Big Bang Theory.{pg}I've been publicly lambasted for not being a feminist,{pg}so my manager has recommended I support some women to generate good press.{pg}Is there anything I can help you with?
+    Hey girl, what you need?{
+    - remote == true ?
+      {pg}{rbw}BATTERIES{/rbw}? Ah, dang. I'm fresh out, sorry.{pg}I'd tell you to go ask Raj, but he can't talk to girls.{pg}We love the gender binary on this show.
+    - else ?
+      Oh, hello.{pg}I'm actress Kaley Cucco,{pg}who plays Penny on The Big Bang Theory.{pg}I've been publicly lambasted for not being a feminist,{pg}so my manager has recommended I support some women to generate good press.{pg}Is there anything I can help you with?
+  }
   - else ?
     heyyy ;){pg}im penny im the dumb blonde that lives next door :O{pg}do u want my number? i love having relations with men...{pg}i mean, aside from the {shk}NERDS{/shk} across the hall
-}{
-  - remote == true ?
-    Batteries? Sure, let me grab some out of the freezer.{pg}You got {wvy}{rbw}COLD BATTERIES{/wvy}{/rbw}!{pg}You load them into the {wvy}{rbw}TV REMOTE{/wvy}{/rbw}.
-  - else ?
-    ...
 }
 """
 NAME bbt_penny dialog
 
 DLG 8
-I take offense to this choice of color palette.
+This color palette is problematic.
 NAME off_stan dialog
 
 DLG 9
@@ -652,11 +728,11 @@ DLG a
 NAME off_toby dialog
 
 DLG b
-You picked up a {wvy}{rbw}TV REMOTE SUSPENDED IN JELL-O{/wvy}{/rbw}
+You picked up a {wvy}{rbw}TV REMOTE SUSPENDED IN JELL-O{/wvy}{/rbw}!
 NAME jello dialog
 
 DLG c
-Has anyone seen a TV remote?{pg}It was on my desk when I went to the bathroom...
+Has anyone seen a {rbw}TV REMOTE{/rbw}?{pg}It was on my desk when I went to the bathroom...
 NAME off_dwight dialog
 
 DLG d
@@ -667,7 +743,7 @@ DLG e
 """
 {
   - male == false ?
-    Hello, welcome to Dunder Mifflin Paper Company.{pg}Please don't talk to Jim.{pg}He's mine, you harlot.
+    Hello, welcome to Dunder Mifflin Paper Company.{pg}Please don't talk to Jim.{pg}He's mine, you hussie.
   - else ?
     Hello, welcome to Dunder Mifflin Paper Company.{pg}Please don't talk to Michael.{pg}He's weird.
 }
@@ -678,9 +754,9 @@ DLG f
 """
 {
   - male == false ?
-    Why hello, pretty lady.{pg}What's a certified smokeshow like you doing in an office like mine?{pg}Care to sit on my face?
+    Wow! What's a certified smokeshow like you doing in an office like this?{pg}Somebody call the fire department, cause we gotta put this lady out!
   - else ?
-    Howdy, pardner!{pg}Welcome to the wild west of paper products.{pg}We're not like {wvy}other{/wvy} boring offices...{pg}[Michael spouting unimportant nonsense]
+    Howdy, pardner!{pg}Welcome to the wild west of paper products.{pg}We're not like {wvy}other{/wvy} boring offices...{pg}[Michael continues spouting unimportant nonsense]
 }
 """
 NAME off_mich dialog
@@ -690,7 +766,7 @@ Hi, I’m Chandler. I make jokes when I’m uncomfortable.
 NAME friends_chand dialog
 
 DLG h
-Hi, I'm Ross and I'm an architect.{pg}Or archeologist? Something like that...
+Hi, I'm Ross and I'm an architect.{pg}Or archeologist? Something like that...{pg}
 NAME friends_ross dialog
 
 DLG i
@@ -709,7 +785,7 @@ DLG l
 """
 {
   - {item "2"} ?
-    Yep...{wvy}there's always room for Jell-O...{/wvy}{pg}[Joey eats the Jell-O. It's very erotic.]{pg}You got a {wvy}{rbw}TV REMOTE{/wvy}{/rbw}{item "2" 0}
+    Yep...{wvy}there's always room for Jell-O...{/wvy}{pg}[Joey eats the Jell-O. It's very erotic.]{pg}You got a {wvy}{rbw}TV REMOTE{/wvy}{/rbw}{item "2" 0}{remote = true}!
   - else ?
     Hi, I'm Joey. I'm dim-witted, but good-natured!
 }
@@ -717,11 +793,12 @@ DLG l
 NAME friends_joey dialog
 
 DLG m
-This episode is called "The One Where Joey Eats Some Jell-O"
+This episode is called "The One Where Joey Eats Some Jell-O".
 NAME friends_tv dialog
 
 DLG n
 """
+{exit "1" 8 15 "tunnel"}
 {
   - male == false ?
     {ava "f"}
@@ -729,7 +806,67 @@ DLG n
     {ava "A"}
 }
 """
-NAME genderer dialog
+NAME genderer_gex dialog
+
+DLG o
+"""
+{exit "2" 8 15 "tunnel"}
+{
+  - male == false ?
+    {ava "f"}
+  - else ?
+    {ava "A"}
+}
+"""
+NAME genderer_bbt dialog
+
+DLG p
+"""
+{exit "3" 8 15 "tunnel"}
+{
+  - male == false ?
+    {ava "f"}
+  - else ?
+    {ava "A"}
+}
+"""
+NAME genderer_friends dialog
+
+DLG q
+"""
+{exit "2" 8 0 "tunnel"}
+{
+  - male == false ?
+    {ava "f"}
+  - else ?
+    {ava "A"}
+}
+"""
+NAME genderer_office_exit dialog
+
+DLG r
+"""
+{exit "1" 8 0 "tunnel"}
+{
+  - male == false ?
+    {ava "f"}
+  - else ?
+    {ava "A"}
+}
+"""
+NAME genderer_friends_exit dialog
+
+DLG s
+"""
+{exit "0" 8 0 "tunnel"}
+{
+  - male == false ?
+    {ava "f"}
+  - else ?
+    {ava "A"}
+}
+"""
+NAME genderer_bbt_exit dialog
 
 VAR male
 true
@@ -737,91 +874,5 @@ true
 VAR remote
 false
 
-TUNE 1
-3d,0,0,0,3d5,0,0,0,3l,0,0,0,3s,0,0,0
-16d2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
->
-4l,0,0,0,s,0,3l,0,0,0,2s,0,2m,0,2r,0
-16m2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
->
-3d,0,0,0,3d5,0,0,0,3l,0,0,0,3s,0,0,0
-16l2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
->
-3l,0,0,0,s,0,4m,0,0,0,4r,0,0,0,0,0
-16s2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-NAME finale fanfare
-KEY C,D,E,F,G,A,B d,r,m,s,l
-TMP XFST
-SQR P2 P8
-ARP INT8
-
-TUNE 2
-0,0,2G,0,A,0,B,0,2C5,0,B,A,G,0,2G,0
-G3,0,D,0,G3,0,D,0,2A3,0,E,0,C,0,E,0
->
-2F#,0,G,0,A,0,F#,0,2E,0,F#,E,4D,0,0,0
-2D,0,E,0,F#,0,D,0,2C,0,2G3,0,2F#3,0,D2,0
->
-0,0,2G,0,A,0,B,0,2C5,0,B,A,G,0,G,0
-2G2,0,D,D5,G3,G,D,0,2C2,0,E,E5,C3,C,E5,0
->
-2D,0,C5,B,A,0,A,0,4A,0,0,0,F#,0,0,0
-A2,0,E3,0,C3,0,E3,0,D3,0,A3,0,D,0,0,0
->
-2E5,0,2G,0,2G5,0,2G,0,2F#5,0,2E5,0,2D5,0,2C5,0
-2C3,0,2E,0,2E5,0,2C,0,2A3,0,2C,0,2F#,0,2E,0
->
-3B,0,0,0,2E5,0,D5,0,4A,0,0,0,G,0,0,0
-2G3,0,B3,0,2D,0,D3,0,2C3,0,G3,0,D#,0,0,0
->
-0,0,2G,0,A,0,2B,0,C5,0,B,C5,A,0,G,0
-A2,0,A3,0,C,0,2D,0,D#,0,D,E,C,0,C3,0
->
-8B,0,0,0,0,0,0,0,A,0,2F#,0,E,0,D,0
-D3,0,A3,0,F#,0,D,0,C,0,2D3,0,C3,0,F#3,0
-NAME tuneful town
-TMP FST
-SQR P4 P2
-
-TUNE 3
-3F5,0,0,A#,0,2C#5,0,A#,3F5,0,0,F#5,0,0,2F5,0
-A#3,C#,F,0,0,F,C#,F,A#3,C#,F,A#,0,A#,C#,F
->
-3F5,0,0,A,0,2C#5,0,A,3F5,0,0,2A#5,0,A#,D#5,0
-A3,C#,F,A3,0,F,C#,F,A,C#,F,0,D#,0,C#5,0
->
-4F5,0,0,0,G#,2C#5,0,G#,3F5,0,0,D#5,0,F5,2C#5,0
-G#3,C#,F,3F#,0,0,2F,0,G#3,C#,F,F#,B,A,F,D#
->
-4D#5,0,0,0,0,0,2A#,0,4A#,0,0,0,0,0,A#,C5
-G3,D#,F,G,0,D#,F,G,G3,D#,G,F,0,F,D#,C#3
->
-4C#5,0,0,0,0,0,2C#5,0,3C#5,0,0,D#5,0,0,2C#5,0
-F#2,C#,F#3,A#3,0,F#3,C#3,F#3,F#2,A,F#3,C#,0,F#3,A3,F#3
->
-3C#5,0,0,F,3C5,0,0,C,3C5,0,0,D#,3A#,0,0,0
-F2,D#3,A3,0,0,F3,C#,0,F#2,A#3,D#3,0,0,F#3,C#,C
->
-3A#,0,0,0,C5,0,C#5,0,A#,0,C#,D#,G#,G#3,0,C#3
-C3,A#3,C,E,A,0,A#,0,0,B2,B3,0,2F,0,0,0
->
-A#,0,A#3,0,C#,0,F,0,A#,0,0,0,0,0,0,0
-A#2,0,C#3,0,F3,0,A#3,0,D,0,0,0,0,F#3,0,F3
-NAME rhythmic ruins
-TMP MED
-SQR P4 P4
-
-BLIP 1
-E5,B5,B5
-NAME meow
-ENV 40 99 4 185 138
-BEAT 61 115
-SQR P2
-
-BLIP 2
-D5,E5,D5
-NAME pick up key
-ENV 99 65 6 96 152
-BEAT 95 0
-SQR P4
-
+VAR batteries
+false
