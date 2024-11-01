@@ -35,7 +35,7 @@ You run into the secluded park as night falls.  The shadows grow tall, and you'r
 
 :: Pick it up {"position":"375,675","size":"100,100"}
 You walk onto the sand to pick up the file folder.  As you grab it, a shadow moves behind the jungle gy-
-<script>sendImpact("cat")</script>
+<script>requestImpact("cat")</script>
 
 
 :: Run after it! {"position":"500,425","size":"100,100"}
@@ -54,7 +54,7 @@ It's winter now, and there's a bite in the air. Snow blankets the ground, which 
 :: Turn around {"position":"500,675","size":"100,100"}
 You go to turn around in a hurry, not noticing the person behind y- 
 
-<script>sendImpact("cat")</script>
+<script>requestImpact("cat")</script>
 
 
 :: Wait...isn't this place familiar? {"position":"500,550","size":"100,100"}
