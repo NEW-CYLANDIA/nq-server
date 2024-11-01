@@ -31,7 +31,7 @@ for file in $BRIDGE_PATH/src/twine/*.twee; do
     if [ -f "$file" ]; then
         FILENAME=$(basename ${file})
         FILENAME_NOEX=${FILENAME%.*}
-        ./tweego -o $BRIDGE_PATH/$FILENAME_NOEX.html $file
+        tweego -o $BRIDGE_PATH/$FILENAME_NOEX.html $file
         cat $BRIDGE_PATH/src/bridge-common.html >> $BRIDGE_PATH/$FILENAME_NOEX.html
     fi 
 done
