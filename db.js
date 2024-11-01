@@ -9,7 +9,7 @@ const pool = new Pool({
     port: process.env.PGPORT, // default Postgres port
     database: process.env.PGDATABASE,
     ssl: {
-        rejectUnauthorized: true,
+        rejectUnauthorized: false,
         ca: process.env.CA_CERT,
     },
 });
