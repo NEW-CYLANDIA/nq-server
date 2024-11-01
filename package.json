@@ -4,13 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "init-db": "node init.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@logtail/js": "^0.5.1",
+    "@super-puzzlescript/puzzlescript": "^0.1.0",
     "bitsy-boilerplate": "github:seleb/bitsy-boilerplate",
     "dotenv": "^16.4.5",
     "express": "^4.17.3",

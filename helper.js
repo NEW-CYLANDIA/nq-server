@@ -148,5 +148,3 @@ exports.dbSyncDreamTable = async () => {
         });
     }
 }
-
-exports.dbSyncDreamTable()
