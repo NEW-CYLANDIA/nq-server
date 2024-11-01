@@ -24,6 +24,7 @@ for file in $BRIDGE_PATH/src/bitsy/*.bitsy; do
 done
 
 echo "building twine games..."
+export TWEEGO_PATH=$BRIDGE_PATH"/src/twine/storyformats"
 for file in $BRIDGE_PATH/src/twine/*.twee; do 
     if [ -f "$file" ]; then
         FILENAME=$(basename ${file})
