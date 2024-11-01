@@ -24,6 +24,7 @@
 
     document.getElementById("currencyDisplay").hidden = !currency
     document.getElementById("currencyCount").innerText = currency
+    document.getElementById("randomGif").setAttribute('src', 'journal_stuff/random/' + JSON.parse(httpGet("/get_random_gif")).gif)
 
     table.render(document.getElementById("wrapper"));
     document.getElementById("displayName").innerText = JSON.parse(httpGet(`/get_display_name?nquid=${nquid}`)).display_name
@@ -50,7 +51,11 @@
 </head>
 
 <body>
-    <div class="header"><h1>welcome to my</h1><img src="journal_stuff/DIARYPAGE.gif"></div>
+    <div class="header">
+        <h1>welcome to my</h1>
+        <img src="journal_stuff/DIARYPAGE.gif">
+        <img id="randomGif">
+    </div>
     <h1>dear diary,</h1>
     <p>i had some really wild dreams last night! i don't remember them all too clearly, but here are some notes:</p>
     <div id="wrapper"></div>

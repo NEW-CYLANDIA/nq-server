@@ -97,6 +97,26 @@ app.get('/set_display_name', async (req, res) => {
 	}
 });
 
+app.get('/get_random_gif', async (req, res) => {
+	try {
+		const fs = require("fs");
+		const path = require("path");
+
+		fs.readdir("public/journal_stuff/random", (err, files) => {
+			let max = files.length - 1;
+			let min = 0;
+
+			let index = Math.round(Math.random() * (max - min) + min);
+			let file = files[index];
+
+			res.json({ gif: file })
+		});
+	} catch (err) {
+		console.error(err);
+		res.status(500).send('Internal Server Error');
+	}
+});
+
 // app.get('/progress', async (req, res) => {
 // 	try {
 // 		console.log(req.query.nquid)
