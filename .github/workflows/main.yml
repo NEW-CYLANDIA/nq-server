@@ -1,6 +1,6 @@
 name: Bash Script
 on:
-  workflow_dispatch:
+  push:
 
 jobs:
   bash-script:
