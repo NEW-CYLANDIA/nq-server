@@ -13,7 +13,7 @@
             url: `/found_dreams?nquid=${nquid}`,
             then: data => data.map(dream =>
                 [
-                    gridjs.html(`<a href='${dream.dream_url}'>${dream.title}</a>`),
+                    gridjs.html(`<a href='bridges/${dream.url_part}.html'>${dream.title}</a>`),
                     gridjs.html(`<a href='${dream.website_url}'>${dream.creator_name}</a>`)
                 ]
             )
@@ -46,9 +46,11 @@
 <head>
     <title>my dream diary <3</title>
     <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
 </head>
 
 <body>
+    <div class="header"><h1>welcome to my</h1><img src="journal_stuff/DIARYPAGE.gif"></div>
     <h1>dear diary,</h1>
     <p>i had some really wild dreams last night! i don't remember them all too clearly, but here are some notes:</p>
     <div id="wrapper"></div>
