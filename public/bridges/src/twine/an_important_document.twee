@@ -8,7 +8,8 @@ An Important Document
   "format": "Harlowe",
   "format-version": "3.3.9",
   "start": "Important Business",
-  "zoom": 1
+  "zoom": 1,
+  "author": "Taylor Anderson"
 }
 
 

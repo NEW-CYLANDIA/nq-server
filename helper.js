@@ -12,19 +12,6 @@ const sleepAdjectives = require('./adjectives.json')
 
 const db = require('./db');
 
-exports.bridgeData = {}
-
-// TODO - dump/insert bridge data to db on server start?
-parser.parse().then(data => {
-    data.forEach((item) => {
-        if (item.impact_keys) {
-            item.impact_keys = item.impact_keys.split(",")
-        }
-
-        exports.bridgeData[item.id] = item
-    })
-})
-
 exports.getSessionId = () => {
     const now = new Date()
 
@@ -88,31 +75,78 @@ exports.dbLogEvent = async (uid, session_hash, data) => {
     )
 }
 
-// TODO update to use db
-// exports.getUserData = (device_uid) => {
-//     let data = []
+exports.dbSyncDreamTable = async () => {
+    const fs = require('fs');
+    const oldEvents = await db.query('select * from events')
 
-//     for (const [key, value] of Object.entries(exports.clientData)) {
-//         data.push([
-//             key,
-//             "blah",
-//             connectedUids.includes(key)
-//         ])
-//     }
+    fs.writeFile("events-old.json", JSON.stringify(oldEvents.rows), (err) => {
+        if (err) throw err
+        console.log("events-old.json written")
+    })
 
-//     return JSON.stringify(data)
-// }
+    // drop outdated rows
+    await db.query('DELETE FROM events')
+    await db.query('DELETE FROM dreams')
 
-// exports.getAllUserData = (connectedUids) => {
-//     let data = []
+    const authorIds = (await db.query('select id, name from creators order by id asc')).rows.map((row)=> {
+        return row.name
+    })
 
-//     for (const [key, value] of Object.entries(exports.clientData)) {
-//         data.push([
-//             key,
-//             "blah",
-//             connectedUids.includes(key)
-//         ])
-//     }
+    const dirs = [
+        "bitsy/",
+        "twine/"
+    ]
 
-//     return JSON.stringify(data)
-// }
+    const extensions = [
+        "bitsy",
+        "twee"
+    ]
+
+    for (let dirIndex in dirs) {
+        fs.readdir(`public/bridges/src/${dirs[dirIndex]}`, function (err, files) {
+            if (err) {
+                console.error("Could not list the directory.", err);
+                process.exit(1);
+            }
+
+            files.forEach(async function (file, index) {
+                if (file.indexOf(`.${extensions[dirIndex]}`) == -1) return
+
+                const url_part = file.split('.')[0]
+                let author
+                let title
+
+                try {
+                    const dreamSrc = fs.readFileSync(`public/bridges/src/${dirs[dirIndex]}/${file}`, 'utf8');
+
+                    switch (extensions[dirIndex]) {
+                        case "bitsy":
+                            title = dreamSrc.match(`({clr 2})(.*?)({\/clr})`)[0]
+                            title = title.substring(
+                                title.indexOf("}") + 1,
+                                title.lastIndexOf("{")
+                            )
+                            let authorStart = dreamSrc.substring(dreamSrc.indexOf("by ") + 3)
+                            author = authorStart.split("\n")[0]
+                            break
+                        case "twee":
+                            title = dreamSrc.split('\n')[1]
+                            let storyData = dreamSrc.substring(
+                                dreamSrc.indexOf("{"),
+                                dreamSrc.indexOf("}") + 1
+                            )
+                            storyData = JSON.parse(storyData)
+                            author = storyData.author
+                            break
+                    }
+
+                    await db.query('insert into dreams (url_part, creator_id, title) values ($1, $2, $3)', [url_part, authorIds.indexOf(author) + 1, title])
+                } catch (err) {
+                    console.error(err);
+                }
+            });
+        });
+    }
+}
+
+exports.dbSyncDreamTable()

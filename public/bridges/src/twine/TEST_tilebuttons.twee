@@ -8,7 +8,8 @@ NQ Test
   "format": "SugarCube",
   "format-version": "2.37.3",
   "start": "START",
-  "zoom": 1
+  "zoom": 1,
+  "author": "izzy kestrel"
 }
 
 
