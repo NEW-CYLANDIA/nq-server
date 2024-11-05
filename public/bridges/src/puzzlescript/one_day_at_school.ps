@@ -137,6 +137,8 @@ transparent
 Heat1
 transparent
 
+Pause
+transparent
 Tick
 transparent
 
@@ -188,7 +190,7 @@ COLLISIONLAYERS
 ================
 
 Background
-Tick
+Pause, Tick
 Countdown, Endpoint
 Heat
 Reachable
@@ -252,7 +254,8 @@ late [ Player | ] -> [ Player | Heat9 ]
 late [ Countdown1 no Tick ] -> [ ] message A symbol appears to guide me!
 late [ Countdown no Tick ] -> [ Countdown Tick ]
 
-late [ Headmaster ] -> [ Headmaster Tick ]
+late [ Headmaster Pause ] -> [ Headmaster Tick ]
+late [ Headmaster no Tick ] -> [ Headmaster Pause ]
 
 late [ Reachable ] -> [ ]
 late [ Player ] -> [ Player Reachable ]
