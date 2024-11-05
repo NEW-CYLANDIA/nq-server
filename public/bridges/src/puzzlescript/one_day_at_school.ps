@@ -1,0 +1,315 @@
+title One Day At School
+author Dom Camus
+website https://bateleur.itch.io/
+run_rules_on_level_start
+
+(
+  Written for No Quarter, November 2024
+  Questions, comment and bug reports to dom@fastram.co.uk
+)
+
+========
+OBJECTS
+========
+
+Background
+#B07010
+
+Wall
+#404060
+00000
+00000
+00000
+00000
+00000
+
+Exit
+#404060 #808080 #C0C0C0
+00000
+01110
+01110
+01120
+01110
+
+Player
+black orange white blue
+.000.
+.111.
+22222
+.333.
+.3.3.
+
+Desk
+#806000 #503000 #000000
+00000
+12221
+1...1
+1...1
+1...1
+
+LeftChair
+#806000 #503000
+.0...
+.0...
+.000.
+.1.1.
+.1.1.
+
+RightChair
+#806000 #503000
+...0.
+...0.
+.000.
+.1.1.
+.1.1.
+
+Headmaster
+black grey white #602040
+.111.
+.222.
+33333
+.000.
+.0.0.
+
+DeadPlayer
+black orange white blue
+..2..
+33210
+.3210
+33210
+..2..
+
+Kid
+black orange white blue
+.....
+.000.
+.111.
+22222
+.3.3.
+
+VisibleSymbol
+#802000
+
+HiddenSymbol
+transparent
+
+NoSymbol
+transparent
+
+Reachable
+transparent
+
+Countdown9
+transparent
+Countdown8
+transparent
+Countdown7
+transparent
+Countdown6
+transparent
+Countdown5
+transparent
+Countdown4
+transparent
+Countdown3
+transparent
+Countdown2
+transparent
+Countdown1
+transparent
+
+Heat9
+transparent
+Heat8
+transparent
+Heat7
+transparent
+Heat6
+transparent
+Heat5
+transparent
+Heat4
+transparent
+Heat3
+transparent
+Heat2
+transparent
+Heat1
+transparent
+
+Tick
+transparent
+
+Endpoint
+transparent
+
+=======
+LEGEND
+=======
+
+Countdown = Countdown9 or Countdown8 or Countdown7 or Countdown6 or Countdown5 or Countdown4 or Countdown3 or Countdown2 or Countdown1
+Heat = Heat9 or Heat8 or Heat7 or Heat6 or Heat5 or Heat4 or Heat3 or Heat2 or Heat1
+HeatGT7 = Heat9 or Heat8
+HeatGT6 = Heat9 or Heat8 or Heat7
+HeatGT5 = Heat9 or Heat8 or Heat7 or Heat6
+HeatGT4 = Heat9 or Heat8 or Heat7 or Heat6 or Heat5
+HeatGT3 = Heat9 or Heat8 or Heat7 or Heat6 or Heat5 or Heat4
+HeatGT2 = Heat9 or Heat8 or Heat7 or Heat6 or Heat5 or Heat4 or Heat3
+HeatGT1 = Heat9 or Heat8 or Heat7 or Heat6 or Heat5 or Heat4 or Heat3 or Heat2
+Chair = LeftChair or RightChair
+Furniture = Desk or Chair
+Obstacle = furniture or Wall
+Symbol = VisibleSymbol or HiddenSymbol
+
+. = Background
+# = Wall
+P = Player
+D = Desk
+C = LeftChair
+R = RightChair
+: = NoSymbol
++ = LeftChair and NoSymbol
+* = Desk and NoSymbol
+9 = Countdown9 and Tick
+H = Headmaster and Heat5
+K = Kid
+X = Exit
+E = Endpoint
+
+=======
+SOUNDS
+=======
+
+Desk move 51796107
+Chair move 21555907
+
+================
+COLLISIONLAYERS
+================
+
+Background
+Tick
+Countdown, Endpoint
+Heat
+Reachable
+Symbol, NoSymbol
+Player, Furniture, Headmaster, Wall, DeadPlayer, Kid, Exit
+
+======
+RULES
+======
+
+[ > Player | Chair ] -> [ > Player | > Chair ]
+[ > Player | Desk ] -> [ > Player | > Desk ]
+[ > Desk | Desk ] -> [ > Desk | > Desk ]
+[ > Desk | Chair ] -> [ > Desk | > Chair ]
+[ > Chair | Chair ] -> [ > Chair | > Chair ]
+
+[ > Player ] [ Countdown9 Tick ] -> [ > Player ] [ Countdown8 ]
+[ > Player ] [ Countdown8 Tick ] -> [ > Player ] [ Countdown7 ]
+[ > Player ] [ Countdown7 Tick ] -> [ > Player ] [ Countdown6 ]
+[ > Player ] [ Countdown6 Tick ] -> [ > Player ] [ Countdown5 ]
+[ > Player ] [ Countdown5 Tick ] -> [ > Player ] [ Countdown4 ]
+[ > Player ] [ Countdown4 Tick ] -> [ > Player ] [ Countdown3 ]
+[ > Player ] [ Countdown3 Tick ] -> [ > Player ] [ Countdown2 ]
+[ > Player ] [ Countdown2 Tick ] -> [ > Player ] [ Countdown1 ]
+[ > Player ] [ Countdown1 Tick ] -> [ > Player ] [ Countdown1 ]
+
+[ Headmaster Tick | Player ] -> [ Headmaster | DeadPlayer ] message I cannot let him catch me.
+[ Headmaster Tick | Heat9 no Obstacle ] -> [ | Headmaster Heat9 ]
+[ Headmaster Tick | Heat8 no Obstacle ] -> [ | Headmaster Heat8 ]
+[ Headmaster Tick | Heat7 no Obstacle ] -> [ | Headmaster Heat7 ]
+[ Headmaster Tick | Heat6 no Obstacle ] -> [ | Headmaster Heat6 ]
+[ Headmaster Tick | Heat5 no Obstacle ] -> [ | Headmaster Heat5 ]
+[ Headmaster Tick | Heat4 no Obstacle ] -> [ | Headmaster Heat4 ]
+[ Headmaster Tick | Heat3 no Obstacle ] -> [ | Headmaster Heat3 ]
+[ Headmaster Tick | Heat2 no Obstacle ] -> [ | Headmaster Heat2 ]
+[ Headmaster Tick | Heat1 no Obstacle ] -> [ | Headmaster Heat1 ]
+
+[ Furniture Heat ] -> [ Furniture ]
+[ Heat1 ] -> [ ]
+[ Heat2 ] -> [ Heat1 ]
+[ Heat3 ] -> [ Heat2 ]
+[ Heat4 ] -> [ Heat3 ]
+[ Heat5 ] -> [ Heat4 ]
+[ Heat6 ] -> [ Heat5 ]
+[ Heat7 ] -> [ Heat6 ]
+[ Heat8 ] -> [ Heat7 ]
+[ Heat9 ] -> [ Heat8 ]
+
+[ Countdown1 no Tick ] [ NoSymbol ] -> [ Countdown1 no Tick ] [ VisibleSymbol ]
+
+late [ Heat2 | no HeatGT1 no Furniture ] -> [ Heat2 | Heat1 ]
+late [ Heat3 | no HeatGT2 no Furniture ] -> [ Heat3 | Heat2 ]
+late [ Heat4 | no HeatGT3 no Furniture ] -> [ Heat4 | Heat3 ]
+late [ Heat5 | no HeatGT4 no Furniture ] -> [ Heat5 | Heat4 ]
+late [ Heat6 | no HeatGT5 no Furniture ] -> [ Heat6 | Heat5 ]
+late [ Heat7 | no HeatGT6 no Furniture ] -> [ Heat7 | Heat6 ]
+late [ Heat8 | no HeatGT7 no Furniture ] -> [ Heat8 | Heat7 ]
+late [ Heat9 | no Heat9 no Furniture ] -> [ Heat9 | Heat8 ]
+late [ Player | ] -> [ Player | Heat9 ]
+
+late [ Countdown1 no Tick ] -> [ ] message A symbol appears to guide me!
+late [ Countdown no Tick ] -> [ Countdown Tick ]
+
+late [ Headmaster ] -> [ Headmaster Tick ]
+
+late [ Reachable ] -> [ ]
+late [ Player ] -> [ Player Reachable ]
+late [ Reachable | no Obstacle no Reachable ] -> [ Reachable | Reachable ]
+late [ Headmaster no Reachable ] [ Player ] [ Furniture ] -> [ Headmaster no Reachable ] [ Player ] [ Furniture ] win
+
+late [Player Endpoint] -> [ Player Endpoint ] win
+
+==============
+WINCONDITIONS
+==============
+
+all Furniture on Symbol
+
+=======
+LEVELS
+=======
+
+message I'm back at school
+message I'm a kid in a classroom
+
+###########
+#..P.....9#
+#.........#
+#..CD.+*:.#
+#.:+*:+*..#
+#..CD.+*:.#
+#.........#
+###########
+
+message I complete the symbol, then...
+message I am taken to the headmaster
+
+###########
+#.........#
+#.C.C.....#
+#.C.CP.DR.#
+#.C.C...H.#
+#.........#
+###########
+
+message Just as I trap him, I hear a sound
+message It sounds like my alarm clock
+message I wake up
+message Time to get to school
+message And I remind myself...
+message I'm not that kid anymore
+message I'm a teacher now
+
+#X############
+#P...........#
+#.CKD.CKD....#
+#.CKD.CKD.EE.#
+#.CKD.CKD.DRE#
+#.CKD.CKD.EE.#
+#.CKD.CKD....#
+#............#
+##############
+
+message THE END
