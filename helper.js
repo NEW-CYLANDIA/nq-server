@@ -85,7 +85,7 @@ exports.dbSyncDreamTable = async () => {
     const fs = require('fs');
     const oldEvents = await db.query('select * from events')
 
-    fs.writeFile("events-old.json", JSON.stringify(oldEvents.rows), (err) => {
+    fs.writeFile(`events-old_${Date.now()}.json`, JSON.stringify(oldEvents.rows), (err) => {
         if (err) throw err
         console.log("events-old.json written")
     })
@@ -127,7 +127,7 @@ exports.dbSyncDreamTable = async () => {
 
                     switch (extensions[dirIndex]) {
                         case "bitsy":
-                            title = dreamSrc.match(`({clr 2})(.*?)({\/clr})`)[0]
+                            title = dreamSrc.match(`(})(.*?)({)`)[0]
                             title = title.substring(
                                 title.indexOf("}") + 1,
                                 title.lastIndexOf("{")

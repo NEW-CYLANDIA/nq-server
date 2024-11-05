@@ -5,6 +5,7 @@ on:
 jobs:
   bash-script:
     runs-on: ubuntu-latest
+    environment: prod
 
     steps:
       - name: Checkout code
@@ -22,6 +23,13 @@ jobs:
 
       - name: Run Bash script
         run: bash ./build.sh
+        env:
+          PGDATABASE: ${{ vars.PGDATABASE }}
+          PGPORT: ${{ vars.PGPORT }}
+          PGUSER: ${{ vars.PGUSER }}
+          PGHOST: ${{ secrets.PGHOST }}
+          PGPASSWORD: ${{ secrets.PGPASSWORD }}
+
 
       - name: Commit Compiled Bridges
         uses: EndBug/add-and-commit@v9

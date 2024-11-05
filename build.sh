@@ -53,3 +53,6 @@ for file in $BRIDGE_PATH/src/downpour/*.js; do
         cat $BRIDGE_PATH/src/bridge-common.html >> $BRIDGE_PATH/$FILENAME_NOEX.html
     fi 
 done
+
+echo "updating database"
+node init.js
