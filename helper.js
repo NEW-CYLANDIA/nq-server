@@ -68,11 +68,17 @@ exports.dbCreatePlayer = async () => {
     return uid
 }
 
+// TODO why is event logging ever throwing errors
 exports.dbLogEvent = async (uid, session_hash, data) => {
-    await db.query(
-        'INSERT INTO events (device_uid, session_hash, type, impact_key, currency_value, dream_url_part) VALUES ($1, $2, $3, $4, $5, $6)',
-        [uid, session_hash, data.type, data.key || null, data.value || null, data.dream_url_part || null]
-    )
+    try {
+        await db.query(
+            'INSERT INTO events (device_uid, session_hash, type, impact_key, currency_value, dream_url_part) VALUES ($1, $2, $3, $4, $5, $6)',
+            [uid, session_hash, data.type, data.key || null, data.value || null, data.dream_url_part || null]
+        )
+    } catch (err) {
+        console.log(err)
+    }
+    
 }
 
 exports.dbSyncDreamTable = async () => {
