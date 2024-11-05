@@ -5,12 +5,15 @@
         nquid = JSON.parse(httpGet("/new_player")).uid
         localStorage.setItem("nquid", nquid)
     }
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    let lookup_nquid = urlParams.get('pass') ? urlParams.get('pass') : nquid
 
     // TODO - flag to designate found this session or not
     const table = new gridjs.Grid({
         columns: ['Dream Title', 'Original Dreamer'],
         server: {
-            url: `/found_dreams?nquid=${nquid}`,
+            url: `/found_dreams?nquid=${lookup_nquid}`,
             then: data => data.map(dream =>
                 [
                     gridjs.html(`<a href='bridges/${dream.url_part}.html'>${dream.title}</a>`),

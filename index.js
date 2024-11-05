@@ -27,7 +27,7 @@ const server = new WebSocket.Server({ server: expressServer });
 
 app.get('/found_dreams', async (req, res) => {
 	try {
-		const result = await db.query(`
+		let query = `
 			select
 				d.url_part,
 				d.title,
@@ -37,8 +37,15 @@ app.get('/found_dreams', async (req, res) => {
 				dreams d
 			LEFT JOIN
 				creators c ON d.creator_id = c.id
-			where 
-				d.url_part in (
+			WHERE
+				d.url_part NOT LIKE 'TEST_%'
+		`
+
+		let result
+
+		if (req.query.nquid !== "newcylandia") {
+			query += `
+				AND d.url_part in (
 					SELECT
 						e.dream_url_part 
 					FROM
@@ -47,7 +54,13 @@ app.get('/found_dreams', async (req, res) => {
 						e.device_uid = $1
 						and e.type = 'handshake'
 				)
-		`, [req.query.nquid]);
+		`
+			result = await db.query(query, [req.query.nquid]);
+		}
+		else {
+			result = await db.query(query);
+		}
+
 		res.json(result.rows);
 	} catch (err) {
 		console.error(err);
