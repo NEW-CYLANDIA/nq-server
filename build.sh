@@ -13,6 +13,7 @@ for file in $BRIDGE_PATH/src/bitsy/*.bitsy; do
         FILENAME=$(basename ${file})
         FILENAME_NOEX=${FILENAME%.*}
         BB_FILEPATH=input/$FILENAME
+        rm $BRIDGE_PATH/$FILENAME_NOEX.html
         cp $file $BB_FILEPATH
         cp $BRIDGE_PATH/src/bitsy/bitsy-common.js input/bitsy-common.js
         mv $BB_FILEPATH "input/gamedata.bitsy"
@@ -31,7 +32,24 @@ for file in $BRIDGE_PATH/src/twine/*.twee; do
     if [ -f "$file" ]; then
         FILENAME=$(basename ${file})
         FILENAME_NOEX=${FILENAME%.*}
+        rm $BRIDGE_PATH/$FILENAME_NOEX.html
         tweego -o $BRIDGE_PATH/$FILENAME_NOEX.html $file
+        cat $BRIDGE_PATH/src/bridge-common.html >> $BRIDGE_PATH/$FILENAME_NOEX.html
+    fi 
+done
+
+echo "building downpour games..."
+cd $ROOT_PATH
+INDEX_PATH=$BRIDGE_PATH"/src/downpour/index.html"
+for file in $BRIDGE_PATH/src/downpour/*.js; do 
+    if [ -f "$file" ]; then
+        FILENAME=$(basename ${file})
+        FILENAME_NOEX=${FILENAME%.*}
+        rm $BRIDGE_PATH/$FILENAME_NOEX.html
+        echo "<script>" >> $BRIDGE_PATH/$FILENAME_NOEX.html
+        cat $file >> $BRIDGE_PATH/$FILENAME_NOEX.html
+        echo "</script>" >> $BRIDGE_PATH/$FILENAME_NOEX.html
+        cat $INDEX_PATH >> $BRIDGE_PATH/$FILENAME_NOEX.html
         cat $BRIDGE_PATH/src/bridge-common.html >> $BRIDGE_PATH/$FILENAME_NOEX.html
     fi 
 done
