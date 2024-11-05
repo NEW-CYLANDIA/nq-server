@@ -273,7 +273,6 @@ SOFTWARE.
 
 </body>
 
-<script src="data.js"></script>
 <script type="text/javascript">
 
     if (data.format_version != 17) {
@@ -821,6 +820,16 @@ SOFTWARE.
 
 
         for (const link of page.links) {
+            if (link.type == "text") {
+                if (link.text.c == '#ffffff00') {
+                    try {
+                        const impactKey = link.text.text.split("=")[1]
+                        requestImpact(impactKey)
+                    } catch (err) {
+                        console.log(err)
+                    }
+                }
+            }
 
             var link_element = document.createElement((link.to || link.type == "comments") ? "a" : "div");
             if (link.type == "comments") {
