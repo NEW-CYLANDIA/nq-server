@@ -1,9 +1,11 @@
 #!/bin/sh
 
+ROOT_PATH=$(git rev-parse --show-toplevel)
+cd $ROOT_PATH
+
 npm install
 pip install psbs
 
-ROOT_PATH=$PWD
 BRIDGE_PATH=$PWD"/public/bridges"
 
 echo "building bitsy games..."
