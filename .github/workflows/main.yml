@@ -27,7 +27,7 @@ jobs:
           PGDATABASE: ${{ vars.PGDATABASE }}
           PGPORT: ${{ vars.PGPORT }}
           PGUSER: ${{ vars.PGUSER }}
-          PGHOST: ${{ secrets.PGHOST }}
+          PGHOST: ${{ vars.PGHOST }}
           PGPASSWORD: ${{ secrets.PGPASSWORD }}
 
 
