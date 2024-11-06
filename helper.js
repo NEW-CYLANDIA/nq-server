@@ -104,7 +104,7 @@ exports.dbSyncDreamTable = async () => {
         "bitsy/",
         "twine/",
         "puzzlescript/",
-        "downpour"
+        "downpour/"
     ]
 
     const extensions = [
@@ -113,6 +113,8 @@ exports.dbSyncDreamTable = async () => {
         "ps",
         "json"
     ]
+
+    let testEntryCreated = false
 
     for (let dirIndex in dirs) {
         fs.readdir(`public/bridges/src/${dirs[dirIndex]}`, function (err, files) {
@@ -124,7 +126,12 @@ exports.dbSyncDreamTable = async () => {
             files.forEach(async function (file, index) {
                 if (file.indexOf(`.${extensions[dirIndex]}`) == -1) return
 
-                const url_part = file.split('.')[0]
+                let url_part = file.split('.')[0]
+
+                if (url_part.includes("TEST_") || url_part == "editor") {
+                    url_part = "debug"
+                }
+
                 let author
                 let title
 
@@ -158,6 +165,14 @@ exports.dbSyncDreamTable = async () => {
                             let json = JSON.parse(dreamSrc)
                             title = json.name
                             author = json.author
+                    }
+
+                    if (url_part == "debug") {
+                        title = "test"
+                        author = "izzy kestrel"
+
+                        if (testEntryCreated) return
+                        testEntryCreated = true
                     }
 
                     await db.query('insert into dreams (url_part, creator_id, title) values ($1, $2, $3)', [url_part, authorIds.indexOf(author) + 1, title])
