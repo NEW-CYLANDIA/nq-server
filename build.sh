@@ -64,6 +64,7 @@ npm install
 node compile.js
 cat $BRIDGE_PATH/src/bridge-common.html >> bin/standalone_inlined.txt
 cat $BRIDGE_PATH/src/bridge-common.html >> bin/standalone.html
+cat $BRIDGE_PATH/src/bridge-common.html >> bin/editor.html
 mv bin $ROOT_PATH/public/puzzlescript-ws
 cd ..
 rm -rf PuzzleScriptWebsocket
