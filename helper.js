@@ -102,12 +102,16 @@ exports.dbSyncDreamTable = async () => {
 
     const dirs = [
         "bitsy/",
-        "twine/"
+        "twine/",
+        "puzzlescript/",
+        "downpour"
     ]
 
     const extensions = [
         "bitsy",
-        "twee"
+        "twee",
+        "ps",
+        "json"
     ]
 
     for (let dirIndex in dirs) {
@@ -146,6 +150,14 @@ exports.dbSyncDreamTable = async () => {
                             storyData = JSON.parse(storyData)
                             author = storyData.author
                             break
+                        case "ps":
+                            title = dreamSrc.split('\n')[0].replace("title ", "").replace(/[\u0000-\u001F\u007F-\u009F]/g, "")
+                            author = dreamSrc.split('\n')[1].replace("author ", "").replace(/[\u0000-\u001F\u007F-\u009F]/g, "")
+                            break
+                        case "json":
+                            let json = JSON.parse(dreamSrc)
+                            title = json.name
+                            author = json.author
                     }
 
                     await db.query('insert into dreams (url_part, creator_id, title) values ($1, $2, $3)', [url_part, authorIds.indexOf(author) + 1, title])

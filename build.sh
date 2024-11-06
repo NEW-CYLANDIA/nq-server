@@ -42,12 +42,12 @@ done
 echo "building downpour games..."
 cd $ROOT_PATH
 INDEX_PATH=$BRIDGE_PATH"/src/downpour/index.html"
-for file in $BRIDGE_PATH/src/downpour/*.js; do 
+for file in $BRIDGE_PATH/src/downpour/*.json; do 
     if [ -f "$file" ]; then
         FILENAME=$(basename ${file})
         FILENAME_NOEX=${FILENAME%.*}
         rm $BRIDGE_PATH/$FILENAME_NOEX.html
-        echo "<script>" >> $BRIDGE_PATH/$FILENAME_NOEX.html
+        echo "<script>let data = " >> $BRIDGE_PATH/$FILENAME_NOEX.html
         cat $file >> $BRIDGE_PATH/$FILENAME_NOEX.html
         echo "</script>" >> $BRIDGE_PATH/$FILENAME_NOEX.html
         cat $INDEX_PATH >> $BRIDGE_PATH/$FILENAME_NOEX.html
