@@ -1,0 +1,210 @@
+title look up
+author izzy kestrel
+homepage https://iznaut.com/
+
+========
+OBJECTS
+========
+
+Background
+darkgreen
+
+Target
+darkblue
+
+TargetTransA
+black red
+00000
+0....
+0....
+0..1.
+0....
+
+TargetTransB
+black blue
+00000
+0....
+0....
+0..1.
+0....
+
+TargetTransC
+black green
+00000
+0....
+0....
+0..1.
+0....
+
+hasCrateChanged
+transparent
+
+Wall
+darkbrown
+
+WallThin
+darkbrown
+.0000
+.0000
+.0000
+.0000
+.0000
+
+Player
+black pink white
+.....
+.0..0
+.2..2
+.....
+..11.
+
+CrateA
+red
+.....
+.....
+..00.
+..00.
+.....
+
+CrateB
+blue
+.....
+.....
+..00.
+..00.
+.....
+
+CrateC
+green
+.....
+.....
+..00.
+..00.
+.....
+
+WallGrid
+darkbrown black
+10000
+10000
+10000
+10000
+10000
+
+WallPillar
+darkbrown black
+1....
+.0000
+.0000
+.0000
+.0000
+
+WallFloor
+darkbrown green
+01111
+01111
+01111
+01111
+01111
+
+Grid
+black
+00000
+0....
+0....
+0....
+0....
+
+GridBottom
+black
+00000
+.....
+.....
+.....
+.....
+
+GridSide
+black gray
+0.11.
+0.11.
+0.11.
+0.11.
+0.11.
+
+GridEdge
+darkbrown black
+10000
+.0000
+.0000
+.0000
+.0000
+
+=======
+LEGEND
+=======
+
+. = Background
+# = Wall
+P = Player
+A = CrateA
+B = CrateB
+C = CrateC
+O = Target
+1 = TargetTransA
+2 = TargetTransB
+3 = TargetTransC
+G = Grid
+_ = GridBottom
+E = GridEdge
+S = GridSide
+W = WallGrid
+F = WallFloor
+I = WallPillar
+N = WallThin
+
+=======
+SOUNDS
+=======
+
+================
+COLLISIONLAYERS
+================
+
+Background
+hasCrateChanged
+Player, Wall, CrateA, CrateB, CrateC, WallPillar, WallThin, WallGrid
+Target, TargetTransA, TargetTransB, TargetTransC, Grid, GridBottom, GridSide, GridEdge, WallFloor
+
+======
+RULES
+======
+
+[ > Player | CrateA no hasCrateChanged ] -> [ > Player | > CrateB hasCrateChanged ]
+[ > Player | CrateB no hasCrateChanged] -> [ > Player | > CrateC hasCrateChanged]
+[ > Player | CrateC no hasCrateChanged] -> [ > Player | > CrateA hasCrateChanged]
+
+[hasCrateChanged] -> [] 
+
+
+==============
+WINCONDITIONS
+==============
+
+all TargetTransA on CrateA
+all TargetTransB on CrateB
+all TargetTransC on CrateC
+
+
+=======
+LEVELS
+=======
+
+#####################
+#ggggsggggsggggsggg2w
+#ggggsg2ggsggggsggggw
+#ggggsggggsgg3gsggggw
+#ggg1sggggsggggsggggw
+#____i____i____i____e
+#....a......a.......n
+#.b.....c........p..n
+#...................n
+#####################
