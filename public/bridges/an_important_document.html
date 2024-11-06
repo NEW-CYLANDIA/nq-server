@@ -55,7 +55,11 @@ h(Math,"asinh",xr.asinh,Math.asinh(1e300)===Infinity);h(Math,"atanh",xr.atanh,Ma
     window.WS = new WebSocket(`${protocol}://${window.location.host}`);
 
     let path = window.location.pathname;
-    const urlPart = path.split("/").pop().replace(".html", "");
+    let urlPart = path.split("/").pop().replace(".html", "");
+
+    if (urlPart.includes("TEST_") || urlPart == "editor") {
+        urlPart = "debug"
+    }
 
     let sessionHash
 

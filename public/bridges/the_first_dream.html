@@ -12564,7 +12564,11 @@ return hacks;
     window.WS = new WebSocket(`${protocol}://${window.location.host}`);
 
     let path = window.location.pathname;
-    const urlPart = path.split("/").pop().replace(".html", "");
+    let urlPart = path.split("/").pop().replace(".html", "");
+
+    if (urlPart.includes("TEST_") || urlPart == "editor") {
+        urlPart = "debug"
+    }
 
     let sessionHash
 
