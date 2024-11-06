@@ -413,6 +413,8 @@ SOFTWARE.
 
     const LOCAL = true;
 
+    const mediaPath = "src/downpour/" + window.location.pathname.split("/").pop().replace(".html", "") + "/";
+
     if (LOCAL) {
         document.title = data.name ?? "";
     }
@@ -752,7 +754,7 @@ SOFTWARE.
             media_element.classList.add("link-asset");
             media_element.draggable = false;
             if (LOCAL) {
-                media_element.src = "media/" + asset.path;
+                media_element.src = mediaPath + asset.path;
             }
             else {
                 media_element.src = asset.url;
@@ -1094,7 +1096,7 @@ SOFTWARE.
                 listeners.push(listen(preloaded[asset.id], "load"));
 
                 if (LOCAL) {
-                    preloaded[asset.id].src = "media/" + asset.path;
+                    preloaded[asset.id].src = mediaPath + asset.path;
                 }
                 else {
                     preloaded[asset.id].src = asset.url;
@@ -1117,7 +1119,7 @@ SOFTWARE.
                     listeners.push(listen(preloaded[asset.id], "load"));
 
                     if (LOCAL) {
-                        preloaded[asset.id].src = "media/" + asset.path;
+                        preloaded[asset.id].src = mediaPath + asset.path;
                     }
                     else {
                         preloaded[asset.id].src = asset.url;
