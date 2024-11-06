@@ -5,8 +5,8 @@
     let path = window.location.pathname;
     let urlPart = path.split("/").pop().replace(".html", "");
 
-    if (url_part.includes("TEST_") || url_part == "editor") {
-        url_part = "test"
+    if (urlPart.includes("TEST_") || urlPart == "editor") {
+        urlPart = "debug"
     }
 
     let sessionHash
