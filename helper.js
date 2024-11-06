@@ -85,10 +85,12 @@ exports.dbSyncDreamTable = async () => {
     const fs = require('fs');
     const oldEvents = await db.query('select * from events')
 
-    fs.writeFile(`events-old_${Date.now()}.json`, JSON.stringify(oldEvents.rows), (err) => {
-        if (err) throw err
-        console.log("events-old.json written")
-    })
+    if (oldEvents.rowCount > 0) {
+        fs.writeFile(`events-old_${Date.now()}.json`, JSON.stringify(oldEvents.rows), (err) => {
+            if (err) throw err
+            console.log("events-old.json written")
+        })
+    }
 
     // drop outdated rows
     await db.query('DELETE FROM events')
