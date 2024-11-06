@@ -54,5 +54,31 @@ for file in $BRIDGE_PATH/src/downpour/*.js; do
     fi 
 done
 
+echo "building puzzlescript games..."
+PS_PATH=$BRIDGE_PATH"/src/puzzlescript"
+cd $PS_PATH
+for file in $PS_PATH/*.ps; do 
+    if [ -f "$file" ]; then
+        FILENAME=$(basename ${file})
+        FILENAME_NOEX=${FILENAME%.*}
+        rm $BRIDGE_PATH/$FILENAME_NOEX.html
+
+        read -r LINE<$file
+        TITLE=${LINE:6:50}
+        TITLE="${TITLE//[$'\r']}"
+        echo $TITLE
+
+        psbs new --from-file $file $FILENAME_NOEX
+        cd $FILENAME_NOEX
+        psbs export
+        cat "bin/$TITLE.html" >> $BRIDGE_PATH/$FILENAME_NOEX.html
+        cd ..
+    
+        rm -r $FILENAME_NOEX
+    fi 
+done
+
+cd $ROOT_PATH
+
 echo "updating database"
 node init.js
