@@ -55,7 +55,21 @@ for file in $BRIDGE_PATH/src/downpour/*.json; do
     fi 
 done
 
+echo "updating puzzlescript-ws"
+cd $ROOT_PATH
+rm -r $ROOT_PATH/public/puzzlescript-ws
+git clone --depth=1 https://github.com/NEW-CYLANDIA/PuzzleScriptWebsocket.git
+cd PuzzleScriptWebsocket
+npm install
+node compile.js
+cat $BRIDGE_PATH/src/bridge-common.html >> bin/standalone_inlined.txt
+cat $BRIDGE_PATH/src/bridge-common.html >> bin/standalone.html
+mv bin $ROOT_PATH/public/puzzlescript-ws
+cd ..
+rm -rf PuzzleScriptWebsocket
+
 echo "building puzzlescript games..."
+cd $ROOT_PATH
 PS_PATH=$BRIDGE_PATH"/src/puzzlescript"
 cd $PS_PATH
 for file in $PS_PATH/*.ps; do 
@@ -70,6 +84,7 @@ for file in $PS_PATH/*.ps; do
         echo $TITLE
 
         psbs new --from-file $file $FILENAME_NOEX
+        cp psbs_config_template.yml $FILENAME_NOEX/config.yml
         cd $FILENAME_NOEX
         psbs export
         cat "bin/$TITLE.html" >> $BRIDGE_PATH/$FILENAME_NOEX.html

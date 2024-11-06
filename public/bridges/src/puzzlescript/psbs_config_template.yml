@@ -1,0 +1,11 @@
+gist_id: null
+engine: https://dreamscape-explorer.app/puzzlescript-ws/
+template: main.pss
+user_extensions: []
+Build:
+  name: debug
+Tiled:
+  generate_tileset: false
+Images:
+  alpha: false
+  max_colors: 10
