@@ -1,6 +1,7 @@
 #!/bin/sh
 
 npm install
+pip install psbs
 
 ROOT_PATH=$PWD
 BRIDGE_PATH=$PWD"/public/bridges"
