@@ -527,6 +527,18 @@ NAME friends_tv
 DLG m
 POS 2 12,13
 
+SPR u
+00000000
+00011000
+00011000
+00100100
+01011010
+00011000
+00100100
+00100100
+NAME zazie
+DLG t
+
 ITM 2
 00000000
 00000000
@@ -631,7 +643,7 @@ DLG 0
         {pg}Let's high-{wvy}tail{/wvy} it outta here!{end}
     }
   - else ?
-    Left at Cheers, right at Doogie Howser...{pg}Ah man, this map hasn't been updated in decades!{pg}Oh, hey. You lost in TV land, too?{pg}Well, this ain't my first rodeo...{pg}Tell you what...if you can track down a {rbw}TV REMOTE{/rbw},{pg}I can get us outta here.{pg}Capisce?
+    {drawNow "SPR, q, 3, 15, 0"}Left at Cheers, right at Doogie Howser...{pg}Ah man, this map hasn't been updated in decades!{pg}Oh, hey. You lost in TV land, too?{pg}Well, this ain't my first rodeo...{pg}Tell you what...if you can track down a {rbw}TV REMOTE{/rbw},{pg}I can get us outta here.{pg}Capisce?
 }
 """
 NAME gex dialog
@@ -642,7 +654,7 @@ DLG 3
   - remote == true ?
     Oh my, that's quite the {rbw}TV REMOTE{/rbw} you have there.{pg}What is that, a Magnavox? Hitachi? Lovely vintage.{
       - batteries == false ?
-          {pg}But wait, no {rbw}BATTERIES{/rbw}??{pg}I'm afraid I used our last set for my Game Boy, unfortunately.{pg}You could ask the loathsome woman next door.{pg}She probably keeps them in her freezer...{pg}...like some kind of Ice Age neanderthal.{pg}Bazinga.
+          {pg}But wait, no {rbw}BATTERIES{/rbw}??{pg}I'm afraid I used our last set for my Nintendo Game Boy, unfortunately.{pg}You could ask the loathsome woman next door.{pg}She probably keeps them in her freezer...{pg}...like some kind of Ice Age neanderthal.{pg}...{pg}Bazinga.
     }
   - else ?
     Please do not talk to me.{pg}I am busy doing math problems in my head for fun.{pg}...{pg}Bazinga.
@@ -656,7 +668,7 @@ DLG 4
   - male == false ?
     {wvy}huh...huh...hi....{pg}i'm....leonard....{pg}nice to meet...pretty lady...~O_O~{/wvy}
   - else ?
-    Hi, I'm Leonard.{pg}That's my roommate Sheldon over there.{pg}We are very smart.
+    Hi, I'm Leonard.{pg}This is my roommate Sheldon.{pg}We are very smart.
 }
 """
 NAME bbt_leonard dialog
@@ -754,7 +766,7 @@ DLG f
 """
 {
   - male == false ?
-    Wow! What's a certified smokeshow like you doing in an office like this?{pg}Somebody call the fire department, cause we gotta put this lady out!
+    {wvy}AWOOOGA!{/wvy} What's a certified smokeshow like you doing in an office like this?{pg}Somebody call the fire department, cause we gotta put this lady out!
   - else ?
     Howdy, pardner!{pg}Welcome to the wild west of paper products.{pg}We're not like {wvy}other{/wvy} boring offices...{pg}[Michael continues spouting unimportant nonsense]
 }
@@ -766,7 +778,14 @@ Hi, I’m Chandler. I make jokes when I’m uncomfortable.
 NAME friends_chand dialog
 
 DLG h
-Hi, I'm Ross and I'm an architect.{pg}Or archeologist? Something like that...{pg}
+"""
+{
+  - harassment == true ?
+    Have you seen page D-7 of the McGuinness file? I keep losing it.
+  - else ?
+    Hi, I'm Ross and I'm an architect.{pg}Or archeologist? Something like that..
+}
+"""
 NAME friends_ross dialog
 
 DLG i
@@ -793,7 +812,14 @@ DLG l
 NAME friends_joey dialog
 
 DLG m
-This episode is called "The One Where Joey Eats Some Jell-O".
+"""
+{
+  - remote == true ?
+    {eraseNow "SPR, g, 4, 8, 2"}The TV is now playing a video of David Schwimmer and Zazie Beetz talking in an Office.{drawNow "SPR, g, 4, 4, 3"}{drawNow "SPR, u, 4, 3, 3"}{harassment = true}
+  - else ?
+    This episode is called "The One Where Joey Eats Some Jell-O".
+}
+"""
 NAME friends_tv dialog
 
 DLG n
@@ -868,6 +894,10 @@ DLG s
 """
 NAME genderer_bbt_exit dialog
 
+DLG t
+Have you looked under your chair? You're always dropping things and making me pick them up...
+NAME zazie dialog
+
 VAR male
 true
 
@@ -875,4 +905,7 @@ VAR remote
 false
 
 VAR batteries
+false
+
+VAR harassment
 false
