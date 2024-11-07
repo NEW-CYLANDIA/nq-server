@@ -4,7 +4,7 @@ ROOT_PATH=$(git rev-parse --show-toplevel)
 cd $ROOT_PATH
 
 npm install
-pip install psbs
+pip install git+https://github.com/NEW-CYLANDIA/PSBS-WS.git#egg=psbs
 
 BRIDGE_PATH=$PWD"/public/bridges"
 
@@ -58,18 +58,18 @@ for file in $BRIDGE_PATH/src/downpour/*.json; do
 done
 
 echo "updating puzzlescript-ws"
-cd $ROOT_PATH
-rm -r $ROOT_PATH/public/puzzlescript-ws
-git clone --depth=1 https://github.com/NEW-CYLANDIA/PuzzleScriptWebsocket.git
-cd PuzzleScriptWebsocket
-npm install
-node compile.js
-cat $BRIDGE_PATH/src/bridge-common.html >> bin/standalone_inlined.txt
-cat $BRIDGE_PATH/src/bridge-common.html >> bin/standalone.html
-cat $BRIDGE_PATH/src/bridge-common.html >> bin/editor.html
-mv bin $ROOT_PATH/public/puzzlescript-ws
-cd ..
-rm -rf PuzzleScriptWebsocket
+# cd $ROOT_PATH
+# rm -r $ROOT_PATH/public/puzzlescript-ws
+# git clone --depth=1 https://github.com/NEW-CYLANDIA/PuzzleScriptWebsocket.git
+# cd PuzzleScriptWebsocket
+# npm install
+# node compile.js
+# cat $BRIDGE_PATH/src/bridge-common.html >> bin/standalone_inlined.txt
+# cat $BRIDGE_PATH/src/bridge-common.html >> bin/standalone.html
+# cat $BRIDGE_PATH/src/bridge-common.html >> bin/editor.html
+# mv bin $ROOT_PATH/public/puzzlescript-ws
+# cd ..
+# rm -rf PuzzleScriptWebsocket
 
 echo "building puzzlescript games..."
 cd $ROOT_PATH
