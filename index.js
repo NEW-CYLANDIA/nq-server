@@ -36,23 +36,27 @@ app.get('/found_dreams', async (req, res) => {
 			LEFT JOIN
 				creators c ON d.creator_id = c.id
 			WHERE
-				d.url_part NOT LIKE 'TEST_%'
+				d.url_part NOT LIKE 'debug'
+			${
+				req.query.nquid !== "newcylandia" ?
+				`
+					AND d.url_part in (
+						SELECT
+							e.dream_url_part 
+						FROM
+							events e 
+						where
+							e.device_uid = $1
+							and e.type = 'handshake'
+					)
+				` : ""
+			}
+			ORDER BY d.title asc
 		`
 
 		let result
 
 		if (req.query.nquid !== "newcylandia") {
-			query += `
-				AND d.url_part in (
-					SELECT
-						e.dream_url_part 
-					FROM
-						events e 
-					where
-						e.device_uid = $1
-						and e.type = 'handshake'
-				)
-		`
 			result = await db.query(query, [req.query.nquid]);
 		}
 		else {
