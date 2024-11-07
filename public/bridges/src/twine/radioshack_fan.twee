@@ -1,0 +1,71 @@
+:: StoryTitle
+RadioShack Fan
+
+
+:: StoryData
+{
+  "ifid": "D7E87921-0D73-4673-B183-38B2F8F11D69",
+  "format": "Harlowe",
+  "format-version": "3.3.9",
+  "start": "Radioshack",
+  "zoom": 0.6
+}
+
+
+:: Isn't there usually a fan running here? {"position":"1050,375","size":"100,100"}
+You turn around to see the familiar box fan mounted to the wall, but it looks like it hasn't been turned on in years. Dust cakes the blades, and its once-colorful streamers are now dull and languid.  Suddenly you're struck by how stationary and still this room is.  It's kind of disconcerting, actually.  Something must be done.  You've gotta do something!
+
+The fan must be turned on.
+
+[[Turn on the fan]]
+
+
+:: Look around {"position":"1325,225","size":"100,100"}
+Suddenly this place that used to make you feel calm and at home feels wrong, deeply wrong. You follow the fan's cord with your eyes, and eventually find the wall outlet it's supposed to be plugged into.  The plug is sitting on the floor.  Well that explains it.
+
+[[Plug in the fan]]
+
+
+:: Plug in the fan {"position":"1450,225","size":"100,100"}
+You plug in the fan, but it doesn't turn on. Suddenly across the room you hear an old radio hum and crackle to life. A news program is on.  The anchor's words are difficult to hear through the static, but he seems to be talking about some sort of invention from an upstart young engineer. The radio suddenly flickers off -- you look down at the outlet, and notice the plug has been taken out of the wall and is on the floor again.
+
+[[Plug it in again]]
+
+
+:: Plug it in again {"position":"1600,225","size":"100,100"}
+You plug it in again, but the fan still isn't turning on.  The RadioShack fills with a dim light as a CRT in the corner, buried behind stacks of boxes and tech products, turns on.
+
+"Microsolutions Inc. loses a great mind today, as Quinton Rhodes leaves his position as Head of Engine--"
+
+The plug's unplugged again.  
+
+Maybe this just isn't going to work.  Maybe the fan is just broken.  Or...maybe it never worked in the first place.  Hmm...but if there's one thing you love, it's finding solutions to hard problems. You've just got to think.
+
+[[What if I....hmm...]]
+
+
+:: Radioshack {"position":"900,375","size":"100,100"}
+The familiar musty smell of the RadioShack at the mall fills your nose, and, for a moment, you can relax. Your refuge from the chaotic din of thoughts and machinery that is your office, this place, though it looks similar, always filled you with a kind of calm.  But this time, something seems to stick out.  The place seems....dustier? Than normal? 
+
+[[Isn't there usually a fan running here?]]
+
+
+:: Rotate the knob a few more times {"position":"1325,375","size":"100,100"}
+You rotate the knob a few more times, to no effect.  You begin to feel that maybe this fan CAN'T move, and the feeling drives you mad.
+
+[[Look around]]
+
+
+:: Turn on the fan {"position":"1200,375","size":"100,100"}
+You rotate the knob on the top of the fan, and with a little effort and a satisfying deep *chnk* it snaps to the next setting. The fan stays motionless.
+
+[[Rotate the knob a few more times]]
+[[Look around]]
+
+
+:: What if I....hmm... {"position":"1750,225","size":"100,100"}
+The glimmer of a plan forms in your brain.  Something you can do to fix this mess.  Suddenly, you hear a low hum, and feel a slight breeze against your face.  The fan's on.
+<script>
+console.log("test")
+sendImpact("fans")
+</script>
