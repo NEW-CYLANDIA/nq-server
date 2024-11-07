@@ -4,14 +4,11 @@ require('dotenv').config()
 
 const os = require("os")
 
-// const pg = require('pg');
-// const { Client } = pg
 const db = require('./db');
 
 const { Node: Logtail } = require("@logtail/js");
 const logtail = new Logtail(process.env.LOGTAIL_TOKEN);
 
-const subdomain = require('express-subdomain');
 const express = require('express');
 const path = require('path');
 const { createServer } = require('http');
@@ -130,34 +127,6 @@ app.get('/get_random_gif', async (req, res) => {
 		res.status(500).send('Internal Server Error');
 	}
 });
-
-var router = express.Router();
-
-router.get('/', function (req, res) {
-	res.redirect('public/puzzlescript-ws/');
-});
-
-app.use(subdomain('puzzlescript', router));
-
-// app.get('/progress', async (req, res) => {
-// 	try {
-// 		console.log(req.query.nquid)
-
-// 		const result = await db.query(`
-// 			SELECT
-// 				e.dream_id 
-// 			FROM
-// 				events e 
-// 			where
-// 				e.device_uid = $1
-// 				and e.type = 'handshake'
-// 		`, [req.query.nquid]);
-// 		res.json(result.rows);
-// 	} catch (err) {
-// 		console.error(err);
-// 		res.status(500).send('Internal Server Error');
-// 	}
-// });
 
 logtail.debug({ msg: "SERVER UP" })
 logtail.flush()
@@ -302,7 +271,7 @@ server.on('connection', function (client) {
 	})
 
 	client.on('close', function () {
-		client.log_info('client disconnected')
+		client.log_info('client disconnected', client)
 
 		if (client == uniqueConns.cyberspace) {
 			uniqueConns.cyberspace = null
