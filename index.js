@@ -11,6 +11,7 @@ const db = require('./db');
 const { Node: Logtail } = require("@logtail/js");
 const logtail = new Logtail(process.env.LOGTAIL_TOKEN);
 
+const subdomain = require('express-subdomain');
 const express = require('express');
 const path = require('path');
 const { createServer } = require('http');
@@ -129,6 +130,14 @@ app.get('/get_random_gif', async (req, res) => {
 		res.status(500).send('Internal Server Error');
 	}
 });
+
+var router = express.Router();
+
+router.get('/', function (req, res) {
+	res.redirect('public/puzzlescript-ws/');
+});
+
+app.use(subdomain('puzzlescript', router));
 
 // app.get('/progress', async (req, res) => {
 // 	try {
