@@ -643,7 +643,7 @@ DLG 0
         {pg}Let's high-{wvy}tail{/wvy} it outta here!{end}
     }
   - else ?
-    {drawNow "SPR, q, 3, 15, 0"}Left at Cheers, right at Doogie Howser...{pg}Ah man, this map hasn't been updated in decades!{pg}Oh, hey. You lost in TV land, too?{pg}Well, this ain't my first rodeo...{pg}Tell you what...if you can track down a {rbw}TV REMOTE{/rbw},{pg}I can get us outta here.{pg}Capisce?
+    Left at Cheers, right at Doogie Howser...{pg}Ah man, this map hasn't been updated in decades!{pg}Oh, hey. You lost in TV land, too?{pg}Well, this ain't my first rodeo...{pg}Tell you what...if you can track down a {rbw}TV REMOTE{/rbw},{pg}I can get us outta here.{pg}Capisce?
 }
 """
 NAME gex dialog
@@ -680,7 +680,7 @@ DLG 5
     {
     - remote == true ?
       {sequence
-        - Sup, my man?{pg}{rbw}BATTERIES{/rbw}? You got it, bro. Anything for a fellow dude. ;){pg}You got {wvy}{rbw}BATTERIES{/wvy}{/rbw}! You pop them into the {wvy}{rbw}TV REMOTE{/wvy}{/rbw}.{batteries = true}
+        - Sup, my man?{pg}{rbw}BATTERIES{/rbw}? You got it, bro. Anything for a fellow dude. ;){pg}You got {wvy}{rbw}BATTERIES{/wvy}{/rbw}!{blip "1"} You pop them into the {wvy}{rbw}TV REMOTE{/wvy}{/rbw}.{batteries = true}
         - Sup, bro? How those {rbw}BATTERIES{/rbw} treatin' ya?
       }
     - else ?
@@ -732,15 +732,15 @@ DLG a
 {sequence
   - Hi. I'm Toby. I work in HR.{pg}Is this your first day?{pg}Talk to me if you have any problems.
   - {cycle
-      - Oh...misgendering? That's very serious.{pg}Please sign here and I'll file your gender change request.{pg}You are now {wvy}FEMALE{/wvy}!{male = false}{ava "f"}
-      - Oh...misgendering? That's very serious.{pg}Please sign here and I'll file your gender change request.{pg}You are now {shk}MALE{/shk}!{male = true}{ava "A"}
+      - Oh...misgendering? That's very serious.{pg}Please sign here and I'll file your gender change request.{pg}You are now {wvy}FEMALE{/wvy}!{male = false}{ava "f"}{blip "1"}
+      - Oh...misgendering? That's very serious.{pg}Please sign here and I'll file your gender change request.{pg}You are now {shk}MALE{/shk}!{male = true}{ava "A"}{blip "1"}
     }
 }
 """
 NAME off_toby dialog
 
 DLG b
-You picked up a {wvy}{rbw}TV REMOTE SUSPENDED IN JELL-O{/wvy}{/rbw}!
+You picked up a {wvy}{rbw}TV REMOTE SUSPENDED IN JELL-O{/wvy}{/rbw}!{blip "1"}
 NAME jello dialog
 
 DLG c
@@ -781,7 +781,7 @@ DLG h
 """
 {
   - harassment == true ?
-    Have you seen page D-7 of the McGuinness file? I keep losing it.
+    (soundeffectNow "harassment_david")I uh...can't find the McGuinness file. I keep losing it.{pg}Here's page D-7, but where's the rest?
   - else ?
     Hi, I'm Ross and I'm an architect.{pg}Or archeologist? Something like that..
 }
@@ -804,7 +804,7 @@ DLG l
 """
 {
   - {item "2"} ?
-    Yep...{wvy}there's always room for Jell-O...{/wvy}{pg}[Joey eats the Jell-O. It's very erotic.]{pg}You got a {wvy}{rbw}TV REMOTE{/wvy}{/rbw}{item "2" 0}{remote = true}!
+    (soundeffectNow "jello")Yep...{wvy}there's always room for Jell-O...{/wvy}{pg}[Joey eats the Jell-O. The studio audience goes wild.]{pg}You got a {wvy}{rbw}TV REMOTE{/wvy}{/rbw}{item "2" 0}{remote = true}!{blip "1"}
   - else ?
     Hi, I'm Joey. I'm dim-witted, but good-natured!
 }
@@ -815,7 +815,7 @@ DLG m
 """
 {
   - remote == true ?
-    {eraseNow "SPR, g, 4, 8, 2"}The TV is now playing a video of David Schwimmer and Zazie Beetz talking in an Office.{drawNow "SPR, g, 4, 4, 3"}{drawNow "SPR, u, 4, 3, 3"}{harassment = true}
+    {eraseNow "SPR, g, 4, 8, 2"}The TV is now playing a video of David Schwimmer and Zazie Beetz talking in an Office...{drawNow "SPR, g, 4, 4, 3"}{drawNow "SPR, u, 4, 2, 3"}{harassment = true}
   - else ?
     This episode is called "The One Where Joey Eats Some Jell-O".
 }
@@ -895,7 +895,7 @@ DLG s
 NAME genderer_bbt_exit dialog
 
 DLG t
-Have you looked under your chair? You're always dropping things and making me pick them up...
+(soundeffectNow "harassment_zazie")Okay...hold on, we're gonna find it. Just give me a second.{pg}Have you looked under your chair? You're always dropping things and making me pick them up...
 NAME zazie dialog
 
 VAR male
@@ -909,3 +909,10 @@ false
 
 VAR harassment
 false
+
+BLIP 1
+G,D#,A#
+NAME pickup
+ENV 98 103 7 161 142
+BEAT 90 0
+SQR P2
