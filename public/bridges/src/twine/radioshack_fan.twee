@@ -4,6 +4,7 @@ RadioShack Fan
 
 :: StoryData
 {
+  "author": "Taylor Anderson",
   "ifid": "D7E87921-0D73-4673-B183-38B2F8F11D69",
   "format": "Harlowe",
   "format-version": "3.3.9",
