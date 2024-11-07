@@ -67,6 +67,5 @@ You rotate the knob on the top of the fan, and with a little effort and a satisf
 :: What if I....hmm... {"position":"1750,225","size":"100,100"}
 The glimmer of a plan forms in your brain.  Something you can do to fix this mess.  Suddenly, you hear a low hum, and feel a slight breeze against your face.  The fan's on.
 <script>
-console.log("test")
-sendImpact("fans")
+requestImpact("fans")
 </script>
