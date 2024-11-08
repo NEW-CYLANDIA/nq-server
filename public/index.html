@@ -20,6 +20,29 @@
                     gridjs.html(`<a href='${dream.website_url}'>${dream.creator_name}</a>`)
                 ]
             )
+        },
+        style: {
+            table: {
+                border: '3px solid #ccc',
+                width: '10%'
+            },
+            th: {
+                'background-color': 'rgba(0, 0, 0, 0.1)',
+                color: '#FFF',
+                'border-bottom': '3px solid #ccc',
+                'text-align': 'center',
+                'font-size': '1.5rem'
+            },
+            td: {
+                'background-color': 'rgba(0,0,0,1)',
+                'font-size': '1.25rem'
+            },
+            a: {
+                'color': '#FFF'
+            },
+            'a:visited': {
+                'color': '#FFF'
+            }
         }
     })
 
@@ -60,7 +83,7 @@
         <img id="randomGif">
     </div>
     <h1>dear diary,</h1>
-    <p>i had some really wild dreams last night! i don't remember them all too clearly, but here are some notes:</p>
+    <p>i had some really wild dreams last night! here's what i can remember about them:</p>
     <div id="wrapper"></div>
     <p>i hope i get to revisit some of them tonight...or maybe share them with someone special? ~O_O~</p>
     <p id="currencyDisplay">oh! also, i found some DREAM DOLLARS! currently, i have <span style="font-size: large; font-weight: bold;" id="currencyCount">0</span> DD on hand...i wonder what i can spend it on :O</p>

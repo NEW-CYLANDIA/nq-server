@@ -6,4 +6,17 @@ body {
 
 p {
     background-color: black;
+    font-size: 2rem;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+a, a:visited {
+    color: white;
 }

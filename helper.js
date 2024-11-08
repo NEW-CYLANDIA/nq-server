@@ -165,6 +165,7 @@ exports.dbSyncDreamTable = async () => {
                             let json = JSON.parse(dreamSrc)
                             title = json.name
                             author = json.author
+                            break
                     }
 
                     if (url_part == "debug") {
