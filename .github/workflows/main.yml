@@ -29,7 +29,16 @@ jobs:
           PGUSER: ${{ vars.PGUSER }}
           PGHOST: ${{ vars.PGHOST }}
           PGPASSWORD: ${{ secrets.PGPASSWORD }}
+      
+      - uses: actions/upload-artifact@v4
+        with:
+          # Name of the artifact to upload.
+          # Optional. Default is 'artifact'
+          name: event_logs_backup
 
+          # A file, directory or wildcard pattern that describes what to upload
+          # Required.
+          path: events-old_*.json
 
       - name: Commit Compiled Bridges
         uses: EndBug/add-and-commit@v9
