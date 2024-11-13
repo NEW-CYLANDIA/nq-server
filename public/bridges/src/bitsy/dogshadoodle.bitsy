@@ -29,15 +29,17 @@ ROOM 0
 10,p,0,0,0,0,z,z,z,0,0,11,10,0,p,0
 0,p,0,11,0,0,z,11,0,0,0,0,0,0,p,0
 0,p,0,0,0,0,z,z,z,0,0,0,0,10,p,0
-0,o,m,m,m,m,m,0,z,m,m,m,m,m,n,0
-0,0,0,0,0,0,0,0,z,0,0,0,0,0,0,0
+0,p,0,0,0,0,0,0,z,0,0,0,0,0,p,0
+0,o,m,m,m,m,m,m,z,m,m,m,m,m,n,0
 z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z
 0,10,0,0,0,0,11,10,0,0,0,10,11,0,0,11
 12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12
 13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13
 NAME example room
+ITM 0 7,10
+ITM 0 8,12
+ITM 0 3,8
 PAL 0
-TUNE 2
 
 TIL 10
 00000000
@@ -124,6 +126,7 @@ TIL 16
 00100110
 00111100
 NAME doghouse_1
+WAL true
 
 TIL 17
 00000011
@@ -135,6 +138,7 @@ TIL 17
 01000000
 01000011
 NAME doghouse_3
+WAL true
 
 TIL 18
 00010010
@@ -146,6 +150,7 @@ TIL 18
 01100100
 00111100
 NAME doghouse_2
+WAL true
 
 TIL 19
 11000000
@@ -156,6 +161,7 @@ TIL 19
 00000010
 00000010
 11100010
+WAL true
 
 TIL a
 11111111
@@ -167,6 +173,7 @@ TIL a
 10000001
 11111111
 NAME block
+WAL true
 
 TIL b
 01000000
@@ -178,6 +185,7 @@ TIL b
 10000000
 11111111
 NAME hs_l_siding
+WAL true
 
 TIL c
 00000010
@@ -189,6 +197,7 @@ TIL c
 00000001
 11111111
 NAME hs_r_siding
+WAL true
 
 TIL d
 00000000
@@ -211,6 +220,7 @@ TIL e
 00000001
 01111111
 NAME hs_r_siding_2
+WAL true
 
 TIL f
 00000000
@@ -222,6 +232,7 @@ TIL f
 00000000
 11111111
 NAME hs_siding_1
+WAL true
 
 TIL g
 00000000
@@ -233,6 +244,7 @@ TIL g
 00000000
 01111111
 NAME hs_siding_2
+WAL true
 
 TIL h
 11111111
@@ -255,6 +267,7 @@ TIL i
 00111111
 01100000
 NAME bush_1
+WAL true
 
 TIL j
 00000000
@@ -266,6 +279,7 @@ TIL j
 10011100
 00000110
 NAME bush_2
+WAL true
 
 TIL k
 00100010
@@ -277,6 +291,7 @@ TIL k
 00011011
 00100110
 NAME bush_3
+WAL true
 
 TIL l
 00000100
@@ -288,6 +303,7 @@ TIL l
 11011000
 01110100
 NAME bush_4
+WAL true
 
 TIL m
 11001100
@@ -299,6 +315,7 @@ TIL m
 10001000
 10001000
 NAME fence_front
+WAL true
 
 TIL n
 11011000
@@ -310,6 +327,7 @@ TIL n
 10011000
 10011000
 NAME fence_r_corner
+WAL true
 
 TIL o
 00011100
@@ -321,6 +339,7 @@ TIL o
 00011000
 00011000
 NAME fence_l_corner
+WAL true
 
 TIL p
 00010000
@@ -332,6 +351,7 @@ TIL p
 00011000
 00001000
 NAME fance_vert
+WAL true
 
 TIL q
 00000001
@@ -343,6 +363,7 @@ TIL q
 01000000
 11111111
 NAME roof_lb_corner
+WAL true
 
 TIL r
 10000000
@@ -354,6 +375,7 @@ TIL r
 00000010
 11111111
 NAME roof_rb_corner
+WAL true
 
 TIL s
 00000000
@@ -365,6 +387,7 @@ TIL s
 00000000
 11111111
 NAME roof_gutter
+WAL true
 
 TIL t
 00010000
@@ -376,6 +399,7 @@ TIL t
 10000000
 10000000
 NAME roof_r_side
+WAL true
 
 TIL u
 00001000
@@ -387,6 +411,7 @@ TIL u
 00000001
 00000001
 NAME roof_l_side
+WAL true
 
 TIL v
 00000000
@@ -398,6 +423,7 @@ TIL v
 00010000
 00010000
 NAME roof_rt_corner
+WAL true
 
 TIL w
 00000000
@@ -409,6 +435,7 @@ TIL w
 00000000
 00000000
 NAME roof_top
+WAL true
 
 TIL x
 00000000
@@ -420,6 +447,7 @@ TIL x
 00000000
 00000000
 NAME roof
+WAL true
 
 TIL y
 00000000
@@ -431,6 +459,7 @@ TIL y
 00001000
 00001000
 NAME roof_lt_corner
+WAL true
 
 TIL z
 00000000
@@ -442,6 +471,7 @@ TIL z
 11111110
 11111110
 NAME concrete_1
+WAL false
 
 SPR A
 00111100
@@ -461,7 +491,7 @@ SPR A
 01111100
 00010100
 00000100
-POS 0 4,7
+POS 0 0,12
 
 SPR a
 00000000
@@ -480,13 +510,14 @@ ITM 0
 00000000
 00000000
 00000000
-00111100
-01100100
-00100100
+00011000
 00011000
 00000000
-NAME tea
+00000000
+00000000
+NAME poop
 DLG 1
+BGC *
 
 ITM 1
 00000000
@@ -506,7 +537,7 @@ I'm a cat
 NAME cat dialog
 
 DLG 1
-You found a nice warm cup of tea
+{end}You stepped in dog poop.
 NAME tea dialog
 
 DLG 2
