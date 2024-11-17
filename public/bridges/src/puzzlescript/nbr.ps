@@ -1,0 +1,433 @@
+title Two Vast And Trunkless Legs Of Stone
+author Mike Cook
+homepage https://possibilityspace.org/
+
+========
+OBJECTS
+========
+
+Background
+orange
+
+Wall
+brown
+00000
+00000
+00000
+00000
+00000
+
+FootLeft
+gray darkgray lightgray
+..02.
+..002
+..100
+00000
+11111
+
+FootRight
+gray darkgray lightgray
+.02..
+002..
+000..
+1000.
+11110
+
+PFootLeft
+white gray darkgray lightgray
+..000
+..000
+..100
+10000
+22111
+
+PFootRight
+white gray darkgray lightgray
+000..
+100..
+100..
+11000
+22111
+
+LegRight
+gray darkgray lightgray
+.....
+02...
+002..
+100..
+100..
+
+PLegRight
+white gray
+00...
+00...
+000..
+000..
+000..
+
+
+LegLeft
+gray darkgray lightgray
+.....
+...10
+..100
+..100
+..100
+
+Pillar
+brown darkbrown lightbrown
+.02..
+.002.
+.102.
+.100.
+11100
+
+
+Pillar2
+brown darkbrown lightbrown
+22222
+.200.
+.222.
+.022.
+11002
+
+Rock
+brown darkbrown
+.....
+.000.
+.000.
+00100
+10110
+
+Face
+gray darkgray lightgray
+0022.
+0100.
+00002
+0011.
+0000.
+
+PFace
+white gray darkgray lightgray
+0000.
+0101.
+00000
+0011.
+0000.
+
+PArmR
+white gray
+.....
+....0
+...01
+..101
+..101
+
+
+PArmL
+white gray
+.....
+0....
+10...
+100..
+100..
+
+BuriedFace
+gray darkgray lightgray orange
+0022.
+0100.
+.0.02
+...1.
+.....
+
+Body
+gray darkgray lightgray
+.002.
+01002
+00000
+01000
+01000
+
+Body2
+gray darkgray lightgray
+01000
+00000
+0.100
+10002
+.10..
+
+PBody
+white gray
+.000.
+00000
+00000
+00000
+00000
+
+PBody2
+white gray
+00000
+00000
+00000
+00000
+0...0
+
+PLegLeft
+white gray
+...10
+...10
+..100
+..100
+..100
+
+Edge
+brown
+.....
+.....
+.....
+.....
+.....
+
+PEdge2
+brown
+.....
+.....
+.....
+.....
+.....
+
+legmarker
+brown
+.....
+.....
+.....
+.....
+.....
+
+footmarker
+brown
+.....
+.....
+.....
+.....
+.....
+
+headmarker
+brown
+.....
+.....
+.....
+.....
+.....
+
+Player
+brown
+.000.
+0...0
+0.0.0
+0..00
+.00..
+
+Citizen
+lightbrown
+.000.
+0...0
+0.0.0
+0..00
+.00..
+
+Crate
+brown
+
+Grass
+green darkgreen
+..0..
+..0..
+.10.0
+11010
+01010
+
+Path
+darkgray orange
+11101
+01110
+10101
+11010
+10111
+
+PPath
+lightgray
+00000
+00000
+00000
+00000
+00000
+
+PEdge
+lightgray
+00000
+00000
+00000
+00000
+00000
+
+PL
+brown darkbrown
+.0000
+.0000
+.0000
+00000
+00000
+
+PR
+brown darkbrown
+0000.
+0000.
+0000.
+00000
+00000
+
+Ped
+brown darkbrown
+00000
+11010
+10111
+10110
+00000
+
+PPed
+brown lightbrown
+00000
+11010
+10111
+10110
+00000
+
+
+=======
+LEGEND
+=======
+
+. = Background
+# = Edge
+P = Player
+* = Crate
+N = FootLeft
+M = FootRight
+E = Rock
+1 = PL
+2 = Ped
+3 = PR
+4 = Face
+F = BuriedFace
+5 = Body
+8 = Body2
+G = Grass
+Q = Path
+L = Pillar
+K = Pillar2
+6 = LegLeft
+7 = LegRight
+Z = PBody
+X = PBody2
+C = PFootLeft
+S = PFootRight
+B = PLegRight
+A = PLegLeft
+D = PFace
+H = PArmL
+J = PArmR
+W = PPath
+$ = PEdge
+R = Citizen
+T = Wall
+Y = Player and PPath
+U = PPed
+I = PEdge2
+! = headmarker
+@ = legmarker
+? = footmarker
+
+=======
+SOUNDS
+=======
+
+================
+COLLISIONLAYERS
+================
+
+Background
+Grass, Path, PPath, legmarker, headmarker, footmarker
+Player, Edge, Crate, LegLeft, LegRight, Rock, Body, Body2, PL, PR, Ped, Face, BuriedFace, Pillar, FootLeft, FootRight, Pillar2, PFootLeft, PFootRight, PLegRight, PLegLeft, PBody, PBody2, PFace, PArmR, PArmL, PEdge, Citizen, Wall, PPed, PEdge2
+
+======
+RULES
+======
+
+[ > Player | LegLeft ] -> [ > Player | > LegLeft ]
+[ > Player | LegRight ] -> [ > Player | > LegRight ]
+[ > Player | FootLeft ] -> [ > Player | > FootLeft ]
+[ > Player | FootRight ] -> [ > Player | > FootRight ]
+[ > Player | Face ] -> [ > Player | > Face ]
+[ action Player | Face ] -> [Player | Face ] message A shattered visage, whose frown and wrinkled lip and sneer of cold command tell that its sculptor well those passions read.
+[ action Player | BuriedFace ] -> [ Player | Face ] message You dig away at the sand with your hands, and after much work, a stone head reveals itself.
+[ > Player | Edge ] -> [ Player | Edge ] message The lone and level sands stretch far away. You turn back.
+[ > Player | PEdge2 ] -> [ Player | PEdge2 ] message The city fades into dreams and sunlight. This is not really here.
+[ > Player | PEdge ] -> [ Player | PEdge ] message The lone and level sands stretch far away. You turn back.
+[ > Player | Citizen ] -> [ Player | Citizen ] message Nothing beside remains.
+[ > Player | Ped ] -> [ Player | Ped ] message "My name is Ozymandias, King of Kings; Look on my works, ye mighty and despair." Nothing beside remains.
+[ > Player | PPed ] -> [ Player | PPed ] message "My name is Ozymandias, King of Kings; Look on my works, ye mighty and despair." 
+
+==============
+WINCONDITIONS
+==============
+
+all LegRight on legmarker
+all LegLeft on legmarker
+all Face on headmarker
+all FootLeft on footmarker
+all FootRight on footmarker
+all Citizen on footmarker
+
+=======
+LEVELS
+=======
+
+###########################
+#.........................#
+#.........................#
+#..............G.....E....#
+#.......4.................#
+#..........L...L..........#
+#....G......6!............#
+#..........L.5.L..........#
+#......N....@8@...........#
+#..........L?.?L.M....G...#
+#...........123...........#
+#..........LqqqL.7........#
+#........E...qq...........#
+#...........qqq.G....E....#
+#...G.......qq............#
+#............Pq...........#
+#.........................#
+###########################
+
+
+IIIIIIIIIIIIIIIIIIIIIIIIIII
+I..........K...K..........I
+Itttttt............Tttttt.I
+It.r..t....K...K...T....t.I
+It....t............T.r..t.I
+Itr..rt....K...K...TTtwtt.I
+Itr.rrt......D........wr..I
+Itrr..t....KJZHK......w...I
+It...rt.....AXB.......w...I
+Ittwwtt....KC.SK......w...I
+I..ww.......1U3.......w...I
+I..ww...r..KWWWK......w...I
+I..ww....R..WWW.......w...I
+I..wwwwwwwwwWWWwwwwwwww...I
+I..wwwwwwwwwWYW...........I
+I...........WWW.......r...I
+ITTTTTTTTTTrWWWrTTTTTTTTTTI
+IIIIIIIIIIII$$$IIIIIIIIIIII
