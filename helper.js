@@ -188,7 +188,7 @@ exports.dbSyncDreamTable = async () => {
                         testEntryCreated = true
                     }
 
-                    await db.query('insert into dreams (url_part, creator_id, title, chat_msg) values ($1, $2, $3)', [url_part, authorIds.indexOf(author) + 1, title, "this is a placeholder message! replace me! @~@"])
+                    await db.query('insert into dreams (url_part, creator_id, title, chat_message) values ($1, $2, $3, $4)', [url_part, authorIds.indexOf(author) + 1, title, "this is a placeholder message! replace me! @~@"])
                 } catch (err) {
                     console.error(err);
                 }
