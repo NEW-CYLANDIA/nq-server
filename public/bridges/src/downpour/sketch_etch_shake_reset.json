@@ -1,0 +1,294 @@
+{
+    "name": "Sketch, Etch, Shake, Reset",
+    "author": "Ian Griffiths",
+    "format_version": 17,
+    "initial_page": "90r",
+    "cover_asset": "a-cover-01jczbvqj5n7ehgdb5c2g1zdqd",
+    "last_modified": "2024-11-18T10:09:33.369492Z",
+    "settings": {
+        "last_page_bg_c": "#ffffffff",
+        "last_link_empty": {
+            "asset_id": null,
+            "b_c": "#c9ffdfff",
+            "b_width": 0,
+            "bg_c": "#c5008fff",
+            "b_radius": 0,
+            "blur": 0
+        },
+        "last_link_image": {
+            "asset_id": null,
+            "b_c": "#c9ffdfff",
+            "b_width": 0,
+            "bg_c": "#00000000",
+            "b_radius": 0,
+            "blur": 0.2010673196890657
+        },
+        "last_link_text": {
+            "text": "",
+            "d_size": 36,
+            "size": 36,
+            "c": "#ffffff00",
+            "b_c": "#ffffff00",
+            "s1_c": "#c9ffdfff",
+            "s2_c": "#c9ffdfff",
+            "h_a": "center",
+            "v_a": "middle",
+            "font": "Public Sans"
+        }
+    },
+    "upload_metadatas": {
+        "shMfEmqOXjgp6liQffbDZR40rXp2": {
+            "last_server_version": null,
+            "remote_url": null,
+            "slug": null,
+            "server_visibility": null,
+            "visibility": "public"
+        }
+    },
+    "pages": [
+        {
+            "id": "90r",
+            "width": 772.9481249778675,
+            "height": 772.9481249778676,
+            "last_modified": "2024-11-18T10:07:23.651341Z",
+            "bg_c": "#ffffffff",
+            "links": [
+                {
+                    "type": "image",
+                    "to": "#abu",
+                    "x": 0,
+                    "y": 0,
+                    "w": 772.9481249778675,
+                    "h": 772.9481249778676,
+                    "image": {
+                        "asset_id": "a-01jczbm8z9vp4kytymyzr5yn0c",
+                        "b_c": "#c9ffdfff",
+                        "b_width": 0,
+                        "bg_c": "#00000000",
+                        "b_radius": 0,
+                        "blur": 0
+                    }
+                }
+            ]
+        },
+        {
+            "id": "abu",
+            "width": 827.9192701955214,
+            "height": 827.9192701955216,
+            "last_modified": "2024-11-18T10:07:34.992934Z",
+            "bg_c": "#ffffffff",
+            "links": [
+                {
+                    "type": "image",
+                    "to": "#nhf",
+                    "x": 0,
+                    "y": 0,
+                    "w": 827.9192701955214,
+                    "h": 827.9192701955216,
+                    "image": {
+                        "asset_id": "a-01jczbnephfdkt1z438m1wwj82",
+                        "b_c": "#c9ffdfff",
+                        "b_width": 0,
+                        "bg_c": "#00000000",
+                        "b_radius": 0,
+                        "blur": 0.0031014660179542117
+                    }
+                }
+            ]
+        },
+        {
+            "id": "nhf",
+            "width": 770.6774332159755,
+            "height": 770.6774332159756,
+            "last_modified": "2024-11-18T10:07:43.261443Z",
+            "bg_c": "#ffffffff",
+            "links": [
+                {
+                    "type": "image",
+                    "to": "#nha",
+                    "x": 0,
+                    "y": 0,
+                    "w": 770.6774332159755,
+                    "h": 770.6774332159756,
+                    "image": {
+                        "asset_id": "a-01jczbpqxjwywgvwzvkr2cqrhy",
+                        "b_c": "#c9ffdfff",
+                        "b_width": 0,
+                        "bg_c": "#00000000",
+                        "b_radius": 0,
+                        "blur": 0.011364228686569057
+                    }
+                }
+            ]
+        },
+        {
+            "id": "nha",
+            "width": 752.6227611382914,
+            "height": 752.6227611382915,
+            "last_modified": "2024-11-18T10:07:49.654718Z",
+            "bg_c": "#ffffffff",
+            "links": [
+                {
+                    "type": "image",
+                    "to": "#iky",
+                    "x": 0,
+                    "y": 0,
+                    "w": 752.6227611382914,
+                    "h": 752.6227611382915,
+                    "image": {
+                        "asset_id": "a-01jczbqspc1ga6gj1tadm5r7c7",
+                        "b_c": "#c9ffdfff",
+                        "b_width": 0,
+                        "bg_c": "#00000000",
+                        "b_radius": 0,
+                        "blur": 0.04621313687425472
+                    }
+                }
+            ]
+        },
+        {
+            "id": "iky",
+            "width": 771.0710713920289,
+            "height": 771.0710713920289,
+            "last_modified": "2024-11-18T10:07:56.647855Z",
+            "bg_c": "#ffffffff",
+            "links": [
+                {
+                    "type": "image",
+                    "to": "#qvn",
+                    "x": 0,
+                    "y": 0,
+                    "w": 771.0710713920289,
+                    "h": 771.0710713920289,
+                    "image": {
+                        "asset_id": "a-01jczbrwbwmmqcyz4da5p1qrsm",
+                        "b_c": "#c9ffdfff",
+                        "b_width": 0,
+                        "bg_c": "#00000000",
+                        "b_radius": 0,
+                        "blur": 0.08187412391731998
+                    }
+                }
+            ]
+        },
+        {
+            "id": "qvn",
+            "width": 766.9242352656038,
+            "height": 766.9242352656039,
+            "last_modified": "2024-11-18T10:09:33.369378Z",
+            "bg_c": "#ffffffff",
+            "links": [
+                {
+                    "type": "image",
+                    "to": "#who",
+                    "x": 0,
+                    "y": 0,
+                    "w": 766.9242352656038,
+                    "h": 766.9242352656039,
+                    "image": {
+                        "asset_id": "a-01jczbs9p5d7kynh4aw1741v30",
+                        "b_c": "#c9ffdfff",
+                        "b_width": 0,
+                        "bg_c": "#00000000",
+                        "b_radius": 0,
+                        "blur": 0.2010673196890657
+                    }
+                }
+            ]
+        },
+        {
+            "id": "who",
+            "width": 511.99999999999994,
+            "height": 316.433,
+            "last_modified": "2024-11-18T10:09:07.767225Z",
+            "bg_c": "#ffffffff",
+            "links": [
+                {
+                    "type": "text",
+                    "to": null,
+                    "x": 0,
+                    "y": 0,
+                    "w": 511.99999999999994,
+                    "h": 316.433,
+                    "text": {
+                        "text": "impact=reaet",
+                        "d_size": 36,
+                        "size": 36,
+                        "c": "#ffffff00",
+                        "b_c": "#ffffff00",
+                        "s1_c": "#c9ffdfff",
+                        "s2_c": "#c9ffdfff",
+                        "h_a": "center",
+                        "v_a": "middle",
+                        "font": "Public Sans"
+                    }
+                }
+            ]
+        }
+    ],
+    "assets": [
+        {
+            "id": "a-01jczbm8z9vp4kytymyzr5yn0c",
+            "path": "scaled_1000020636.png",
+            "url": null,
+            "hidden": null,
+            "width": 1080,
+            "height": 1080,
+            "fs": 238027
+        },
+        {
+            "id": "a-01jczbnephfdkt1z438m1wwj82",
+            "path": "scaled_1000020637.png",
+            "url": null,
+            "hidden": null,
+            "width": 1080,
+            "height": 1080,
+            "fs": 237972
+        },
+        {
+            "id": "a-01jczbpqxjwywgvwzvkr2cqrhy",
+            "path": "scaled_1000020638.png",
+            "url": null,
+            "hidden": null,
+            "width": 1080,
+            "height": 1080,
+            "fs": 237738
+        },
+        {
+            "id": "a-01jczbqspc1ga6gj1tadm5r7c7",
+            "path": "scaled_1000020639.png",
+            "url": null,
+            "hidden": null,
+            "width": 1080,
+            "height": 1080,
+            "fs": 237304
+        },
+        {
+            "id": "a-01jczbrwbwmmqcyz4da5p1qrsm",
+            "path": "scaled_1000020640.png",
+            "url": null,
+            "hidden": null,
+            "width": 1080,
+            "height": 1080,
+            "fs": 236742
+        },
+        {
+            "id": "a-01jczbs9p5d7kynh4aw1741v30",
+            "path": "scaled_1000020641.png",
+            "url": null,
+            "hidden": null,
+            "width": 1080,
+            "height": 1080,
+            "fs": 212709
+        },
+        {
+            "id": "a-cover-01jczbvqj5n7ehgdb5c2g1zdqd",
+            "path": "a-cover-01jczbvqj5n7ehgdb5c2g1zdqd.png",
+            "url": null,
+            "hidden": true,
+            "width": 823,
+            "height": 823,
+            "fs": 212244
+        }
+    ]
+}
