@@ -68,6 +68,18 @@ exports.dbCreatePlayer = async () => {
     return uid
 }
 
+exports.dbGetPlayerName = async (uid) => {
+    let result = await db.query(`select display_name from users where device_uid = $1`, [uid])
+
+    return result.rows[0].display_name
+}
+
+exports.dbGetChatMessage = async (url_part) => {
+    let result = await db.query(`select chat_message from dreams where url_part = $1`, [url_part])
+
+    return result.rows[0].chat_message
+}
+
 // TODO why is event logging ever throwing errors
 exports.dbLogEvent = async (uid, session_hash, data) => {
     try {
@@ -176,7 +188,7 @@ exports.dbSyncDreamTable = async () => {
                         testEntryCreated = true
                     }
 
-                    await db.query('insert into dreams (url_part, creator_id, title) values ($1, $2, $3)', [url_part, authorIds.indexOf(author) + 1, title])
+                    await db.query('insert into dreams (url_part, creator_id, title, chat_msg) values ($1, $2, $3)', [url_part, authorIds.indexOf(author) + 1, title, "this is a placeholder message! replace me! @~@"])
                 } catch (err) {
                     console.error(err);
                 }

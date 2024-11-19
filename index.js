@@ -187,7 +187,7 @@ server.on('connection', function (client) {
 		logtail.error(buildLogObj(msg, data))
 	}
 
-	client.on('message', function (data) {
+	client.on('message', async function (data) {
 		try {
 			data = JSON.parse(data)
 		}
@@ -231,7 +231,9 @@ server.on('connection', function (client) {
 
 				let connectData = {
 					"uid": client.uid,
-					"session_hash": client.sessionHash
+					"session_hash": client.sessionHash,
+					"player_name": await nqHelper.dbGetPlayerName(client.uid),
+					"chat_msg": await nqHelper.dbGetChatMessage(data.dream_url_part)
 				}
 
 				client.send(JSON.stringify(connectData))
