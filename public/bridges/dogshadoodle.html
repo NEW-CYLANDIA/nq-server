@@ -47,7 +47,6 @@ z,z,z,z,z,z,z,z,z,z,z,z,1a,z,z,z
 12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12
 13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13
 NAME example room
-ITM 0 3,8
 ITM 2 0,14
 ITM 2 1,14
 ITM 2 2,14
@@ -67,7 +66,6 @@ ITM 2 15,14
 ITM 3 12,12
 ITM 0 0,1
 ITM 0 15,7
-ITM 0 8,8
 ITM 0 4,7
 ITM 0 5,6
 ITM 0 13,6
@@ -81,17 +79,19 @@ ITM 0 13,8
 ITM 0 10,8
 ITM 0 9,10
 ITM 0 10,10
-ITM 0 9,8
-ITM 0 10,7
 ITM 0 12,8
 ITM 0 3,10
 ITM 0 2,10
-ITM 0 2,3
 ITM 0 3,6
 ITM 0 7,9
-ITM 0 5,10
-ITM 0 6,8
+ITM 4 2,3
+ITM 0 5,9
+ITM 0 6,7
+ITM 0 3,8
 ITM 0 7,7
+ITM 0 8,8
+ITM 0 9,8
+ITM 5 8,6
 PAL 0
 
 TIL 10
@@ -559,15 +559,16 @@ POS 0 0,12
 
 SPR a
 00000000
-00000000
-01010001
-01110001
-01110010
-01111100
-00111100
-00100100
-NAME cat
+01111110
+01010110
+01111110
+01101010
+01111110
+00011000
+00011000
+NAME sign
 DLG 0
+POS 0 7,11
 BLIP 1
 
 ITM 0
@@ -622,12 +623,38 @@ NAME crack
 DLG 4
 BGC *
 
+ITM 4
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+NAME doghouse
+DLG 5
+BGC *
+
+ITM 5
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+NAME door
+DLG 6
+BGC *
+
 DLG 0
-I'm a cat
-NAME cat dialog
+The sign reads "5 Dogwood Drive".
+NAME sign dialog
 
 DLG 1
-{end}{shk}* S Q U E L C H *{/shk}{pg}{clr 1}You stepped in dog poop.{/clr}(impact "poop")
+{shk}* S Q U E L C H *{/shk}{pg}{end}{clr 1}You stepped in dog poop.{/clr}(impact "poop")
 NAME tea dialog
 
 DLG 2
@@ -635,12 +662,20 @@ A key! {wvy}What does it open?{wvy}
 NAME key dialog
 
 DLG 3
-{end}You didn't look both ways before crossing the street.{pg}{clr 1}You have been struck by a car.{/clr}(impact "crash")
+You didn't look both ways before crossing the street.{pg}{end}{clr 1}You have been struck by a car.{/clr}(impact "struck")
 NAME car dialog
 
 DLG 4
 Your phone rings.{pg}It's your mother.{pg}"Can you come home right away? I need some help."{pg}{end}{clr 1}You stepped on a crack (and broke your mother's back).{/clr}(impact "scream")
 NAME item 3 dialog
+
+DLG 5
+You approach the doghouse.{pg}Despite the deposits of dog doo everywhere, you find no dog.{pg}Instead, a massive hornet's nest hangs inside.{pg}{end}{clr 1}You got stung by a hornet.{/clr}(impact "sting")
+NAME item 4 dialog
+
+DLG 6
+You deftly maneuvered the minefield of pet poop.{pg}Despite arriving at the door unscathed,{pg}you feel as though you weren't as lucky in another life.{pg}{end}{clr 2}You make your final delivery.{/clr}(impact "delivery")
+NAME door dialog
 
 VAR a
 42
