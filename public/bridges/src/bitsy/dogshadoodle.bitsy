@@ -31,14 +31,56 @@ ROOM 0
 0,p,0,0,0,0,z,z,z,0,0,0,0,10,p,0
 0,p,0,0,0,0,0,0,z,0,0,0,0,0,p,0
 0,o,m,m,m,m,m,m,z,m,m,m,m,m,n,0
-z,z,z,z,z,z,z,z,z,z,z,z,z,z,z,z
+z,z,z,z,z,z,z,z,z,z,z,z,1a,z,z,z
 0,10,0,0,0,0,11,10,0,0,0,10,11,0,0,11
 12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12
 13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13
 NAME example room
-ITM 0 7,10
-ITM 0 8,12
 ITM 0 3,8
+ITM 2 0,14
+ITM 2 1,14
+ITM 2 2,14
+ITM 2 3,14
+ITM 2 4,14
+ITM 2 5,14
+ITM 2 6,14
+ITM 2 7,14
+ITM 2 8,14
+ITM 2 9,14
+ITM 2 10,14
+ITM 2 11,14
+ITM 2 13,14
+ITM 2 12,14
+ITM 2 14,14
+ITM 2 15,14
+ITM 3 12,12
+ITM 0 0,1
+ITM 0 15,7
+ITM 0 8,8
+ITM 0 4,7
+ITM 0 5,6
+ITM 0 13,6
+ITM 0 11,6
+ITM 0 12,6
+ITM 0 13,10
+ITM 0 12,10
+ITM 0 11,10
+ITM 0 13,9
+ITM 0 13,8
+ITM 0 10,8
+ITM 0 9,10
+ITM 0 10,10
+ITM 0 9,8
+ITM 0 10,7
+ITM 0 12,8
+ITM 0 3,10
+ITM 0 2,10
+ITM 0 2,3
+ITM 0 3,6
+ITM 0 7,9
+ITM 0 5,10
+ITM 0 6,8
+ITM 0 7,7
 PAL 0
 
 TIL 10
@@ -473,6 +515,17 @@ TIL z
 NAME concrete_1
 WAL false
 
+TIL 1a
+00000000
+11101110
+11011110
+11101110
+11101110
+11110110
+11111110
+11111110
+WAL false
+
 SPR A
 00111100
 00111100
@@ -510,8 +563,8 @@ ITM 0
 00000000
 00000000
 00000000
-00011000
-00011000
+00000000
+00000000
 00000000
 00000000
 00000000
@@ -532,17 +585,51 @@ NAME key
 DLG 2
 BLIP 2
 
+ITM 2
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+NAME car
+DLG 3
+BGC *
+
+ITM 3
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+00000000
+NAME crack
+DLG 4
+BGC *
+
 DLG 0
 I'm a cat
 NAME cat dialog
 
 DLG 1
-{end}You stepped in dog poop.
+{end}{shk}* S Q U E L C H *{/shk}{pg}{clr 1}You stepped in dog poop.{/clr}(impact "poop")
 NAME tea dialog
 
 DLG 2
 A key! {wvy}What does it open?{wvy}
 NAME key dialog
+
+DLG 3
+{end}You didn't look both ways before crossing the street.{pg}{clr 1}You have been struck by a car.{/clr}(impact "crash")
+NAME car dialog
+
+DLG 4
+Your phone rings.{pg}It's your mother.{pg}"Can you come home right away? I need some help."{pg}{end}{clr 1}You stepped on a crack (and broke your mother's back).{/clr}(impact "scream")
+NAME item 3 dialog
 
 VAR a
 42
