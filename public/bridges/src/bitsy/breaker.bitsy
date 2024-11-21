@@ -887,99 +887,99 @@ DLG 9
 NAME arrow_on dialog
 
 DLG a
-{exit "8" 3 7}
+{exit "8" 3 7}(impact "breaker1")
 NAME arrow_1_room_1 dialog
 
 DLG b
-{exit "5" 7 7}
+{exit "5" 7 7}(impact "breaker2")
 NAME arrow_2_room_1 dialog
 
 DLG c
-{exit "6" 3 7}
+{exit "6" 3 7}(impact "breaker1")
 NAME arrow_1_room_3 dialog
 
 DLG d
-{exit "7" 3 7}
+{exit "7" 3 7}(impact "breaker1")
 NAME arrow_1_room_4 dialog
 
 DLG e
-{exit "4" 3 7}
+{exit "4" 3 7}(impact "breaker1")
 NAME arrow_1_room_5 dialog
 
 DLG f
-{exit "5" 3 7}
+{exit "5" 3 7}(impact "breaker1")
 NAME arrow_1_room_6 dialog
 
 DLG g
-{exit "2" 3 7}
+{exit "2" 3 7}(impact "breaker1")
 NAME arrow_1_room_7 dialog
 
 DLG h
-{exit "3" 3 7}
+{exit "3" 3 7}(impact "breaker1")
 NAME arrow_1_room_8 dialog
 
 DLG i
-{exit "4" 7 7}
+{exit "4" 7 7}(impact "breaker2")
 NAME arrow_2_room_2 dialog
 
 DLG j
-{exit "3" 7 7}
+{exit "3" 7 7}(impact "breaker2")
 NAME arrow_2_room_3 dialog
 
 DLG k
-{exit "2" 7 7}
+{exit "2" 7 7}(impact "breaker2")
 NAME arrow_2_room_4 dialog
 
 DLG l
-{exit "9" 7 7}
+{exit "9" 7 7}(impact "breaker2")
 NAME arrow_2_room_5 dialog
 
 DLG m
-{exit "8" 7 7}
+{exit "8" 7 7}(impact "breaker2")
 NAME arrow_2_room_6 dialog
 
 DLG n
-{exit "7" 7 7}
+{exit "7" 7 7}(impact "breaker2")
 NAME arrow_2_room_7 dialog
 
 DLG o
-{exit "6" 7 7}
+{exit "6" 7 7}(impact "breaker2")
 NAME arrow_2_room_8 dialog
 
 DLG p
-{exit "9" 3 7}
+{exit "9" 3 7}(impact "breaker1")
 NAME arrow_1_room_2 dialog
 
 DLG q
-{exit "3" 11 7}
+{exit "3" 11 7}(impact "breaker3")
 NAME arrow_3_room_1 dialog
 
 DLG r
-{exit "2" 11 7}
+{exit "2" 11 7}(impact "breaker3")
 NAME arrow_3_room_2 dialog
 
 DLG s
-{exit "5" 11 7}
+{exit "5" 11 7}(impact "breaker3")
 NAME arrow_3_room_3 dialog
 
 DLG t
-{exit "4" 11 7}
+{exit "4" 11 7}(impact "breaker3")
 NAME arrow_3_room_4 dialog
 
 DLG u
-{exit "7" 11 7}
+{exit "7" 11 7}(impact "breaker3")
 NAME arrow_3_room_5 dialog
 
 DLG v
-{exit "6" 11 7}
+{exit "6" 11 7}(impact "breaker3")
 NAME arrow_3_room_6 dialog
 
 DLG w
-{exit "9" 11 7}
+{exit "9" 11 7}(impact "breaker3")
 NAME arrow_3_room_7 dialog
 
 DLG x
-{exit "8" 11 7}
+{exit "8" 11 7}(impact "breaker3")
 NAME arrow_3_room_8 dialog
 
 VAR cat_fed
