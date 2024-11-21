@@ -188,6 +188,13 @@ exports.dbSyncDreamTable = async () => {
                         testEntryCreated = true
                     }
 
+                    var QRCode = require('qrcode')
+
+                    QRCode.toFile(`qr/${url_part}.png`, `https://dreamscape-explorer.app/bridges/${url_part}.html`, function (err) {
+                        if (err) throw err
+                        console.log('done')
+                    })
+
                     await db.query('insert into dreams (url_part, creator_id, title, chat_message) values ($1, $2, $3, $4)', [url_part, authorIds.indexOf(author) + 1, title, "this is a placeholder message! replace me! @~@"])
                 } catch (err) {
                     console.error(err);
