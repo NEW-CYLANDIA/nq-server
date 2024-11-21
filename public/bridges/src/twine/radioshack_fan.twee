@@ -69,3 +69,8 @@ The glimmer of a plan forms in your brain.  Something you can do to fix this mes
 <script>
 requestImpact("fans")
 </script>
+
+:: StoryStylesheet [stylesheet]
+tw-sidebar {
+    display: none;
+}

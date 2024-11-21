@@ -62,3 +62,8 @@ You go to turn around in a hurry, not noticing the person behind y-
 You look around.  You know this place.  You walked these streets every day as a kid. The suburbs stretch out in front of you endlessly, and as you walk you realize you've become hopelessly lost.  The black file folder is in your hand, but you're not really sure how you'll deliver it to its owner.  
 
 [[Turn around]]
+
+:: StoryStylesheet [stylesheet]
+tw-sidebar {
+    display: none;
+}
