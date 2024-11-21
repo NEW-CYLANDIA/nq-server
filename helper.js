@@ -69,9 +69,14 @@ exports.dbCreatePlayer = async () => {
 }
 
 exports.dbGetPlayerName = async (uid) => {
-    let result = await db.query(`select display_name from users where device_uid = $1`, [uid])
+    try {
+        let result = await db.query(`select display_name from users where device_uid = $1`, [uid])
 
-    return result.rows[0].display_name
+        return result.rows[0].display_name
+    } catch (err) {
+        console.log(err)
+        return "MISSINGNO"
+    }
 }
 
 exports.dbGetChatMessage = async (url_part) => {
