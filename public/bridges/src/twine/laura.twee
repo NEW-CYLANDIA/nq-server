@@ -1,142 +1,167 @@
 :: StoryTitle
-Laura Dream
+Rob's Dream
 
 
 :: StoryData
 {
-  "ifid": "E5322417-5363-4F20-94C3-F135BB67B84B",
+  "ifid": "DD45D2F1-FF58-4D80-9E51-4567238645BB",
   "author": "Laura E. Hall",
   "format": "Harlowe",
-  "format-version": "3.3.9",
-  "start": "Introduction",
+  "format-version": "3.3.8",
+  "start": "Untitled Passage",
   "zoom": 1
 }
 
 
-:: "Uh, cool. I guess. I hope this game is good..." {"position":"750,725","size":"100,100"}
-Thanks for playing!
+:: "I have to get these jokes to the other end of the building!" {"position":"600,550","size":"100,100"}
+Rob squints at the notecards with jokes written on them. The words blur together and he can't quite make them out. 
+
+He shakes his head.
+
+[["Probably just too many late nights playing Spelunky in the office. I'm sure it's fine."|"I'm sure it's fine.]]
 
 
-:: Dials {"position":"175,550","size":"100,100"}
-<pre>
-(link-repeat: "Zero")[ (set: $dial's $x to 0) (set: $x to it +1)]
-(link-repeat: "One")[ (set: $dial's $x to 1) (set: $x to it +1)]
-(link-repeat: "Two")[ (set: $dial's $x to 2) (set: $x to it +1)]
-(link-repeat: "Three")[ (set: $dial's $x to 3) (set: $x to it +1)]
-(link-repeat: "Four")[ (set: $dial's $x to 4) (set: $x to it +1)]
-(link-repeat: "Five")[ (set: $dial's $x to 5) (set: $x to it +1)]
-(link-repeat: "Six")[ (set: $dial's $x to 6) (set: $x to it +1)]
-(link-repeat: "Seven")[ (set: $dial's $x to 7) (set: $x to it +1)]
-(link-repeat: "Eight")[ (set: $dial's $x to 8) (set: $x to it +1)]
-(link-repeat: "Nine")[ (set: $dial's $x to 9) (set: $x to it +1)]</pre>
+:: "I'm sure it's fine. {"position":"600,675","size":"100,100"}
+The stage for the Light Night News Comedy Show is all the way across the building! How should Rob get there?
+
+[[Take the elevator — what's the worst that could happen?|Take the elevator.]]
+
+[[Take the stairs.|Take the stairs.]]
 
 
-:: Eat the fortune cookie {"position":"750,600","size":"100,100"}
-Yuck.
+:: "Wait a second, this is supposed to be a dream, not a nightmare!" {"position":"550,1300","size":"100,100"}
+Rob flings the cards at the bright stage lights and dives for cover. The crowd roars its approval.
 
-Did you have to do that? I'm disgusted and half tempted just to GAME OVER you on the spot, but that feels unsportsmanlike at this stage. So I'll let it slide.
+When Rob stands up again, he's wearing a blue motion-capture suit covered in ping pong balls. The host gives him a big, appreciative hug. For some reason, there's a possum on the stage too.
 
-[[Anyway...|Just break it open]] 
+"The No Quarter folks are going to love this!" the host says.
 
-
-
-
-:: Introduction {"position":"400,450","size":"100,100"}
-(if: $x >= 3)[
-Nothing happens. Must be the wrong code...
-(set: $x to 1)]
-You find yourself in some sort of underground bunker. Frosted glass windows appear on both sides of the room - you can faintly make out a figure moving around in each. Perhaps there are other rooms like this one?
-
-In front of you is a large (css: "color: red;")[RED] button with a glass cover. You would LOVE to [[press]] that button.
-
-Just above the button, you notice a three digit combination lock. Perhaps [[inputting|lock]] the correct code might open the cover?
+Oh, right — No Quarter, Rob remembers. [[Better get back there.]]
 
 
-:: Just break it open {"position":"875,600","size":"100,100"}
-You remove the small slip of paper inside, which reads:
+:: Anyway... {"position":"550,2050","size":"100,100"}
+Thank you for playing! Enjoy No Quarter!
 
-“I solved the most complex Dreamscape Explorer puzzle at No Quarter ‘24 and all I got was this Steam key for IguaRPG!”
-
-Wow. Not even in the ballpark of being a "fortune". You flip the slip to reveal your "lucky numbers":
-
-$steamcode
-
-[["Uh, cool. I guess. I hope this game is good..."]]
-
-
-:: Startup [startup] {"position":"175,425","size":"100,100"}
-<!--A Twine 2 Demo Story by DDall for Marlboro College Graduate Work
-You may reuse this code as long as you include this comment-->
-(set: $filler_text to "You stare at the giant red button with a sense of longing. Your button finger is just itchin' to press something. A three digit code appears to be the key to unlocking it.")
-(set: $locked to 1)
-(set: $x to 1)
-(set: $dial to (a:0,0,0))
-
-
-:: lock {"position":"725,275","size":"100,100"}
-(print: $filler_text)
-{(live: 0.5) [
-(if: $x is <= 3)[The lock is set to: (print: $dial.join("-"))
-](else:)[
-(if: $dial's 1st is 3 and $dial's 2nd is 1 and $dial's 3rd is 1)[
-(set: $locked to 0)
-(goto: "open")](else:)[
-(goto: "Introduction")]
-]
-]}
-(display: "Dials")
+The end!
 
 
 
-:: open {"position":"550,625","size":"100,100"}
-The protective glass cover flips up, exposing the pristine button to the musty bunker air.
-
-It's [[pressin'|press]] time.
+~Laura E. Hall
 
 
-:: press {"position":"750,475","size":"100,100"}
-(if: $locked is 1)
-[
-	You try to press the button, but your finger smashes against the glass cover guarding it. I don't know why you thought that was a good idea.
-    
-    [["Yeah..."|Introduction]]
-]
-(else:)
-[
-  You press the button harder than you've ever pressed anything in your life. You wait patiently for something interesting to happen...
-  <script>requestImpact("bunkerPress")</script>
+:: Better get back there. {"position":"550,1425","size":"100,100"}
+Rob falls backwards as the possum waves its farewell.
 
-  (after: 6s)[
-    ...very patiently, as if there's some kind of fancy internet magic happening...
-    <script>checkSuccess()</script>
-  ]
+A voice echoes after him: "And that was Rob Dubbin, everyone!" 
 
-  (after: 10s)
-  [
-    (set: $buttonSuccess to getSuccess())
-    (if: $buttonSuccess is true)
-    [
-      Suddenly, a small puff of confetti falls from the ceiling. It's a little underwhelming, and if I'm being honest, a little sad.
-        
-      Amidst the confetti you find a fortune cookie. It's not wrapped or anything so it's probably like, mad stale.
-      
-      [[Eat the fortune cookie]]
+The applause fills the building, rumbling the walls, causing cracks to appear in the concrete and plaster as the very seams of reality unravel.
 
-      [[Just break it open]]
-    ]
-    (else:)[
-      ...but nothing does. Hm.
-
-      Do the other rooms have buttons, too? Maybe those people need to press their buttons at the same time...
-    ]
-  ]
-]
+[[Rob wakes up, for real this time.]]
 
 
-:: StoryScript [script]
-window.getSuccess = async function() {
-  return await buttonSuccess
-}
+:: Or is it?! {"position":"550,1675","size":"100,100"}
+(Yes, it is, this isn't one of those fake-out movie endings setting it up for a sequel)
+
+//[[Or is it?!?????]]//
+
+
+:: Or is it?!????? {"position":"550,1800","size":"100,100"}
+Oh no, this is like when 00s films used to show bloopers during the end credits... were those ever actually funny?
+
+//[[Sometimes, probably?]]//
+
+
+:: Press the button for the basement {"position":"550,925","size":"100,100"}
+The bell dings and [[the doors open]].
+
+
+:: Press the button for the executive suite {"position":"375,925","size":"100,100"}
+The elevator goes alllll the way up to the top of the building.
+
+The doors open onto a palatial suite filled with expensive furniture, the kind that is never quite comfortable enough and will bruise your shins if you look at it funny. 
+
+This is the lair of The Executive.
+
+The windows overlook the city, where the people appear as small as ants. The Executive likes it that way.
+
+If this were a longer dream, Rob would probably fight a boss battle here. Luckily, he remembers his quest.
+
+"Capitalism is a joke... just not the kind that I have to get to the other side of the building!"
+
+[[Get back in the elevator.|Take the elevator.]] 
+
+
+:: Rob looks down... {"position":"550,1175","size":"100,100"}
+Oh no!! Rob is fully naked! Except for a baseball cap that says “Brooklyn, There’s Alway’s A Story” in gold stitching!!
+
+[["Wait a second, this is supposed to be a dream, not a nightmare!"]]
+
+
+:: Rob wakes up, for real this time. {"position":"550,1550","size":"100,100"}
+"Thank goodness, it was all just a dream, and now I'm at No Quarter where I can showcase my new game Tide Breakers in collaboration with Garrett Miller," Rob says.
+
+"There's no punchline because while I am a comedy writer, the invisible author isn't," he adds. "But you'll see some very funny stuff if you check me out at https://robdubbin.online, follow me on social media, and listen to me as co-host of the Eggplant Show!"
+
+And with that, Rob returns to showcasing his game, and all is right with the world... 
+
+//[[Or is it?!]]//
+
+
+
+
+:: Sometimes, probably? {"position":"550,1925","size":"100,100"}
+Post-credits scenes are a lost art form and it's annoying that Marvel movies are the only ones that seem to do them anymore. I always sit through the end credits of a film because I like to remember how many hands have touched a creative work. But these days people will often stop to inform me that there's nothing to see afterward. I'm just listening to the music, people!
+
+[[Anyway...]]
+
+
+:: Take the elevator. {"position":"500,800","size":"100,100"}
+<script>requestImpact("laura")</script>
+Elevators are very safe actually, I just wanted to see what you would do.
+
+Rob presses the button for the elevator and the doors open. He gets inside.
+
+There's music playing. Think of the chorus from most annoying 80s song you can remember. Now try to not get it stuck in your head.
+
+[[Press the button for the executive suite]]
+
+[[Press the button for the basement]]
+
+
+:: Take the stairs. {"position":"750,825","size":"100,100"}
+Rob enters the stairwell. The door shuts behind him, trapping him inside — it's actually a fire exit.
+
+He has no choice but to walk all the way down to the bottom, where he is forced to step out onto the rainy street, without his wallet or ID — something which definitely did not happen to this author and which they are not still annoyed about, 
+
+especially because of the type of stressful work environment in which the author found themselves where sometimes you need to step into the stairwell for a good stress cry, 
+
+and surely such a contraption would be clearly labeled as such, right?
+
+Anyway, the jokes get wet and disintegrate in Rob hands.
+
+"Ugh, this is a nightmare! Next time I should just [[take the elevator.|Take the elevator.]]
+
+
+:: Untitled Passage {"position":"600,300","size":"100,100"}
+Rob has been very busy getting ready for No Quarter! But now he's so very sleepy...
+
+Time for a little nap... //[[zzzzzzz...|zzz]]//
+
+
+:: the doors open {"position":"550,1050","size":"100,100"}
+A voice rings out: "Please welcome our next guest, teen sensation Olivia Taters!"
+
+The lights are bright and blinding as Rob steps out, not into the basement, but onto the interview stage of the Late Night Comedy News Show.
+
+[[Rob looks down...]]
+
+
+:: zzz {"position":"600,425","size":"100,100"}
+After a lovely long nap on the couch in his office at the Late Night News Comedy Show, Rob stretches and rubs his eyes.
+
+Oh no, he's overslept! It's almost showtime — //and Rob is still holding all of the jokes!//
+
+[["I have to get these jokes to the other end of the building!"]]
 
 :: StoryStylesheet [stylesheet]
 tw-sidebar {
