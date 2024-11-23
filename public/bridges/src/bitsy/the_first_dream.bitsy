@@ -310,7 +310,7 @@ DLG 4
 """
 {
   - final_dialog >= 1 ?
-     The door is unlocked!{pg}{end}The End!{pg}...is the door unlocked?(impact "firstdoor")
+     The door is unlocked!{pg}{end}The End!{pg}...is the door unlocked?
   - else ?
      The door is locked.
 }
@@ -331,7 +331,7 @@ DLG 7
   - {item "2"} >= 1 ?
     {
       - cat_fed == 0 ?
-        My bowl! Thank you! *crunch crunch*{cat_fed = 1}
+        My bowl! Thank you! *crunch crunch*{cat_fed = 1}(impact "firstdoor")
       - else ?
         {
           - final_dialog >= 1 ?
