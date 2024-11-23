@@ -1,0 +1,144 @@
+:: StoryTitle
+The Button?
+
+
+:: StoryData
+{
+  "ifid": "E5322417-5363-4F20-94C3-F135BB67B84B",
+  "author": "izzy kestrel",
+  "format": "Harlowe",
+  "format-version": "3.3.9",
+  "start": "Introduction",
+  "zoom": 1
+}
+
+
+:: "Uh, cool. I guess. I hope this game is good..." {"position":"750,725","size":"100,100"}
+Thanks for playing!
+
+
+:: Dials {"position":"175,550","size":"100,100"}
+<pre>
+(link-repeat: "Zero")[ (set: $dial's $x to 0) (set: $x to it +1)]
+(link-repeat: "One")[ (set: $dial's $x to 1) (set: $x to it +1)]
+(link-repeat: "Two")[ (set: $dial's $x to 2) (set: $x to it +1)]
+(link-repeat: "Three")[ (set: $dial's $x to 3) (set: $x to it +1)]
+(link-repeat: "Four")[ (set: $dial's $x to 4) (set: $x to it +1)]
+(link-repeat: "Five")[ (set: $dial's $x to 5) (set: $x to it +1)]
+(link-repeat: "Six")[ (set: $dial's $x to 6) (set: $x to it +1)]
+(link-repeat: "Seven")[ (set: $dial's $x to 7) (set: $x to it +1)]
+(link-repeat: "Eight")[ (set: $dial's $x to 8) (set: $x to it +1)]
+(link-repeat: "Nine")[ (set: $dial's $x to 9) (set: $x to it +1)]</pre>
+
+
+:: Eat the fortune cookie {"position":"750,600","size":"100,100"}
+Yuck.
+
+Did you have to do that? I'm disgusted and half tempted just to GAME OVER you on the spot, but that feels unsportsmanlike at this stage. So I'll let it slide.
+
+[[Anyway...|Just break it open]] 
+
+
+
+
+:: Introduction {"position":"400,450","size":"100,100"}
+(if: $x >= 3)[
+Nothing happens. Must be the wrong code...
+(set: $x to 1)]
+You find yourself in some sort of underground bunker. Frosted glass windows appear on both sides of the room - you can faintly make out a figure moving around in each. Perhaps there are other rooms like this one?
+
+In front of you is a large (css: "color: yellow;")[YELLOW] button with a glass cover. You would LOVE to [[press]] that button.
+
+Just above the button, you notice a three digit combination lock. Perhaps [[inputting|lock]] the correct code might open the cover?
+
+
+:: Just break it open {"position":"875,600","size":"100,100"}
+You remove the small slip of paper inside, which reads:
+
+“I solved the most complex Dreamscape Explorer puzzle at No Quarter ‘24 and all I got was this Steam key for IguaRPG!”
+
+Wow. Not even in the ballpark of being a "fortune". You flip the slip to reveal your "lucky numbers":
+
+$steamcode
+
+[["Uh, cool. I guess. I hope this game is good..."]]
+
+
+:: Startup [startup] {"position":"175,425","size":"100,100"}
+<!--A Twine 2 Demo Story by DDall for Marlboro College Graduate Work
+You may reuse this code as long as you include this comment-->
+(set: $filler_text to "You stare at the giant yellow button with a sense of longing. Your button finger is just itchin' to press something. A three digit code appears to be the key to unlocking it.")
+(set: $locked to 1)
+(set: $x to 1)
+(set: $dial to (a:0,0,0))
+
+
+:: lock {"position":"725,275","size":"100,100"}
+(print: $filler_text)
+{(live: 0.5) [
+(if: $x is <= 3)[The lock is set to: (print: $dial.join("-"))
+](else:)[
+(if: $dial's 1st is 8 and $dial's 2nd is 0 and $dial's 3rd is 8)[
+(set: $locked to 0)
+(goto: "open")](else:)[
+(goto: "Introduction")]
+]
+]}
+(display: "Dials")
+
+
+
+:: open {"position":"550,625","size":"100,100"}
+The protective glass cover flips up, exposing the pristine button to the musty bunker air.
+
+It's [[pressin'|press]] time.
+
+
+:: press {"position":"750,475","size":"100,100"}
+(if: $locked is 1)
+[
+	You try to press the button, but your finger smashes against the glass cover guarding it. I don't know why you thought that was a good idea.
+    
+    [["Yeah..."|Introduction]]
+]
+(else:)
+[
+  You press the button harder than you've ever pressed anything in your life. You wait patiently for something interesting to happen...
+  <script>requestImpact("bunkerPress")</script>
+
+  (after: 6s)[
+    ...very patiently, as if there's some kind of fancy internet magic happening...
+    <script>checkSuccess()</script>
+  ]
+
+  (after: 10s)
+  [
+    (set: $buttonSuccess to getSuccess())
+    (if: $buttonSuccess is true)
+    [
+      Suddenly, a small puff of confetti falls from the ceiling. It's a little underwhelming, and if I'm being honest, a little sad.
+        
+      Amidst the confetti you find a fortune cookie. It's not wrapped or anything so it's probably like, mad stale.
+      
+      [[Eat the fortune cookie]]
+
+      [[Just break it open]]
+    ]
+    (else:)[
+      ...but nothing does. Hm.
+
+      Do the other rooms have buttons, too? Maybe those people need to press their buttons at the same time...
+    ]
+  ]
+]
+
+
+:: StoryScript [script]
+window.getSuccess = async function() {
+  return await buttonSuccess
+}
+
+:: StoryStylesheet [stylesheet]
+tw-sidebar {
+    display: none;
+}

@@ -268,6 +268,14 @@ server.on('connection', function (client) {
 				db.query('UPDATE users SET currency = currency + $1 WHERE device_uid = $2', [data.value, client.uid])
 
 				break
+			case "checkButtons":
+				let result = await db.query("select * from events where type = 'impact' and dream_url_part like 'button%' order by timestamp desc")
+
+				console.log(result.rows)
+
+				client.send(JSON.stringify({ "type": "buttonSuccess", "value": true })) // TODO
+
+				break
 		}
 
 		nqHelper.dbLogEvent(client.uid, client.sessionHash, data)
