@@ -109,6 +109,22 @@ exports.dbSyncDreamTable = async () => {
         })
     }
 
+    var QRCode = require('qrcode')
+
+    QRCode.toFile(
+        `qr/quinton.png`,
+        `https://dreamscape-explorer.app/quinton.wav`,
+        {
+            color: {
+                dark: "#a50997",
+                light: "#f4d4b1"
+            }
+        },
+        function (err) {
+            if (err) throw err
+        }
+    )
+
     // drop outdated rows
     await db.query('DELETE FROM events')
     await db.query('DELETE FROM dreams')
@@ -193,8 +209,6 @@ exports.dbSyncDreamTable = async () => {
                         testEntryCreated = true
                     }
 
-                    var QRCode = require('qrcode')
-
                     QRCode.toFile(
                         `qr/${url_part}.png`,
                         `https://dreamscape-explorer.app/bridges/${url_part}.html`,
@@ -206,7 +220,6 @@ exports.dbSyncDreamTable = async () => {
                         },
                         function (err) {
                             if (err) throw err
-                            console.log('done')
                         }
                     )
 
