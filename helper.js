@@ -61,6 +61,7 @@ exports.generateDisplayName = () => {
 
 exports.dbCreatePlayer = async () => {
     const uid = exports.getUniqueId();
+    console.log(uid)
     const displayName = exports.generateDisplayName()
 
     await db.query('INSERT INTO users (device_uid, display_name) VALUES ($1, $2)', [uid, displayName])

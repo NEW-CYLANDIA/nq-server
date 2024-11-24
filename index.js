@@ -228,7 +228,7 @@ server.on('connection', function (client) {
 				}
 
 				client.sessionHash = currentSessionHash;
-
+				console.log(client.uid)
 				let connectData = {
 					"uid": client.uid,
 					"session_hash": client.sessionHash,

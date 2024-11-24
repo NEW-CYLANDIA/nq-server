@@ -20,7 +20,7 @@
     };
 
     window.WS.onmessage = function (event) {
-        if (!event.data || localStorage.getItem("nquid")) { return }
+        if (!event.data) { return }
 
         let data = JSON.parse(event.data)
 
