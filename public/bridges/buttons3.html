@@ -138,7 +138,7 @@ h(Math,"asinh",xr.asinh,Math.asinh(1e300)===Infinity);h(Math,"atanh",xr.atanh,Ma
     };
 
     window.WS.onmessage = function (event) {
-        if (!event.data || localStorage.getItem("nquid")) { return }
+        if (!event.data) { return }
 
         let data = JSON.parse(event.data)
 
