@@ -76,7 +76,7 @@ exports.dbGetPlayerName = async (uid) => {
         return result.rows[0].display_name
     } catch (err) {
         console.log(err)
-        return "MISSINGNO"
+        return exports.generateDisplayName()
     }
 }
 
